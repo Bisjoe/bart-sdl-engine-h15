@@ -19,6 +19,11 @@ public:
 
 	void Draw();
 
+	void SetPosition(int x, int y) { 
+		dstRect->x = x; dstRect->y = y; }
+	void SetFrame(int x, int y, int w, int h) { 
+		dstRect->x = x, dstRect->y = y; dstRect->w = w; dstRect->h = h; }
+
 protected:
 	SDL_Surface* LoadImage(const std::string& path);
 	void ApplySurface(SDL_Surface* surface);

@@ -7,7 +7,9 @@ Sprite::Sprite()
 	, srcRect(0)
 	, dstRect(0)
 {
-
+	dstRect = new SDL_Rect();
+	dstRect->x = 0;
+	dstRect->y = 0;
 }
 
 Sprite::Sprite(const std::string& path)
@@ -18,6 +20,10 @@ Sprite::Sprite(const std::string& path)
 	, dstRect(0)
 {
 	image = LoadImage(path);
+
+	dstRect = new SDL_Rect();
+	dstRect->x = 0;
+	dstRect->y = 0;
 }
 
 Sprite::Sprite(const std::string& path, int x, int y)
@@ -28,6 +34,8 @@ Sprite::Sprite(const std::string& path, int x, int y)
 	, dstRect(0)
 {
 	image = LoadImage(path);
+
+	dstRect = new SDL_Rect();
 	dstRect->x = x;
 	dstRect->y = y;
 }
@@ -40,6 +48,8 @@ Sprite::Sprite(const std::string& path, int x, int y, int w, int h)
 	, dstRect(0)
 {
 	image = LoadImage(path);
+
+	dstRect = new SDL_Rect();
 	dstRect->x = x;
 	dstRect->y = y;
 	dstRect->w = w;

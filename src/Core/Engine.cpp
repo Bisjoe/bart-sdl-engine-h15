@@ -3,7 +3,11 @@
 Engine* Engine::instance = 0;
 
 Engine::Engine()
+	:window(nullptr)
+	, renderer(nullptr)
+	, input(nullptr)
 {
+
 }
 
 Engine::~Engine()
@@ -13,6 +17,9 @@ Engine::~Engine()
 
 	delete renderer;
 	renderer = nullptr;
+
+	delete input;
+	input = nullptr;
 
 	SDL_Quit();
 }
@@ -37,6 +44,7 @@ void Engine::Init()
 		else
 		{
 			renderer = new Renderer(window);
+			input = new Input();
 		}
 	}
 }
@@ -68,13 +76,42 @@ void Engine::Draw()
 	}
 
 	SDL_UpdateWindowSurface(window);
+
+	SDL_FillRect(renderer->GetScreen(), nullptr, SDL_MapRGB(renderer->GetScreen()->format, 0, 0, 0));
 }
 
 void Engine::Run()
 {
+	SDL_Event event;
+	bool isRunning = true;
+
 	Start();
-	for (;;)
+	while (isRunning)
 	{
+		while (SDL_PollEvent(&event))
+		{
+			input->Poll(event);
+
+			switch (event.type)
+			{
+			case SDL_QUIT:
+				isRunning = false;
+				break;
+			case SDL_KEYDOWN:
+				switch (event.key.keysym.sym)
+				{
+				case SDLK_ESCAPE:
+					isRunning = false;
+					break;
+				default:
+					break;
+				}
+				break;
+			default:
+				break;
+			}
+		}
+
 		Update();
 		Draw();
 	}
