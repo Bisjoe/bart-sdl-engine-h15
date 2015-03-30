@@ -41,8 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\SDKs\SDL2_image-2.0.0\include;C:\SDKs\SDL2-2.0.3\include;D:\Bisjoe\Projets\bart-sdl-engine-h15\Core;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SDKs\SDL2-2.0.3\lib\x86;C:\SDKs\SDL2_image-2.0.0\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\dependencies\SDL2_image-2.0.0\include;..\..\dependencies\SDL2-2.0.3\include;..\Core;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\dependencies\SDL2-2.0.3\lib\x86;..\..\dependencies\SDL2_image-2.0.0\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

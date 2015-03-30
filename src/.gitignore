@@ -27,7 +27,8 @@
 *.out
 *.app
 
+# Custom ignore
 Debug
-
 *.sdf
 *.suo
+*.opensdf
