@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include "Sprite.h"
 #include "Ship.h"
+#include "MegaSonic.h"
 
 typedef int* pInt;
 
@@ -46,11 +47,13 @@ int main(int argc, char* args[])
 
 	// Declare tous mes objets
 	Ship* ship = new Ship();
+	//MegaSonic* megaSonic = new MegaSonic();
 
 	// L'engin vire
 	Engine::GetInstance()->Run();
 
 	delete ship;
+	//delete megaSonic;
 
 	return 0;
 }

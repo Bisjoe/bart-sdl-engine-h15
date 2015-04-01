@@ -1,3 +1,6 @@
+#ifndef COMMON_H
+#define COMMON_H
+
 // Global constants
 #ifndef DEFAULT_WIN_TITLE
 #define DEFAULT_WIN_TITLE "Engine - "
@@ -22,3 +25,9 @@
 
 // Engine
 #include "Input.h"
+#include "Timer.h"
+
+// Custom lib
+#include "Point.h"
+
+#endif

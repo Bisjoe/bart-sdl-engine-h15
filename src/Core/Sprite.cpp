@@ -7,6 +7,12 @@ Sprite::Sprite()
 	, srcRect(0)
 	, dstRect(0)
 {
+	srcRect = new SDL_Rect();
+	srcRect->x = 0;
+	srcRect->y = 0;
+	srcRect->w = DEFAULT_WIN_W;
+	srcRect->h = DEFAULT_WIN_H;
+
 	dstRect = new SDL_Rect();
 	dstRect->x = 0;
 	dstRect->y = 0;
@@ -20,6 +26,12 @@ Sprite::Sprite(const std::string& path)
 	, dstRect(0)
 {
 	image = LoadImage(path);
+
+	srcRect = new SDL_Rect();
+	srcRect->x = 0;
+	srcRect->y = 0;
+	srcRect->w = DEFAULT_WIN_W;
+	srcRect->h = DEFAULT_WIN_H;
 
 	dstRect = new SDL_Rect();
 	dstRect->x = 0;
@@ -35,6 +47,12 @@ Sprite::Sprite(const std::string& path, int x, int y)
 {
 	image = LoadImage(path);
 
+	srcRect = new SDL_Rect();
+	srcRect->x = 0;
+	srcRect->y = 0;
+	srcRect->w = DEFAULT_WIN_W;
+	srcRect->h = DEFAULT_WIN_H;
+
 	dstRect = new SDL_Rect();
 	dstRect->x = x;
 	dstRect->y = y;
@@ -48,6 +66,12 @@ Sprite::Sprite(const std::string& path, int x, int y, int w, int h)
 	, dstRect(0)
 {
 	image = LoadImage(path);
+
+	srcRect = new SDL_Rect();
+	srcRect->x = 0;
+	srcRect->y = 0;
+	srcRect->w = DEFAULT_WIN_W;
+	srcRect->h = DEFAULT_WIN_H;
 
 	dstRect = new SDL_Rect();
 	dstRect->x = x;
@@ -64,6 +88,13 @@ Sprite::Sprite(const std::string& path, SDL_Rect* dstRect)
 	, dstRect(0)
 {
 	image = LoadImage(path);
+
+	srcRect = new SDL_Rect();
+	srcRect->x = 0;
+	srcRect->y = 0;
+	srcRect->w = DEFAULT_WIN_W;
+	srcRect->h = DEFAULT_WIN_H;
+
 	this->dstRect = dstRect;
 }
 

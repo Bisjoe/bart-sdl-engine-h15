@@ -16,6 +16,7 @@ public:
 
 private:
 	float currentX, currentY;
+	float currentTime;
 
 	static const float SPEED;
 };

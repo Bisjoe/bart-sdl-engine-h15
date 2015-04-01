@@ -37,6 +37,7 @@ public:
 
 	Renderer* GetRenderer(){ return renderer; }
 	Input* GetInput(){ return input; }
+	Timer* GetTimer(){ return timer; }
 
 private:
 	void Start();
@@ -46,5 +47,6 @@ private:
 	SDL_Window* window;
 	Renderer* renderer;
 	Input* input;
+	Timer* timer;
 };
 

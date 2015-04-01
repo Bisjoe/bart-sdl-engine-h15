@@ -80,10 +80,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="MegaSonic.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="MegaSonic.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.vcxproj">

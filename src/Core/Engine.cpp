@@ -6,6 +6,7 @@ Engine::Engine()
 	:window(nullptr)
 	, renderer(nullptr)
 	, input(nullptr)
+	, timer(nullptr)
 {
 
 }
@@ -20,6 +21,9 @@ Engine::~Engine()
 
 	delete input;
 	input = nullptr;
+
+	delete timer;
+	timer = nullptr;
 
 	SDL_Quit();
 }
@@ -45,6 +49,7 @@ void Engine::Init()
 		{
 			renderer = new Renderer(window);
 			input = new Input();
+			timer = new Timer();
 		}
 	}
 }
@@ -56,6 +61,9 @@ void Engine::Start()
 	{
 		(*iter)->Start();
 	}
+
+	timer->Reset();
+	timer->Start();
 }
 
 void Engine::Update()
@@ -65,6 +73,8 @@ void Engine::Update()
 	{
 		(*iter)->Update();
 	}
+
+	timer->Tick();
 }
 
 void Engine::Draw()
@@ -86,6 +96,7 @@ void Engine::Run()
 	bool isRunning = true;
 
 	Start();
+
 	while (isRunning)
 	{
 		while (SDL_PollEvent(&event))
@@ -115,6 +126,7 @@ void Engine::Run()
 		Update();
 		Draw();
 	}
+
 	Stop();
 }
 
@@ -125,4 +137,5 @@ void Engine::Stop()
 	{
 		(*iter)->Stop();
 	}
+	timer->Stop();
 }

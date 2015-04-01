@@ -18,6 +18,6 @@ public:
 
 private:
 	static std::vector<Component*> components;
-
+	int depth;
 };
 
