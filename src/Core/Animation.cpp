@@ -3,7 +3,7 @@
 Animation::Animation()
 	: Sprite()
 	, isPlaying(false)
-	, isLooping(true)
+	, isLooping(false)
 	, nbFrame(0)
 	, frameRate(30)
 	, currentTime(0)
@@ -16,7 +16,7 @@ Animation::Animation()
 Animation::Animation(std::string filePath, int nbFrame, int frameRate, const point<int>& frameSize, const point<int>& startSrcPos)
 	: Sprite(filePath)
 	, isPlaying(false)
-	, isLooping(true)
+	, isLooping(false)
 	, nbFrame(nbFrame)
 	, frameRate(frameRate)
 	, currentTime(0)
@@ -24,13 +24,16 @@ Animation::Animation(std::string filePath, int nbFrame, int frameRate, const poi
 	, startSrcPos(startSrcPos)
 	, frameSize(frameSize)
 {
-	
+	SetSrcFrame(
+		startSrcPos.x, startSrcPos.y,
+		frameSize.x, frameSize.y);
 }
 
 Animation::~Animation()
 {
 
 }
+
 
 void Animation::Update()
 {
@@ -41,14 +44,13 @@ void Animation::Update()
 
 		if (currentTime >= 1.0f / frameRate)
 		{
-			if (currentFrame < nbFrame)
+			SetSrcFrame(
+				startSrcPos.x + currentFrame * frameSize.x,
+				startSrcPos.y,
+				frameSize.x, frameSize.y);
+			if (currentFrame < nbFrame-1)
 			{
 				currentFrame++;
-
-				SetSrcFrame(
-					startSrcPos.x + currentFrame * frameSize.x,
-					startSrcPos.y + currentFrame * frameSize.y,
-					frameSize.x, frameSize.y);
 			}
 			else
 			{
@@ -58,7 +60,6 @@ void Animation::Update()
 					Stop();
 				}
 			}
-
 			currentTime = 0;
 		}
 	}

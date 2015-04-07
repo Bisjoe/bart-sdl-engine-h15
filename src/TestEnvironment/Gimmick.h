@@ -1,17 +1,19 @@
 #pragma once
 
+//First 'Clean & Simple' iteration
+
 #include "Common.h"
 #include "Animation.h"
 
-class MegaSonic :
+class Gimmick :
 	public Animation
 {
 public:
-	MegaSonic();
-	~MegaSonic();
+	Gimmick();
+	~Gimmick();
 
 	void Update();
-	const std::string MEGASONIC_PATH;
+	const std::string GIMMICK_PATH;
 	const point<int> START_SRC_POS;
 	const point<int> FRAME_SRC_SIZE;
 };

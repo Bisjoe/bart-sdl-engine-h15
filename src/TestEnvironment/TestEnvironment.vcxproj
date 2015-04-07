@@ -79,11 +79,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Gimmick.cpp" />
+    <ClCompile Include="GimmickV2.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="MegaSonic.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Gimmick.h" />
+    <ClInclude Include="GimmickV2.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="MegaSonic.h" />
   </ItemGroup>
