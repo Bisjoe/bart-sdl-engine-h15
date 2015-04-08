@@ -44,6 +44,7 @@ protected:
 	void SetIsLooping(bool isLooping)		{ this->isLooping = isLooping;}
 	void SetStartSrcPos(point<int> point)	{ this->startSrcPos = point;  }
 	void SetNbFrame(int nbFrame)			{ this->nbFrame = nbFrame;	  }
+	void SetFrameRate(int frameRate)		{ this->frameRate = frameRate;}
 	void ResetCurrentFrame()				{ this->currentFrame = 0;	  }
 
 	//Getter

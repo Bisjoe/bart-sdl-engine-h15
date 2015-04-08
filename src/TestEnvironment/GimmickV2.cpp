@@ -1,7 +1,7 @@
 #include "GimmickV2.h"
 
 GimmickV2::GimmickV2()
-: Animation(GIMMICKV2_PATH, IDLE_NB_FRAME(), ANIM_DEFAULT_SPEED, FRAME_SIZE(), IDLE_START_SRC())
+: Animation(GIMMICKV2_PATH, WALK_NB_FRAME(), ANIM_DEFAULT_SPEED, FRAME_SIZE(), WALK_START_SRC())
 , currentState(IDLE)
 {
 	//Start the animation on creation
@@ -11,6 +11,7 @@ GimmickV2::GimmickV2()
 }
 
 //Really basic animation state change
+//You'd want to use another system to store an object's multiple animations
 void GimmickV2::changeState(state newState)
 {
 	if (this->currentState != newState)
@@ -20,14 +21,18 @@ void GimmickV2::changeState(state newState)
 		case IDLE:
 			this->SetStartSrcPos(IDLE_START_SRC());
 			this->SetNbFrame(IDLE_NB_FRAME());
+			this->SetFrameRate(3);
+			//Using varying frame rates cause issues since we won't instantly change to the other frame.
 			break;
 		case WALK:
 			this->SetStartSrcPos(WALK_START_SRC());
 			this->SetNbFrame(WALK_NB_FRAME());
+			this->SetFrameRate(ANIM_DEFAULT_SPEED);
 			break;
 		case DIZZY:
 			this->SetStartSrcPos(DIZZY_START_SRC());
 			this->SetNbFrame(DIZZY_NB_FRAME());
+			this->SetFrameRate(ANIM_DEFAULT_SPEED);
 			break;
 		default:
 			break;
