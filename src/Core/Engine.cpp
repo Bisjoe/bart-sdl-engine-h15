@@ -30,6 +30,7 @@ Engine::~Engine()
 
 void Engine::Init()
 {
+	TTF_Init();
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -132,6 +133,7 @@ void Engine::Run()
 
 void Engine::Stop()
 {
+	TTF_Quit();
 	auto iter = Component::components.begin();
 	for (; iter != Component::components.end(); iter++)
 	{

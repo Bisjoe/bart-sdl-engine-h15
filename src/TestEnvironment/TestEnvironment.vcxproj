@@ -41,8 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\dependencies\SDL2_image-2.0.0\include;..\..\dependencies\SDL2-2.0.3\include;..\Core;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\dependencies\SDL2-2.0.3\lib\x86;..\..\dependencies\SDL2_image-2.0.0\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\dependencies\SDL2_image-2.0.0\include;..\..\dependencies\SDL2-2.0.3\include;..\Core;..\..\dependencies\SDL2_ttf-2.0.12\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\dependencies\SDL2-2.0.3\lib\x86;..\..\dependencies\SDL2_image-2.0.0\lib\x86;..\..\dependencies\SDL2_ttf-2.0.12\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -58,7 +58,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

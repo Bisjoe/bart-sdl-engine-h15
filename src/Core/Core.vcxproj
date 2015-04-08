@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\..\dependencies\SDL2_image-2.0.0\include;..\..\dependencies\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\dependencies\SDL2_image-2.0.0\lib\x86;..\..\dependencies\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\dependencies\SDL2_image-2.0.0\include;..\..\dependencies\SDL2-2.0.3\include;..\..\dependencies\SDL2_ttf-2.0.12\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\dependencies\SDL2_image-2.0.0\lib\x86;..\..\dependencies\SDL2-2.0.3\lib\x86;..\..\dependencies\SDL2_ttf-2.0.12\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -76,6 +76,7 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +88,7 @@
     <ClInclude Include="Point.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

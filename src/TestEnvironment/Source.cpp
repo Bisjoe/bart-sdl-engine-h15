@@ -4,6 +4,7 @@
 #include "MegaSonic.h"
 #include "Gimmick.h"
 #include "GimmickV2.h"
+#include "Text.h"
 
 typedef int* pInt;
 
@@ -51,7 +52,8 @@ int main(int argc, char* args[])
 	//Ship* ship = new Ship();
 	//MegaSonic* megaSonic = new MegaSonic();
 	//Gimmick* gimmick = new Gimmick();
-	GimmickV2* gimmickV2 = new GimmickV2();
+	//GimmickV2* gimmickV2 = new GimmickV2();
+	Text* textTest = new Text("Hello world!", GREEN);
 
 	// L'engin vire
 	Engine::GetInstance()->Run();
@@ -59,7 +61,7 @@ int main(int argc, char* args[])
 	//delete ship;
 	//delete megaSonic;
 	//delete gimmick;
-	delete gimmickV2;
-
+	//delete gimmickV2;
+	delete textTest;
 	return 0;
 }
