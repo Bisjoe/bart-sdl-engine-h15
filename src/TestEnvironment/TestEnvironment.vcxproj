@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\dependencies\SDL2_image-2.0.0\include;..\..\dependencies\SDL2-2.0.3\include;..\Core;..\..\dependencies\SDL2_ttf-2.0.12\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\dependencies\SDL2_image-2.0.0\include;..\..\dependencies\SDL2-2.0.3\include;..\..\dependencies\SDL2_ttf-2.0.12\include;..\Core;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\dependencies\SDL2-2.0.3\lib\x86;..\..\dependencies\SDL2_image-2.0.0\lib\x86;..\..\dependencies\SDL2_ttf-2.0.12\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,14 +82,12 @@
     <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="GimmickV2.cpp" />
     <ClCompile Include="Ship.cpp" />
-    <ClCompile Include="MegaSonic.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Gimmick.h" />
     <ClInclude Include="GimmickV2.h" />
     <ClInclude Include="Ship.h" />
-    <ClInclude Include="MegaSonic.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.vcxproj">
