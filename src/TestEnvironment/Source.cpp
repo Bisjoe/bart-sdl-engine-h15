@@ -15,7 +15,9 @@ int main(int argc, char* args[])
 	//Ship* ship = new Ship();
 	//Gimmick* gimmick = new Gimmick();
 	//GimmickV2* gimmickV2 = new GimmickV2();
-	Text* textTest = new Text("Hello world!", GREEN);
+	Text* textTest = new Text("Hello world!");
+	textTest->SetFontsize(18);
+	textTest->SetTextColor({ 245, 222, 187 });
 
 	// L'engin vire
 	Engine::GetInstance()->Run();

@@ -3,18 +3,24 @@
 #include "Engine.h"
 
 // =====================================================
-// ------------------   QUICK DOC  ---------------------
-//
-// 
-//
-//
-//
-//
-//
+// Based on SDL_ttf lib  
+//	  (Documentation http://sdl.beuc.net/sdl.wiki/SDL_ttf)
+//					
+//	=========================================
+//	To get new font: http://www.dafont.com/fr/ (watch for license right, some are personal use only)
+//  Also make sure they are in ".ttf" (other type of font may work but have not been tested) and
+//  that you place them in your project folder.
 //
 
-enum DEFAULT_COLOR {
-	BLACK, 
+
+// Default consts
+char* const DEFAULT_TEXT_FONT = "lhandw.ttf";
+const SDL_Color DEFAULT_TEXT_COLOR = { 255, 255, 255 };
+const int DEFAULT_TEXT_FONTSIZE = 12;
+const int DEFAULT_TEXT_WRAPPER = 150;
+
+// Shortcut to quickly get a color without having to manually set an SDL_Color, use with GetColor()
+enum DefaultColor {
 	WHITE, 
 	RED,
 	BLUE,
@@ -25,26 +31,41 @@ class Text :
 	public Component
 {
 private:
+	char* fontSrc;
+	char* text;
+	int x = 0;
+	int currentTime;
+	int changeAtTime;
 	TTF_Font* font;
 	SDL_Surface* message;
+	int fontSize;
+	int wrapper;
+	SDL_Color color;
 	SDL_Rect* dstRect; 
 	SDL_Rect* srcRect;
 
 
 public:
-	Text(const char* text);
-	Text(const char* text, const SDL_Color color);
-	Text(const char* text, const DEFAULT_COLOR color);
-	Text(const char* text, char* font);
-	Text(const char* text, char* font, const int fontSize);
-	Text(const char* text, char* font, const int fontSize, const int x, const int y);
-	Text(const char* text, char* font, const int fontSize, const int x, const int y, const int wrapper);
-	Text(const char* text, char* font, const int fontSize, const int x, const int y, const int wrapper, const SDL_Color color);
-	Text(const char* text, char* font, const int fontSize, const int x, const int y, const int wrapper, const DEFAULT_COLOR color);
-	void Init(const char* text, char* font, const int fontSize, const int x, const int y, const int wrapper, const SDL_Color color);
+	Text(char* const text);
+	Text(char* const text, char* const fontSrc);
+	Text(char* const text, char* const fontSrc, const int fontSize);
+	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper);
+	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y);
+	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y, SDL_Color color);
+	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y, DefaultColor color);
 
 
 	~Text();
+
+	void SetFont(char* const font);
+	void SetText(char* const text);
+	void SetFontsize(const int fontSize);
+	void SetPosition(const int x, const int y);
+	void SetWrapper(const int wrapper);
+	void SetTextColor(const SDL_Color color);
+	void SetTextColor(const DefaultColor color);
+	void UpdateMessage();
+	void Init(const int x, const int y);
 
 	virtual void Start();
 	virtual void Update();
@@ -53,7 +74,8 @@ public:
 	void Draw();
 
 protected:
+	void Init(char* const text, char* const font, const int fontSize, const int x, const int y, const int wrapper, SDL_Color const color);
 	void ShowMessage(SDL_Surface* surface);
-	SDL_Color GetColor(DEFAULT_COLOR color);
+	SDL_Color GetColor(DefaultColor color);
 };
 
