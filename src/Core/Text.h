@@ -2,15 +2,13 @@
 #include "Common.h"
 #include "Engine.h"
 
-// =====================================================
-// Based on SDL_ttf lib  
-//	  (Documentation http://sdl.beuc.net/sdl.wiki/SDL_ttf)
-//					
-//	=========================================
-//	To get new font: http://www.dafont.com/fr/ (watch for license right, some are personal use only)
-//  Also make sure they are in ".ttf" (other type of font may work but have not been tested) and
-//  that you place them in your project folder.
-//
+/**  =====================================================
+	 SDL_ttf Documentation http://sdl.beuc.net/sdl.wiki/SDL_ttf			
+	 =========================================
+	 To get new font: http://www.dafont.com/fr/ (watch for license right, some are personal use only)
+	 Also make sure they are in ".ttf" (other type of font may work but have not been tested) and
+	 that you place them in your project folder.
+**/
 
 
 // Default consts
@@ -53,8 +51,6 @@ public:
 	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y);
 	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y, SDL_Color color);
 	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y, DefaultColor color);
-
-
 	~Text();
 
 	void SetFont(char* const font);
@@ -65,7 +61,6 @@ public:
 	void SetTextColor(const SDL_Color color);
 	void SetTextColor(const DefaultColor color);
 	void UpdateMessage();
-	void Init(const int x, const int y);
 
 	virtual void Start();
 	virtual void Update();
@@ -74,7 +69,7 @@ public:
 	void Draw();
 
 protected:
-	void Init(char* const text, char* const font, const int fontSize, const int x, const int y, const int wrapper, SDL_Color const color);
+	void Init(const int x, const int y);
 	void ShowMessage(SDL_Surface* surface);
 	SDL_Color GetColor(DefaultColor color);
 };

@@ -23,7 +23,7 @@ void Component::Update()
 
 void Component::Draw()
 {
-	std::cout << "Component Draw!" << std::endl;
+	// std::cout << "Component Draw!" << std::endl;
 }
 
 void Component::Stop()

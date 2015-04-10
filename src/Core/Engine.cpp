@@ -30,7 +30,15 @@ Engine::~Engine()
 
 void Engine::Init()
 {
-	TTF_Init();
+	if (TTF_Init() == -1)
+	{
+		printf("SDL TTF could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+	}
+
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1)
+	{
+		printf("SDL Mixer could not initialize! SDL_Mixer Error: %s\n", Mix_GetError());
+	}
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -134,6 +142,7 @@ void Engine::Run()
 void Engine::Stop()
 {
 	TTF_Quit();
+	Mix_CloseAudio();
 	auto iter = Component::components.begin();
 	for (; iter != Component::components.end(); iter++)
 	{
