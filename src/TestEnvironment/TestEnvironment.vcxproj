@@ -85,6 +85,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Libraries.h" />
     <ClInclude Include="Gimmick.h" />
     <ClInclude Include="GimmickV2.h" />
     <ClInclude Include="Ship.h" />

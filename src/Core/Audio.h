@@ -3,6 +3,10 @@
 #include "Engine.h"
 
 /**  =====================================================
+
+	IN CASE OF DLL ERROR:
+		Add the DLL from the folder ..\..\bart-sdl-engine-h15\dependencies\SDL2_mixer-2.0.0\lib\x86 into your Debug folder
+
 	 SDL_Mixer Documentation : http://jcatki.no-ip.org:8080/SDL_mixer/SDL_mixer.html
 	 ======================================
 	 Positive point - Works
