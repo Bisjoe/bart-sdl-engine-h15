@@ -14,6 +14,10 @@
 #define DEFAULT_WIN_H 600
 #endif
 
+#ifndef CHANNELS_COUNT
+#define CHANNELS_COUNT 16
+#endif
+
 // STD Lib
 #include <iostream>
 #include <string>

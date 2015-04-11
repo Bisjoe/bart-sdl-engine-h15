@@ -6,6 +6,9 @@
 
 typedef int* pInt;
 
+char* const sound1 = "about_time.wav";
+char* const sound2 = "enemy_hit.wav";
+
 int main(int argc, char* args[])
 {
 	Engine::GetInstance()->Init();
@@ -17,9 +20,12 @@ int main(int argc, char* args[])
 	Text* textTest = new Text("Hello world!");
 	textTest->SetFontsize(18);
 	textTest->SetTextColor({ 245, 222, 187 });
-	Audio* musicTest = new Audio("testmusic.mp3", -1);
-	Audio::SetVolume(30); // Change this value to raise or lower the volume. Work overall and not per instance.
-
+	AUDIO->SetMusicVolume(30);
+	AUDIO->PlayMusic("testmusic.mp3");
+	AUDIO->AddSoundToList(sound2);
+	AUDIO->SetSfxVolume(sound2, 40);
+	AUDIO->OverrideSoundInList(sound1, sound2);
+	AUDIO->PlaySound(sound1, 1);
 
 	// L'engin vire
 	Engine::GetInstance()->Run();
@@ -27,7 +33,6 @@ int main(int argc, char* args[])
 	//delete ship;
 	//delete gimmick;
 	//delete gimmickV2;
-	delete musicTest;
 	delete textTest;
 	return 0;
 }
