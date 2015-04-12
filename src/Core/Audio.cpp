@@ -45,7 +45,6 @@ int Audio::CheckVolume(int volumeLevel)
 
 void Audio::SetMusicVolume(int volumeLevel)
 {
-	
 	Mix_VolumeMusic(CheckVolume(volumeLevel));
 }
 
