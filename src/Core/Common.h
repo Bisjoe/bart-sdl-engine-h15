@@ -18,6 +18,10 @@
 #define CHANNELS_COUNT 16
 #endif
 
+#ifndef DEFAULT_FRAMERATE
+#define DEFAULT_FRAMERATE 30
+#endif
+
 // STD Lib
 #include <iostream>
 #include <string>

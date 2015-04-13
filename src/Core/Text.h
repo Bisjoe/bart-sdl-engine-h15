@@ -11,11 +11,25 @@
 **/
 
 
-// Default consts
-char* const DEFAULT_TEXT_FONT = "lhandw.ttf";
-const SDL_Color DEFAULT_TEXT_COLOR = { 255, 255, 255 };
-const int DEFAULT_TEXT_FONTSIZE = 12;
-const int DEFAULT_TEXT_WRAPPER = 150;
+// Default parameters
+#ifndef DEFAULT_TEXT_FONT
+#define DEFAULT_TEXT_FONT "lhandw.ttf"
+#endif
+#ifndef DEFAULT_TEXT_COLOR
+#define DEFAULT_TEXT_COLOR { 255, 255, 255 }
+#endif
+#ifndef DEFAULT_TEXT_FONTSIZE
+#define DEFAULT_TEXT_FONTSIZE 12
+#endif
+#ifndef DEFAULT_TEXT_WRAPPER
+#define DEFAULT_TEXT_WRAPPER 750
+#endif
+#ifndef DEFAULT_FADEIN_MAX
+#define DEFAULT_FADEIN_MAX 5
+#endif
+#ifndef DEFAUL_FADEINTXT
+#define DEFAUL_FADEINTXT { false, "", 0, 0, NULL, NULL }
+#endif
 
 // Shortcut to quickly get a color without having to manually set an SDL_Color, use with GetColor()
 enum DefaultColor {
@@ -25,15 +39,25 @@ enum DefaultColor {
 	GREEN
 };
 
+struct FadeInText {
+	bool used;
+	char text[15];
+	float alpha;
+	int currentTime;
+	SDL_Surface* message;
+	SDL_Rect* dstRect;
+};
+
 class Text :
 	public Component
 {
 private:
 	char* fontSrc;
 	char* text;
-	int x = 0;
 	int currentTime;
 	int changeAtTime;
+	int framerate;
+	
 	TTF_Font* font;
 	SDL_Surface* message;
 	int fontSize;
@@ -42,8 +66,8 @@ private:
 	SDL_Rect* dstRect; 
 	SDL_Rect* srcRect;
 
-
 public:
+	Text();
 	Text(char* const text);
 	Text(char* const text, char* const fontSrc);
 	Text(char* const text, char* const fontSrc, const int fontSize);
@@ -60,17 +84,23 @@ public:
 	void SetWrapper(const int wrapper);
 	void SetTextColor(const SDL_Color color);
 	void SetTextColor(const DefaultColor color);
+	point<int> GetTextSize();
 	void UpdateMessage();
 
 	virtual void Start();
-	virtual void Update();
 	virtual void Stop();
 
 	void Draw();
 
 protected:
+	FadeInText fadeInTxtsList[DEFAULT_FADEIN_MAX];
+	int elemInList;
+	char compText[250];
+	void AddToTxtsList(char* const text, const int x, const int y);
+	void UpdateFadeIn();
 	void Init(const int x, const int y);
 	void ShowMessage(SDL_Surface* surface);
+	void Text::ShowFadeIn(SDL_Surface* surface);
 	SDL_Color GetColor(DefaultColor color);
 };
 
