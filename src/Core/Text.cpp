@@ -1,8 +1,6 @@
 #include "Text.h"
-#pragma warning(disable: 4996)
-
 #include <assert.h>
-
+#pragma warning(disable: 4996)
 
 Text::Text()
 	: text("")
@@ -14,7 +12,7 @@ Text::Text()
 	Init(0, 0);
 }
 
-Text::Text(const int x, const int y)
+Text::Text(int x, int y)
 : text("")
 , fontSrc(DEFAULT_TEXT_FONT)
 , fontSize(DEFAULT_TEXT_FONTSIZE)
@@ -24,7 +22,7 @@ Text::Text(const int x, const int y)
 	Init(x, y);
 }
 
-Text::Text(char* const text)
+Text::Text(Str text)
 	: text(text)
 	, fontSrc(DEFAULT_TEXT_FONT)
 	, fontSize(DEFAULT_TEXT_FONTSIZE)
@@ -34,7 +32,7 @@ Text::Text(char* const text)
 	Init(0, 0);
 }
 
-Text::Text(char* const text, char* const fontSrc)
+Text::Text(Str text, Str fontSrc)
 	: text(text)
 	, fontSrc(fontSrc)
 	, fontSize(DEFAULT_TEXT_FONTSIZE)
@@ -44,7 +42,7 @@ Text::Text(char* const text, char* const fontSrc)
 	Init(0, 0);
 }
 
-Text::Text(char* const text, char* const fontSrc, const int fontSize)
+Text::Text(Str text, Str fontSrc, int fontSize)
 	: text(text)
 	, fontSrc(fontSrc)
 	, fontSize(fontSize)
@@ -54,7 +52,7 @@ Text::Text(char* const text, char* const fontSrc, const int fontSize)
 	Init(0, 0);
 }
 
-Text::Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper)
+Text::Text(Str text, Str fontSrc, int fontSize, int wrapper)
 	: text(text)
 	, fontSrc(fontSrc)
 	, fontSize(fontSize)
@@ -64,7 +62,7 @@ Text::Text(char* const text, char* const fontSrc, const int fontSize, const int 
 	Init(0, 0);
 }
 
-Text::Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y)
+Text::Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, int y)
 	: text(text)
 	, fontSrc(fontSrc)
 	, fontSize(fontSize)
@@ -74,7 +72,7 @@ Text::Text(char* const text, char* const fontSrc, const int fontSize, const int 
 	Init(x, y);
 }
 
-Text::Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y, SDL_Color color)
+Text::Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, int y, SDL_Color color)
 	: text(text)
 	, fontSrc(fontSrc)
 	, fontSize(fontSize)
@@ -84,7 +82,7 @@ Text::Text(char* const text, char* const fontSrc, const int fontSize, const int 
 	Init(x, y);
 }
 
-Text::Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y, DefaultColor color)
+Text::Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, const int y, DefaultColor color)
 	: text(text)
 	, fontSrc(fontSrc)
 	, fontSize(fontSize)
@@ -99,7 +97,7 @@ Text::~Text()
 
 }
 
-void Text::AddToTxtsList(char* const text, const int x, const int y)
+void Text::AddToTxtsList(Str text, int x, int y)
 {
 	elemInList++;
 	for (int i = 0; i < DEFAULT_FADEIN_MAX; ++i)
@@ -119,7 +117,7 @@ void Text::AddToTxtsList(char* const text, const int x, const int y)
 	}
 }
 
-void Text::Init(const int x, const int y)
+void Text::Init(int x, int y)
 {
 	elemInList = 0;
 	srcRect = new SDL_Rect();
@@ -140,22 +138,22 @@ void Text::Init(const int x, const int y)
 	memset(compText, 0, sizeof(compText));
 }
 
-void Text::SetFont(char* const font) {
+void Text::SetFont(Str font) {
 	this->fontSrc = font;
 	UpdateMessage();
 }
 
-void Text::SetFontsize(const int fontSize) {
+void Text::SetFontsize(int fontSize) {
 	this->fontSize = fontSize;
 	UpdateMessage();
 }
 
-void Text::SetPosition(const int x, const int y) {
+void Text::SetPosition(int x, int y) {
 	dstRect->x = x;
 	dstRect->y = y;
 }
 
-void Text::SetWrapper(const int wrapper) {
+void Text::SetWrapper(int wrapper) {
 	this->wrapper = wrapper;
 
 }

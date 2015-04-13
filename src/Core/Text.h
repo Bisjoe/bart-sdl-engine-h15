@@ -30,6 +30,7 @@
 #ifndef DEFAUL_FADEINTXT
 #define DEFAUL_FADEINTXT { false, 0, 0, NULL, NULL, "" }
 #endif
+typedef char const* Str;
 
 // Shortcut to quickly get a color without having to manually set an SDL_Color, use with GetColor()
 enum DefaultColor {
@@ -52,8 +53,8 @@ class Text :
 	public Component
 {
 private:
-	char* fontSrc;
-	char* text;
+	Str fontSrc;
+	Str text;
 	int currentTime;
 	int changeAtTime;
 	int framerate;
@@ -68,25 +69,23 @@ private:
 
 public:
 	Text();
-	Text(char* const text);
-	Text(const int x, const int y);
-	Text(char* const text, char* const fontSrc);
-	Text(char* const text, char* const fontSrc, const int fontSize);
-	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper);
-	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y);
-	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y, SDL_Color color);
-	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper, const int x, const int y, DefaultColor color);
+	Text(Str text);
+	Text(int x, int y);
+	Text(Str text, Str fontSrc);
+	Text(Str text, Str fontSrc, int fontSize);
+	Text(Str text, Str fontSrc, int fontSize, int wrapper);
+	Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, int y);
+	Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, int y, SDL_Color color);
+	Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, int y, DefaultColor color);
 	~Text();
 
-	void SetFont(char* const font);
-	void SetText(char* const text);
-	void SetFontsize(const int fontSize);
-	void SetPosition(const int x, const int y);
-	void SetWrapper(const int wrapper);
+	void SetFont(Str font);
+	void SetText(Str text);
+	void SetFontsize(int fontSize);
+	void SetPosition(int x, int y);
+	void SetWrapper(int wrapper);
 	void SetTextColor(const SDL_Color color);
 	void SetTextColor(const DefaultColor color);
-	void CopyString(char dest[1000], char const source[]);
-	void AppendString(char dest[1000], char const source[]);
 	point<int> GetTextSize();
 	void UpdateMessage();
 
@@ -98,8 +97,8 @@ public:
 protected:
 	FadeInText fadeInTxtsList[DEFAULT_FADEIN_MAX];
 	int elemInList;
-	char compText[1000];
-	void AddToTxtsList(char* const text, const int x, const int y);
+	char compText[1024];
+	void AddToTxtsList(Str text, const int x, const int y);
 	void UpdateFadeIn();
 	void Init(const int x, const int y);
 	void ShowMessage(SDL_Surface* surface);

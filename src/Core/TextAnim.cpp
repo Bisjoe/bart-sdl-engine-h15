@@ -1,8 +1,6 @@
 #include "TextAnim.h"
 
-typedef char const* Str;
-
-TextAnim::TextAnim(char* const text)
+TextAnim::TextAnim(Str text)
 	: Text()
 	, animText(text)
 	, animType(LETTER)
@@ -10,10 +8,10 @@ TextAnim::TextAnim(char* const text)
 	, frameRate(DEFAULT_FRAMERATE)
 	, animationStarted(false)
 {
-	origin = { 0, 0 };
+	Init(DEFAULT_TEXT_FONT, DEFAULT_TEXT_FONTSIZE, 0, 0, DEFAULT_TEXT_COLOR);
 }
 
-TextAnim::TextAnim(char* const text, char* const font)
+TextAnim::TextAnim(Str text, Str font)
 	: Text()
 	, animText(text)
 	, animType(LETTER)
@@ -21,11 +19,10 @@ TextAnim::TextAnim(char* const text, char* const font)
 	, frameRate(DEFAULT_FRAMERATE)
 	, animationStarted(false)
 {
-	SetFont(font);
-	origin = { 0, 0 };
+	Init(font, DEFAULT_TEXT_FONTSIZE, 0, 0, DEFAULT_TEXT_COLOR);
 }
 
-TextAnim::TextAnim(char* const text, TextAnimType animType)
+TextAnim::TextAnim(Str text, TextAnimType animType)
 	: Text()
 	, animText(text)
 	, animType(animType)
@@ -33,10 +30,10 @@ TextAnim::TextAnim(char* const text, TextAnimType animType)
 	, frameRate(DEFAULT_FRAMERATE)
 	, animationStarted(false)
 {
-	origin = { 0, 0 };
+	Init(DEFAULT_TEXT_FONT, DEFAULT_TEXT_FONTSIZE, 0, 0, DEFAULT_TEXT_COLOR);
 }
 
-TextAnim::TextAnim(char* const text, TextAnimType animType, char* const font)
+TextAnim::TextAnim(Str text, TextAnimType animType, Str font)
 	: Text()
 	, animText(text)
 	, animType(animType)
@@ -44,11 +41,10 @@ TextAnim::TextAnim(char* const text, TextAnimType animType, char* const font)
 	, frameRate(DEFAULT_FRAMERATE)
 	, animationStarted(false)
 {
-	SetFont(font);
-	origin = { 0, 0 };
+	Init(font, DEFAULT_TEXT_FONTSIZE, 0, 0, DEFAULT_TEXT_COLOR);
 }
 
-TextAnim::TextAnim(char* const text, TextAnimType animType, char* const font, const int fontSize)
+TextAnim::TextAnim(Str text, TextAnimType animType, Str font, int fontSize)
 	: Text()
 	, animText(text)
 	, animType(animType)
@@ -56,12 +52,10 @@ TextAnim::TextAnim(char* const text, TextAnimType animType, char* const font, co
 	, frameRate(DEFAULT_FRAMERATE)
 	, animationStarted(false)
 {
-	SetFontsize(fontSize);
-	SetFont(font);
-	origin = { 0, 0 };
+	Init(font, fontSize, 0, 0, DEFAULT_TEXT_COLOR);
 }
 
-TextAnim::TextAnim(char* const text, TextAnimType animType, char* const font, const int fontSize, const int x, const int y)
+TextAnim::TextAnim(Str text, TextAnimType animType, Str font, int fontSize, int x, int y)
 	: Text(x, y)
 	, animText(text)
 	, animType(animType)
@@ -69,15 +63,43 @@ TextAnim::TextAnim(char* const text, TextAnimType animType, char* const font, co
 	, frameRate(DEFAULT_FRAMERATE)
 	, animationStarted(false)
 {
-	SetFontsize(fontSize);
-	SetFont(font);
-	origin = { x, y };
+	Init(font, fontSize, x, y, DEFAULT_TEXT_COLOR);
+}
+
+TextAnim::TextAnim(Str text, TextAnimType animType, Str font, int fontSize, int x, int y, SDL_Color color)
+	: Text(x, y)
+	, animText(text)
+	, animType(animType)
+	, currentTime(0)
+	, frameRate(DEFAULT_FRAMERATE)
+	, animationStarted(false)
+{
+	Init(font, fontSize, x, y, color);
+}
+
+TextAnim::TextAnim(Str text, TextAnimType animType, Str font, int fontSize, int x, int y, DefaultColor color)
+	: Text(x, y)
+	, animText(text)
+	, animType(animType)
+	, currentTime(0)
+	, frameRate(DEFAULT_FRAMERATE)
+	, animationStarted(false)
+{
+	Init(font, fontSize, x, y, GetColor(color));
 }
 
 
 TextAnim::~TextAnim()
 {
+	
+}
 
+void TextAnim::Init(Str font, int fontSize, int x, int y, SDL_Color color)
+{
+	SetTextColor(color);
+	SetFontsize(fontSize);
+	SetFont(font);
+	origin = { x, y };
 }
 
 void TextAnim::Start()
@@ -164,7 +186,7 @@ void TextAnim::SetNextWord()
 	bool kill = false;
 	int i = 0;
 
-	char* pos = strchr(animText, ' ');
+	Str pos = strchr(animText, ' ');
 	if (pos) 
 	{
 		i = (size_t)(pos - animText) + 1;

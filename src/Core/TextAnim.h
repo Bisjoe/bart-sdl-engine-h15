@@ -13,12 +13,14 @@ class TextAnim :
 	public Text
 {
 public:
-	TextAnim(char* const text);
-	TextAnim(char* const text, char* const font);
-	TextAnim(char* const text, TextAnimType animType);
-	TextAnim(char* const text, TextAnimType animType, char* const font);
-	TextAnim(char* const text, TextAnimType animType, char* const font, const int fontSize);
-	TextAnim(char* const text, TextAnimType animType, char* const font, const int fontSize, const int x, const int y);
+	TextAnim(Str text);
+	TextAnim(Str text, Str font);
+	TextAnim(Str text, TextAnimType animType);
+	TextAnim(Str text, TextAnimType animType, Str font);
+	TextAnim(Str text, TextAnimType animType, Str font, int fontSize);
+	TextAnim(Str text, TextAnimType animType, Str font, int fontSize, int x, int y);
+	TextAnim(Str text, TextAnimType animType, Str font, int fontSize, int x, int y, SDL_Color color);
+	TextAnim(Str text, TextAnimType animType, Str font, int fontSize, int x, int y, DefaultColor color);
 	~TextAnim();
 
 	void Play();
@@ -29,7 +31,7 @@ private:
 	TextAnimType animType;
 	float currentTime;
 	int frameRate;
-	char* animText;
+	Str animText;
 	int currentI;
 
 	void Start();
@@ -39,13 +41,9 @@ private:
 	void SetNextText();
 	void SetNextLetter();
 	void SetNextWord();
-	void GetAnimation();
-	void LetterAnim();
-	void LineAnim();
-	void WordAnim();
 
 protected:
-	void Init();
+	void Init(Str font, int fontSize, int x, int y, SDL_Color color);
 	
 };
 
