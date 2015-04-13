@@ -28,7 +28,7 @@
 #define DEFAULT_FADEIN_MAX 5
 #endif
 #ifndef DEFAUL_FADEINTXT
-#define DEFAUL_FADEINTXT { false, "", 0, 0, NULL, NULL }
+#define DEFAUL_FADEINTXT { false, 0, 0, NULL, NULL, "" }
 #endif
 
 // Shortcut to quickly get a color without having to manually set an SDL_Color, use with GetColor()
@@ -41,11 +41,11 @@ enum DefaultColor {
 
 struct FadeInText {
 	bool used;
-	char text[15];
 	float alpha;
 	int currentTime;
 	SDL_Surface* message;
 	SDL_Rect* dstRect;
+	char text[128];
 };
 
 class Text :
@@ -69,6 +69,7 @@ private:
 public:
 	Text();
 	Text(char* const text);
+	Text(const int x, const int y);
 	Text(char* const text, char* const fontSrc);
 	Text(char* const text, char* const fontSrc, const int fontSize);
 	Text(char* const text, char* const fontSrc, const int fontSize, const int wrapper);
@@ -84,6 +85,8 @@ public:
 	void SetWrapper(const int wrapper);
 	void SetTextColor(const SDL_Color color);
 	void SetTextColor(const DefaultColor color);
+	void CopyString(char dest[1000], char const source[]);
+	void AppendString(char dest[1000], char const source[]);
 	point<int> GetTextSize();
 	void UpdateMessage();
 
@@ -95,7 +98,7 @@ public:
 protected:
 	FadeInText fadeInTxtsList[DEFAULT_FADEIN_MAX];
 	int elemInList;
-	char compText[250];
+	char compText[1000];
 	void AddToTxtsList(char* const text, const int x, const int y);
 	void UpdateFadeIn();
 	void Init(const int x, const int y);

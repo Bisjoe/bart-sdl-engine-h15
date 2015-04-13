@@ -17,10 +17,13 @@ int main(int argc, char* args[])
 	//Ship* ship = new Ship();
 	//Gimmick* gimmick = new Gimmick();
 	//GimmickV2* gimmickV2 = new GimmickV2();
-	TextAnim* textTest = new TextAnim("Text Animation - v:0.1.0");
+	TextAnim* textTest = new TextAnim("Text Animation - v:0.2.5", LETTER, "dialog.ttf");
+	TextAnim* textTest2 = new TextAnim("Text Animation - v:0.2.5", WORD, "dialog.ttf", 18, 0, 50);
+	TextAnim* textTest3 = new TextAnim("Hello you there on the wall", LINE, "dialog.ttf", 18, 0, 100);
 	textTest->SetFontsize(18);
 	textTest->Play();
-//	textTest->SetTextColor({ 245, 222, 187 });
+	textTest2->Play();
+	textTest3->Play();
 	AUDIO->SetMusicVolume(30);
 	AUDIO->PlayMusic("testmusic.mp3");
 	AUDIO->AddSoundToList(sound2);
@@ -35,5 +38,7 @@ int main(int argc, char* args[])
 	//delete gimmick;
 	//delete gimmickV2;
 	delete textTest;
+	delete textTest2;
+	delete textTest3;
 	return 0;
 }

@@ -1,6 +1,8 @@
 #include "Text.h"
 #pragma warning(disable: 4996)
 
+#include <assert.h>
+
 
 Text::Text()
 	: text("")
@@ -10,6 +12,16 @@ Text::Text()
 	, color(DEFAULT_TEXT_COLOR)
 {
 	Init(0, 0);
+}
+
+Text::Text(const int x, const int y)
+: text("")
+, fontSrc(DEFAULT_TEXT_FONT)
+, fontSize(DEFAULT_TEXT_FONTSIZE)
+, wrapper(DEFAULT_TEXT_WRAPPER)
+, color(DEFAULT_TEXT_COLOR)
+{
+	Init(x, y);
 }
 
 Text::Text(char* const text)
@@ -92,11 +104,12 @@ void Text::AddToTxtsList(char* const text, const int x, const int y)
 	elemInList++;
 	for (int i = 0; i < DEFAULT_FADEIN_MAX; ++i)
 	{
-		if (fadeInTxtsList[i].used == false)
+		if (!fadeInTxtsList[i].used)
 		{
 			fadeInTxtsList[i].used = true;
+			assert(strlen(text) < sizeof(fadeInTxtsList[i].text));
 			strcpy(fadeInTxtsList[i].text, text);
-			fadeInTxtsList[i].message = TTF_RenderText_Blended(this->font, text, this->color);
+			fadeInTxtsList[i].message = TTF_RenderText_Blended_Wrapped(this->font, text, this->color, wrapper);
 			SDL_Rect* tempDstRect = new SDL_Rect();
 			tempDstRect->x = x;
 			tempDstRect->y = y;
@@ -123,10 +136,13 @@ void Text::Init(const int x, const int y)
 		fadeInTxtsList[i] = DEFAUL_FADEINTXT;
 	}
 	this->font = TTF_OpenFont(this->fontSrc, this->fontSize);
+
+	memset(compText, 0, sizeof(compText));
 }
 
 void Text::SetFont(char* const font) {
 	this->fontSrc = font;
+	UpdateMessage();
 }
 
 void Text::SetFontsize(const int fontSize) {
@@ -159,7 +175,9 @@ void Text::UpdateMessage() {
 }
 
 
-// Work in progress, still not quite working well yet
+// Efficiency may vary depending on the font used, the more equal they are between each letter, the better
+// (monstly because TTF_SizeText include spacing between letter, and this spacing change if the letter are together (ex. "Hello") or separated in multiple 
+// substrings (ex. "Hel" "lo");
 point<int> Text::GetTextSize() {
 	int w = 0, h = 0;
 	char tempString[250] = "";
@@ -190,7 +208,7 @@ void Text::UpdateFadeIn()
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 	for (int i = 0; i < DEFAULT_FADEIN_MAX; ++i)
 	{
-		if (fadeInTxtsList[i].used != false)
+		if (fadeInTxtsList[i].used)
 		{
 			fadeInTxtsList[i].currentTime += dt;
 			if (fadeInTxtsList[i].currentTime >= 1.0f / framerate)
@@ -198,16 +216,13 @@ void Text::UpdateFadeIn()
 				fadeInTxtsList[i].currentTime = 0;
 				if (fadeInTxtsList[i].alpha < 255)
 				{
-					fadeInTxtsList[i].alpha += 0.1f;
+					fadeInTxtsList[i].alpha += 0.09f;
 					SDL_SetSurfaceAlphaMod(fadeInTxtsList[i].message, fadeInTxtsList[i].alpha);
 					ShowFadeIn(Engine::GetInstance()->GetRenderer()->GetScreen());
 				}
 				else
 				{
 					elemInList--;
-					if (text[0] == '\0')
-						strcpy(compText, fadeInTxtsList[i].text);
-					else
 					strcat(compText, fadeInTxtsList[i].text);
 					text = compText;
 					fadeInTxtsList[i] = DEFAUL_FADEINTXT;

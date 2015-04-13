@@ -13,8 +13,12 @@ class TextAnim :
 	public Text
 {
 public:
-	TextAnim(char* const text, TextAnimType animType);
 	TextAnim(char* const text);
+	TextAnim(char* const text, char* const font);
+	TextAnim(char* const text, TextAnimType animType);
+	TextAnim(char* const text, TextAnimType animType, char* const font);
+	TextAnim(char* const text, TextAnimType animType, char* const font, const int fontSize);
+	TextAnim(char* const text, TextAnimType animType, char* const font, const int fontSize, const int x, const int y);
 	~TextAnim();
 
 	void Play();
@@ -33,6 +37,8 @@ private:
 	void Stop();
 
 	void SetNextText();
+	void SetNextLetter();
+	void SetNextWord();
 	void GetAnimation();
 	void LetterAnim();
 	void LineAnim();

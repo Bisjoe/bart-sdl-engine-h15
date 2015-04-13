@@ -16,8 +16,8 @@
 	=========================================
 	IMPORTANT NOTE:
 		Doesn't work with every file (even if the extension is supported), in case of doubt try another one.
-		If the file turns out to be problematic try going to http://mp3cut.net/, upload your file and redownload it from there (with or without editing it) and in the appropriate format (mp3 or wav), 
-		should work after.
+		If the file turns out to be problematic try going to http://mp3cut.net/, upload your file and redownload it from there (with or without editing it) and in 
+		the appropriate format (mp3 or wav), should work after.
 
 		-------------------------------------------------
 	HOW IT WORKS:
