@@ -36,15 +36,16 @@ public:
 	void Run();
 	void Stop();
 
-	Renderer* GetRenderer(){ return renderer; }
-	Input* GetInput(){ return input; }
-	Timer* GetTimer(){ return timer; }
+	Renderer* GetRenderer()				{ return renderer; }
+	Input* GetInput()					{ return input; }
+	Timer* GetTimer()					{ return timer; }
+	point<int> GetScreenSize()			{ return screenSize; };
 
 private:
 	void Start();
 	void Update();
 	void Draw();
-
+	point<int> screenSize;
 	SDL_Window* window;
 	Renderer* renderer;
 	Input* input;

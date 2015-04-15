@@ -19,13 +19,11 @@ public:
 
 	void Draw();
 
-	void SetPosition(int x, int y) { 
-		dstRect->x = x; dstRect->y = y; }
-	void SetDstFrame(int x, int y, int w, int h) { 
-		dstRect->x = x, dstRect->y = y; dstRect->w = w; dstRect->h = h; }
-	void SetSrcFrame(int x, int y, int w, int h) {
-		srcRect->x = x, srcRect->y = y; srcRect->w = w; srcRect->h = h;
-	}
+	void ScaleSprite(int w, int h);
+
+	void SetPosition(int x, int y)						{ dstRect->x = x; dstRect->y = y; }
+	void SetDstFrame(int x, int y, int w, int h)		{ dstRect->x = x, dstRect->y = y; dstRect->w = w; dstRect->h = h; }
+	void SetSrcFrame(int x, int y, int w, int h)		{ srcRect->x = x, srcRect->y = y; srcRect->w = w; srcRect->h = h; }
 
 protected:
 	SDL_Surface* LoadImage(const std::string& path);
@@ -37,5 +35,6 @@ private:
 	SDL_Rect* dstRect;
 	float angle;
 	bool isVisible;
+	bool scaled;
 };
 

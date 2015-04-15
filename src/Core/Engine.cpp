@@ -58,6 +58,7 @@ void Engine::Init(int screenWidth, int screenHeight) {
 			renderer = new Renderer(window);
 			input = new Input();
 			timer = new Timer();
+			screenSize = { screenWidth, screenHeight };
 		}
 	}
 }
