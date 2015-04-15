@@ -30,6 +30,10 @@ Engine::~Engine()
 
 void Engine::Init()
 {
+	Init(DEFAULT_WIN_W, DEFAULT_WIN_H);
+}
+
+void Engine::Init(int screenWidth, int screenHeight) {
 	if (TTF_Init() == -1)
 	{
 		printf("SDL TTF could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
@@ -43,7 +47,7 @@ void Engine::Init()
 		// Créer la fenetre
 		window = SDL_CreateWindow(
 			DEFAULT_WIN_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			DEFAULT_WIN_W, DEFAULT_WIN_H, SDL_WINDOW_SHOWN);
+			screenWidth, screenHeight, SDL_WINDOW_SHOWN);
 
 		if (window == nullptr)
 		{

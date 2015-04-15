@@ -44,6 +44,5 @@ private:
 
 protected:
 	void Init(Str font, int fontSize, int x, int y, SDL_Color color);
-	
 };
 

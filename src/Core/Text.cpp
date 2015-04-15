@@ -131,7 +131,7 @@ void Text::Init(int x, int y)
 	dstRect->y = y;
 	for (int i = 0; i < DEFAULT_FADEIN_MAX; ++i)
 	{
-		fadeInTxtsList[i] = DEFAUL_FADEINTXT;
+		fadeInTxtsList[i] = DEFAULT_FADEINTXT;
 	}
 	this->font = TTF_OpenFont(this->fontSrc, this->fontSize);
 
@@ -223,7 +223,7 @@ void Text::UpdateFadeIn()
 					elemInList--;
 					strcat(compText, fadeInTxtsList[i].text);
 					text = compText;
-					fadeInTxtsList[i] = DEFAUL_FADEINTXT;
+					fadeInTxtsList[i] = DEFAULT_FADEINTXT;
 					UpdateMessage();
 				}
 			}

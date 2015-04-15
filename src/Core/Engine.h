@@ -32,6 +32,7 @@ private:
 
 public:
 	void Init();
+	void Init(int screenWidth, int screenHeight);
 	void Run();
 	void Stop();
 

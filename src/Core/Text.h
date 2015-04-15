@@ -25,14 +25,14 @@
 #define DEFAULT_TEXT_WRAPPER 750
 #endif
 #ifndef DEFAULT_FADEIN_MAX
-#define DEFAULT_FADEIN_MAX 5
+#define DEFAULT_FADEIN_MAX 16
 #endif
-#ifndef DEFAUL_FADEINTXT
-#define DEFAUL_FADEINTXT { false, 0, 0, NULL, NULL, "" }
+#ifndef DEFAULT_FADEINTXT
+#define DEFAULT_FADEINTXT { false, 0, 0, NULL, NULL, "" }
 #endif
 typedef char const* Str;
 
-// Shortcut to quickly get a color without having to manually set an SDL_Color, use with GetColor()
+// Shortcut to quickly get a color without having to manually set an SDL_Color
 enum DefaultColor {
 	WHITE, 
 	RED,
@@ -79,6 +79,7 @@ public:
 	Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, int y, DefaultColor color);
 	~Text();
 
+	// Setters
 	void SetFont(Str font);
 	void SetText(Str text);
 	void SetFontsize(int fontSize);
@@ -86,21 +87,22 @@ public:
 	void SetWrapper(int wrapper);
 	void SetTextColor(const SDL_Color color);
 	void SetTextColor(const DefaultColor color);
-	point<int> GetTextSize();
-	void UpdateMessage();
 
+	// Getter
+	point<int> GetTextSize();
+
+	void UpdateMessage();
 	virtual void Start();
 	virtual void Stop();
-
-	void Draw();
+	virtual void Draw();
 
 protected:
 	FadeInText fadeInTxtsList[DEFAULT_FADEIN_MAX];
 	int elemInList;
 	char compText[1024];
-	void AddToTxtsList(Str text, const int x, const int y);
+	void AddToTxtsList(Str text, int x, int y);
 	void UpdateFadeIn();
-	void Init(const int x, const int y);
+	void Init(int x, int y);
 	void ShowMessage(SDL_Surface* surface);
 	void Text::ShowFadeIn(SDL_Surface* surface);
 	SDL_Color GetColor(DefaultColor color);
