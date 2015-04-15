@@ -30,9 +30,9 @@ public:
 protected:
 	SDL_Surface* LoadImage(const std::string& path);
 	void ApplySurface(SDL_Surface* surface);
+	SDL_Surface* image;
 	
 private:
-	SDL_Surface* image;
 	SDL_Rect* srcRect;
 	SDL_Rect* dstRect;
 	float angle;

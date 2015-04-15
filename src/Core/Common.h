@@ -26,6 +26,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
 
 // SDL
 #include "SDL.h"
