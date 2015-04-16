@@ -4,6 +4,23 @@
 #include "Renderer.h"
 #include "Component.h"
 
+//shortcut
+#ifndef ENGINE
+#define ENGINE Engine::GetInstance()
+#endif
+#ifndef GET_INPUT
+#define GET_INPUT ENGINE->GetInput()
+#endif
+#ifndef GET_INPUT_HELD
+#define GET_INPUT_HELD GET_INPUT->IsKeyHeld
+#endif
+#ifndef GET_INPUT_PRESSED
+#define GET_INPUT_PRESSED GET_INPUT->IsKeyPressed
+#endif
+#ifndef GET_INPUT_RELEASED
+#define GET_INPUT_RELEASED GET_INPUT->IsKeyReleased
+#endif
+
 class Engine
 {
 #pragma region SINGLETON
