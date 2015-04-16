@@ -214,7 +214,7 @@ void Text::UpdateFadeIn()
 				fadeInTxtsList[i].currentTime = 0;
 				if (fadeInTxtsList[i].alpha < 255)
 				{
-					fadeInTxtsList[i].alpha += 0.09f;
+					fadeInTxtsList[i].alpha += 0.4f;
 					SDL_SetSurfaceAlphaMod(fadeInTxtsList[i].message, fadeInTxtsList[i].alpha);
 					ShowFadeIn(Engine::GetInstance()->GetRenderer()->GetScreen());
 				}

@@ -10,6 +10,14 @@ Ship::Ship()
 {
 }
 
+Ship::Ship(int x, int y)
+	: Sprite("ship.jpg", x, y)
+	, currentX(0)
+	, currentY(0)
+	, currentTime(0)
+{
+}
+
 Ship::~Ship()
 {
 }

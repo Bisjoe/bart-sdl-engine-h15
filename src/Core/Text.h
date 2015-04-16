@@ -34,6 +34,7 @@ typedef char const* Str;
 
 // Shortcut to quickly get a color without having to manually set an SDL_Color
 enum DefaultColor {
+	BLACK,
 	WHITE, 
 	RED,
 	BLUE,
@@ -106,5 +107,6 @@ protected:
 	void ShowMessage(SDL_Surface* surface);
 	void Text::ShowFadeIn(SDL_Surface* surface);
 	SDL_Color GetColor(DefaultColor color);
+	
 };
 

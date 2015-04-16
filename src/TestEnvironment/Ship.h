@@ -8,6 +8,7 @@ class Ship :
 {
 public:
 	Ship();
+	Ship(int x, int y);
 	~Ship();
 
 	void Start();
