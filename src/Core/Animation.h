@@ -18,7 +18,7 @@ class Animation :
 {
 public:
 	Animation();
-	Animation(std::string filePath, int nbFrame, int frameRate, const point<int>& frameSize, const point<int>& startSrcPos);
+	Animation(Texture::ID id, int nbFrame, int frameRate, const point<int>& frameSize, const point<int>& startSrcPos);
 	~Animation();
 
 	// Virtual from Sprite

@@ -79,7 +79,6 @@
     <ClCompile Include="LineSegment.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Rectangle.cpp" />
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Text.cpp" />
@@ -97,13 +96,16 @@
     <ClInclude Include="LineSegment.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="TextAnim.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ResourceHolder.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

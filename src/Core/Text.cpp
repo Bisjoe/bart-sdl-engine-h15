@@ -216,7 +216,7 @@ void Text::UpdateFadeIn()
 				{
 					fadeInTxtsList[i].alpha += 0.4f;
 					SDL_SetSurfaceAlphaMod(fadeInTxtsList[i].message, fadeInTxtsList[i].alpha);
-					ShowFadeIn(Engine::GetInstance()->GetRenderer()->GetScreen());
+					//ShowFadeIn(Engine::GetInstance()->GetRenderer()->GetScreen());
 				}
 				else
 				{
@@ -238,10 +238,10 @@ void Text::Stop()
 
 void Text::Draw()
 {
-	if (text[0] != '\0')
-		ShowMessage(Engine::GetInstance()->GetRenderer()->GetScreen());
-	if (elemInList > 0)
-		ShowFadeIn(Engine::GetInstance()->GetRenderer()->GetScreen());
+	//if (text[0] != '\0')
+		//ShowMessage(Engine::GetInstance()->GetRenderer()->GetScreen());
+	//if (elemInList > 0)
+		//ShowFadeIn(Engine::GetInstance()->GetRenderer()->GetScreen());
 }
 
 void Text::ShowMessage(SDL_Surface* surface)

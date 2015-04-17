@@ -1,9 +1,10 @@
 #include "Ship.h"
+#include "Libraries.h"
 
-const float Ship::SPEED = 0.1f;
+const float Ship::SPEED = 100.0f;
 
 Ship::Ship()
-	: Sprite("ship.jpg")
+	: Sprite(Texture::ID::Ship)
 	, currentX(0)
 	, currentY(0)
 	, currentTime(0)
@@ -11,11 +12,12 @@ Ship::Ship()
 }
 
 Ship::Ship(int x, int y)
-	: Sprite("ship.jpg", x, y)
+	: Sprite(Texture::ID::Ship)
 	, currentX(0)
 	, currentY(0)
 	, currentTime(0)
 {
+	this->SetPosition(x, y);
 }
 
 Ship::~Ship()
@@ -36,6 +38,7 @@ void Ship::Update()
 		currentX += SPEED * dt;
 		currentY += SPEED * dt;
 		SetPosition(currentX, currentY);
+		std::cout << "deltaTime" << SPEED*dt;
 	}
 }
 

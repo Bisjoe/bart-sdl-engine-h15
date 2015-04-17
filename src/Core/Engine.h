@@ -1,25 +1,12 @@
 #pragma once
 
 #include "Common.h"
-#include "Renderer.h"
 #include "Component.h"
 
-//shortcut
-#ifndef ENGINE
-#define ENGINE Engine::GetInstance()
-#endif
-#ifndef GET_INPUT
-#define GET_INPUT ENGINE->GetInput()
-#endif
-#ifndef GET_INPUT_HELD
-#define GET_INPUT_HELD GET_INPUT->IsKeyHeld
-#endif
-#ifndef GET_INPUT_PRESSED
-#define GET_INPUT_PRESSED GET_INPUT->IsKeyPressed
-#endif
-#ifndef GET_INPUT_RELEASED
-#define GET_INPUT_RELEASED GET_INPUT->IsKeyReleased
-#endif
+#define Textures Engine::GetInstance()->GetTextures()
+#define Fonts Engine::GetInstance()->GetFonts()
+#define Sounds Engine::GetInstance()->GetSounds()
+#define Musics Engine::GetInstance()->GetMusics()
 
 class Engine
 {
@@ -53,19 +40,27 @@ public:
 	void Run();
 	void Stop();
 
-	Renderer* GetRenderer()				{ return renderer; }
-	Input* GetInput()					{ return input; }
-	Timer* GetTimer()					{ return timer; }
-	point<int> GetScreenSize()			{ return screenSize; };
+	SDL_Renderer*						GetRenderer(){ return renderer; }
+	ResourceHolder<SDL_Texture, int>*	GetTextures(){ return textures; }
+	ResourceHolder<TTF_Font, int>*		GetFonts()	 { return fonts; }
+	ResourceHolder<Mix_Music, int>*		GetMusics()	 { return musics; }
+	ResourceHolder<Mix_Chunk, int>*		GetSounds()	 { return sounds; }
+	Input*								GetInput()	 { return input; }
+	Timer*								GetTimer()	 { return timer; }
+	SDL_Window*							GetWindow()	 { return window; }
 
 private:
 	void Start();
 	void Update();
 	void Draw();
-	point<int> screenSize;
+
 	SDL_Window* window;
-	Renderer* renderer;
+	SDL_Renderer* renderer;
 	Input* input;
 	Timer* timer;
+	ResourceHolder<SDL_Texture, int>*	textures;
+	ResourceHolder<TTF_Font, int>*		fonts;
+	ResourceHolder<Mix_Music, int>*		musics;
+	ResourceHolder<Mix_Chunk, int>*		sounds;
 };
 

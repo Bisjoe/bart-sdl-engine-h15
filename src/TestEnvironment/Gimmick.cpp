@@ -1,9 +1,10 @@
 #include "Gimmick.h"
+#include "Libraries.h"
 
 //First 'Clean & Simple' iteration
 
 Gimmick::Gimmick()
-: Animation("Gimmick.png", 6, 18, point<int>(16, 19), point<int>(2, 24))
+	: Animation(Texture::ID::Gimmick, 6, 18, point<int>(16, 19), point<int>(2, 24))
 {
 	//Start the animation on creation
 	this->Play();

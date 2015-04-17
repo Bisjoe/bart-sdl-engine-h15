@@ -3,9 +3,6 @@
 //There's a billion way to handle this but with only 3 animations this works just fine for our current purpose.
 //Might want to consider another way to stock animations if you end up with 6-7 animations per actors.
 
-#define GIMMICK_PATH "Gimmick.png"	//Default
-#define GIMMICKV2_PATH "Gimmick2.png" //2x Original size
-
 #include "Common.h"
 #include "Animation.h"
 

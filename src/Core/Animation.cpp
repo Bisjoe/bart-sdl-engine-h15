@@ -13,8 +13,8 @@ Animation::Animation()
 {
 }
 
-Animation::Animation(std::string filePath, int nbFrame, int frameRate, const point<int>& frameSize, const point<int>& startSrcPos)
-	: Sprite(filePath)
+Animation::Animation(Texture::ID id, int nbFrame, int frameRate, const point<int>& frameSize, const point<int>& startSrcPos)
+	: Sprite(id, startSrcPos, frameSize)
 	, isPlaying(false)
 	, isLooping(false)
 	, nbFrame(nbFrame)

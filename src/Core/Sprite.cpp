@@ -1,120 +1,69 @@
 #include "Sprite.h"
 
 Sprite::Sprite()
-	: image(nullptr)
+	: texture(nullptr)
 	, isVisible(true)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
 	, scaled(false)
 {
-	srcRect = new SDL_Rect();
-	srcRect->x = 0;
-	srcRect->y = 0;
-	srcRect->w = Engine::GetInstance()->GetScreenSize().x;
-	srcRect->h = Engine::GetInstance()->GetScreenSize().y;
-	
-	dstRect = new SDL_Rect();
-	dstRect->x = 0;
-	dstRect->y = 0;
-}
 
-Sprite::Sprite(const std::string& path)
-	: image(nullptr)
-	, path(path)
-	, isVisible(true)
-	, angle(0)
-	, srcRect(0)
-	, dstRect(0)
-	, scaled(false)
-{
-	image = LoadImage(path);
 	srcRect = new SDL_Rect();
 	srcRect->x = 0;
 	srcRect->y = 0;
-	srcRect->w = Engine::GetInstance()->GetScreenSize().x;
-	srcRect->h = Engine::GetInstance()->GetScreenSize().y;
+	SDL_QueryTexture(texture, NULL, NULL, &srcRect->w, &srcRect->h);
 
 	dstRect = new SDL_Rect();
 	dstRect->x = 0;
 	dstRect->y = 0;
-	dstRect->w = 50;
-	dstRect->h = 50;
+	SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
 }
 
-Sprite::Sprite(const std::string& path, int x, int y)
-	: image(nullptr)
-	, path(path)
+
+Sprite::Sprite(Texture::ID id)
+	: texture(Engine::GetInstance()->GetTextures()->Get(id))
 	, isVisible(true)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
-	, scaled(false)
+	//, scaled()
 {
-	image = LoadImage(path);
-
 	srcRect = new SDL_Rect();
 	srcRect->x = 0;
 	srcRect->y = 0;
-	srcRect->w = Engine::GetInstance()->GetScreenSize().x;
-	srcRect->h = Engine::GetInstance()->GetScreenSize().y;
+	SDL_QueryTexture(texture, NULL, NULL, &srcRect->w, &srcRect->h);
+
 
 	dstRect = new SDL_Rect();
-	dstRect->x = x;
-	dstRect->y = y;
+	dstRect->x = 0;
+	dstRect->y = 0;
+	SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
+	//SDL_GetWindowSize(Engine::GetInstance()->GetWindow(), &dstRect->w, &dstRect->h);
 }
 
-Sprite::Sprite(const std::string& path, int x, int y, int w, int h)
-	: image(nullptr)
-	, path(path)
+
+Sprite::Sprite(Texture::ID id, point<int> srcPos, point<int> srcSize)
+	: texture(Engine::GetInstance()->GetTextures()->Get(id))
 	, isVisible(true)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
+	//, scaled()
 {
-	image = LoadImage(path);
-
 	srcRect = new SDL_Rect();
-	srcRect->x = 0;
-	srcRect->y = 0;
-	srcRect->w = Engine::GetInstance()->GetScreenSize().x;
-	srcRect->h = Engine::GetInstance()->GetScreenSize().y;
+	srcRect->x = srcPos.x;
+	srcRect->y = srcPos.y;
+	srcRect->w = srcSize.x;
+	srcRect->h = srcSize.y;
 
 	dstRect = new SDL_Rect();
-	dstRect->x = x;
-	dstRect->y = y;
-	dstRect->w = w;
-	dstRect->h = h;
-
-	if (dstRect->w == 0 || dstRect->h == 0)
-		scaled = false;
-	else
-		scaled = true;
+	dstRect->x = 0;
+	dstRect->y = 0;
+	dstRect->w = srcSize.x;
+	dstRect->h = srcSize.y;
 }
 
-Sprite::Sprite(const std::string& path, SDL_Rect* dstRect)
-	: image(nullptr)
-	, path(path)
-	, isVisible(true)
-	, angle(0)
-	, srcRect(0)
-	, dstRect(0)
-{
-	image = LoadImage(path);
-
-	srcRect = new SDL_Rect();
-	srcRect->x = 0;
-	srcRect->y = 0;
-	srcRect->w = Engine::GetInstance()->GetScreenSize().x;
-	srcRect->h = Engine::GetInstance()->GetScreenSize().y;
-
-	this->dstRect = dstRect;
-
-	if (dstRect->w == 0 || dstRect->h == 0)
-		scaled = false;
-	else
-		scaled = true;
-}
 
 Sprite::~Sprite()
 {
@@ -139,9 +88,16 @@ void Sprite::Stop()
 void Sprite::Draw()
 {
 	if (isVisible)
-		ApplySurface(Engine::GetInstance()->GetRenderer()->GetScreen());
+		ApplyTexture(Engine::GetInstance()->GetRenderer());
 }
 
+
+void Sprite::ApplyTexture(SDL_Renderer* renderer)
+{
+	SDL_RenderCopy(renderer, texture, srcRect, dstRect);
+}
+
+/*
 // (0, 0) return to the sprite original size
 void Sprite::ScaleSprite(int w, int h)
 {
@@ -190,7 +146,7 @@ SDL_Surface* Sprite::LoadImage(const std::string& path)
 Uint32 Sprite::GetPixel(SDL_Surface *surface, int x, int y)
 {
 	int bpp = surface->format->BytesPerPixel;
-	/* Here p is the address to the pixel we want to retrieve */
+	//Here p is the address to the pixel we want to retrieve
 	Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
 
@@ -211,14 +167,14 @@ Uint32 Sprite::GetPixel(SDL_Surface *surface, int x, int y)
 		return *(Uint32 *)p;
 
 	default:
-		return 0;       /* shouldn't happen, but avoids warnings */
+		return 0;       //shouldn't happen, but avoids warnings
 	}
 }
 
 void Sprite::DrawPixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
 	int bpp = surface->format->BytesPerPixel;
-	/* Here p is the address to the pixel we want to set */
+	//Here p is the address to the pixel we want to set
 	Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
 
@@ -303,3 +259,4 @@ void Sprite::VerticalFlip()
 	}
 	imageTemp = NULL;
 }
+*/

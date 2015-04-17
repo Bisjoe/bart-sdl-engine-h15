@@ -1,7 +1,8 @@
 #include "GimmickV2.h"
+#include "Libraries.h"
 
 GimmickV2::GimmickV2()
-: Animation(GIMMICKV2_PATH, WALK_NB_FRAME(), ANIM_DEFAULT_SPEED, FRAME_SIZE(), WALK_START_SRC())
+: Animation(Texture::ID::Gimmick, WALK_NB_FRAME(), ANIM_DEFAULT_SPEED, FRAME_SIZE(), WALK_START_SRC())
 , currentState(IDLE)
 {
 	//Start the animation on creation

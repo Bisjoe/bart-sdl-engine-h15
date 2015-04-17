@@ -7,6 +7,10 @@ Engine::Engine()
 	, renderer(nullptr)
 	, input(nullptr)
 	, timer(nullptr)
+	, textures(nullptr)
+	, fonts(nullptr)
+	, musics(nullptr)
+	, sounds(nullptr)
 {
 
 }
@@ -16,7 +20,7 @@ Engine::~Engine()
 	SDL_DestroyWindow(window);
 	window = nullptr;
 
-	delete renderer;
+	SDL_DestroyRenderer(renderer);
 	renderer = nullptr;
 
 	delete input;
@@ -55,10 +59,13 @@ void Engine::Init(int screenWidth, int screenHeight) {
 		}
 		else
 		{
-			renderer = new Renderer(window);
+			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 			input = new Input();
 			timer = new Timer();
-			screenSize = { screenWidth, screenHeight };
+			textures = new ResourceHolder<SDL_Texture, int>();
+			fonts = new ResourceHolder<TTF_Font, int>();
+			musics = new ResourceHolder<Mix_Music, int>();
+			sounds = new ResourceHolder<Mix_Chunk, int>();
 		}
 	}
 }
@@ -94,10 +101,10 @@ void Engine::Draw()
 		(*iter)->Draw();
 	}
 
-	SDL_UpdateWindowSurface(window);
-
-	SDL_FillRect(renderer->GetScreen(), nullptr, SDL_MapRGB(renderer->GetScreen()->format, 0, 0, 0));
+	SDL_RenderPresent(renderer);
+	SDL_RenderClear(renderer);
 }
+
 
 void Engine::Run()
 {
