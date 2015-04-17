@@ -96,6 +96,14 @@ void Audio::PlayMusic(char* const filePath, const int playCount)
 	}
 }
 
+void Audio::PlayMusic(Mix_Music* music) 
+{
+	if (Mix_PlayMusic(music, -1) == -1)
+	{
+		std::cout << "Error while trying to play music, ERROR: %s\n", Mix_GetError(); // Doesn't work properly for reason yet unknown (never show the error message)
+	}
+}
+
 void Audio::AddSoundToList(char* const filePath)
 {
 	for (int i = 0; i < SOUND_COUNT; ++i)
@@ -178,6 +186,15 @@ void Audio::PlaySound(char* const filePath, const int playCount)
 		}
 	}
 	std::cout << "ERROR: File to play not found in list." << std::endl;
+}
+
+// Default will play once
+void Audio::PlaySound(Mix_Chunk* chunk) {
+	Mix_PlayChannel(-1, chunk, 0);
+}
+
+void Audio::PlaySound(Mix_Chunk* chunk, int playCount) {
+	Mix_PlayChannel(-1, chunk, playCount-1);
 }
 
 void Audio::FreeAllAudio()

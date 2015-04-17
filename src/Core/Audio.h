@@ -89,6 +89,7 @@ public:
 	// Music
 	void PlayMusic(char* const filePath);
 	void PlayMusic(char* const filePath, const int playCount);
+	void PlayMusic(Mix_Music* music);
 
 	// Sound effects
 	void AddSoundToList(char* const filePath);
@@ -96,6 +97,8 @@ public:
 	void removeSound(char* const filePath);
 	void PlaySound(char* const filePath);
 	void PlaySound(char* const filePath, const int playCount);
+	void PlaySound(Mix_Chunk* chunk);
+	void PlaySound(Mix_Chunk* chunk, int playCount);
 	
 
 private:
