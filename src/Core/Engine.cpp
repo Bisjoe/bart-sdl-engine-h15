@@ -1,5 +1,4 @@
 #include "Engine.h"
-#include "Audio.h" // Break things when place in Common.h, so I put him there for now
 
 Engine* Engine::instance = 0;
 
@@ -30,6 +29,11 @@ Engine::~Engine()
 	delete timer;
 	timer = nullptr;
 
+	textures = nullptr;
+	musics = nullptr;
+	sounds = nullptr;
+	fonts = nullptr;
+
 	SDL_Quit();
 }
 
@@ -39,7 +43,6 @@ void Engine::Init()
 }
 
 void Engine::Init(int screenWidth, int screenHeight) {
-	AUDIO;
 	if (TTF_Init() == -1)
 	{
 		printf("SDL TTF could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
@@ -102,7 +105,7 @@ void Engine::Draw()
 	{
 		(*iter)->Draw();
 	}
-
+	
 	SDL_RenderPresent(renderer);
 	SDL_RenderClear(renderer);
 }

@@ -15,13 +15,12 @@ int main(int argc, char* args[])
 	// Proportional resolution for NES (default: 256 * 240) (only to show it's working, default "Init()" has the same size as before (800 * 600))
 	Engine::GetInstance()->Init(800, 750); 
 
+
 	Textures->LoadTexture(Texture::ID::Gimmick, "Gimmick2.png");
 	Textures->LoadTexture(Texture::ID::Ship, "Ship.jpg");
 	Sounds->LoadSound(Sound::ID::EnemyHit, "enemy_hit.wav");
 	Musics->LoadMusic(Music::ID::TestMusic, "testmusic.mp3");
 	Fonts->LoadFont(Font::ID::Dialog, "dialog.ttf");
-	AUDIO->PlayMusic(Musics->Get(Music::ID::TestMusic));
-	AUDIO->PlaySound(Sounds->Get(Sound::ID::EnemyHit));
 
 	Ship* ship = new Ship(25, 25);
 	GimmickV2* gimmickv2 = new GimmickV2();

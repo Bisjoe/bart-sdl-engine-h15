@@ -1,33 +1,46 @@
 #include "Sprite.h"
 
+//////////////////////////////
+//Default Sprite constructor//
+//////////////////////////////
+//Shouldn't ever be used directly
+//////////////////////////////
 Sprite::Sprite()
 	: texture(nullptr)
 	, isVisible(true)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
-	, scaled(false)
+	, flipType (SDL_FLIP_NONE)
 {
 
 	srcRect = new SDL_Rect();
 	srcRect->x = 0;
 	srcRect->y = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &srcRect->w, &srcRect->h);
+	srcRect->h = 0;
+	srcRect->w = 0;
 
 	dstRect = new SDL_Rect();
 	dstRect->x = 0;
 	dstRect->y = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
+	dstRect->h = 0;
+	dstRect->w = 0;
 }
 
-
+////////////////////////////////
+//Sprite (Texture) constructor//
+////////////////////////////////
+//This'll create a sprite out of a texture.
+//This is suited for any non-animated images like a game's HUD, Map or "Title Screen".
+//@id - This is your "Sprite sheet" ID.
+////////////////////////////////
 Sprite::Sprite(Texture::ID id)
 	: texture(Engine::GetInstance()->GetTextures()->Get(id))
 	, isVisible(true)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
-	//, scaled()
+	, flipType(SDL_FLIP_NONE)
 {
 	srcRect = new SDL_Rect();
 	srcRect->x = 0;
@@ -39,17 +52,24 @@ Sprite::Sprite(Texture::ID id)
 	dstRect->x = 0;
 	dstRect->y = 0;
 	SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
-	//SDL_GetWindowSize(Engine::GetInstance()->GetWindow(), &dstRect->w, &dstRect->h);
 }
 
-
-Sprite::Sprite(Texture::ID id, point<int> srcPos, point<int> srcSize)
+/////////////////////////////////////////////////////
+//Sprite (Texture & Sprite Coordinates) constructor//
+/////////////////////////////////////////////////////
+//This'll create a sprite out of a texture's using specific coordinates.
+//This is suited for all actors (Tiles, Characters, Enemies...)
+//@id - This is your "Sprite sheet" ID.
+//@srcPos - The Sprite's starting (X,Y) position from the Sprite Sheet
+//@srcSize - The Sprite's width/height
+////////////////////////////////////////////////////////////////////
+Sprite::Sprite(Texture::ID id, const point<int> srcPos, const point<int> srcSize)
 	: texture(Engine::GetInstance()->GetTextures()->Get(id))
 	, isVisible(true)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
-	//, scaled()
+	, flipType(SDL_FLIP_NONE)
 {
 	srcRect = new SDL_Rect();
 	srcRect->x = srcPos.x;
@@ -64,26 +84,17 @@ Sprite::Sprite(Texture::ID id, point<int> srcPos, point<int> srcSize)
 	dstRect->h = srcSize.y;
 }
 
-
 Sprite::~Sprite()
-{
-
-}
+{}
 
 void Sprite::Start()
-{
-	std::cout << "Sprite Start!" << std::endl;
-}
+{}
 
 void Sprite::Update()
-{
-	std::cout << "Sprite Update!" << std::endl;
-}
+{}
 
 void Sprite::Stop()
-{
-	std::cout << "Sprite Stop!" << std::endl;
-}
+{}
 
 void Sprite::Draw()
 {
@@ -91,58 +102,65 @@ void Sprite::Draw()
 		ApplyTexture(Engine::GetInstance()->GetRenderer());
 }
 
-
 void Sprite::ApplyTexture(SDL_Renderer* renderer)
 {
-	SDL_RenderCopy(renderer, texture, srcRect, dstRect);
+	SDL_RenderCopyEx(renderer, texture, srcRect, dstRect, angle, NULL, flipType);
+}
+
+
+//////////////////
+//Sprite Scaling//
+//////////////////
+//This'll scale a sprite by the desired K factor.
+//ScaleBy(1) will reset the texture back to its original file's size.
+//@k - Scaling factor
+////////////////////////////////////////////////////////////////////
+void Sprite::Scale(float k)
+{
+	SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
+	dstRect->w = (int)(dstRect->w*k);
+	dstRect->h = (int)(dstRect->w*k);
+}
+
+///////////////////
+//Sprite Resizing//
+///////////////////
+//This'll manually resize a sprite to your desired size.
+//This will not modify your sprite's sourcing.
+//@w - Desired sprite width
+//@h - Desired sprite height
+////////////////////////////////////////////////////////
+void Sprite::ResizeTo(int w, int h)
+{
+	dstRect->w = w;
+	dstRect->h = h;
+}
+
+///////////////////
+//Sprite Flipping//
+///////////////////
+void Sprite::Flip(SDL_RendererFlip flip)
+{
+	this->flipType = flip;
+}
+
+///////////////////
+//Sprite Rotation//
+///////////////////
+void Sprite::SetRotation(float angle)
+{
+	this->angle = angle;
+}
+
+//////////////////////
+//Sprite Rotation By//
+//////////////////////
+void Sprite::RotateBy(float angle)
+{
+	this->angle += angle;
 }
 
 /*
-// (0, 0) return to the sprite original size
-void Sprite::ScaleSprite(int w, int h)
-{
-	if (w != 0 && h != 0)
-	{
-		dstRect->w = w;
-		dstRect->h = h;
-		scaled = true;
-	}
-	else
-	{
-		scaled = false;
-	}
-		
-}
-
-void Sprite::ApplySurface(SDL_Surface* surface)
-{
-	if (!scaled)
-	{
-		SDL_BlitSurface(image
-			, srcRect
-			, surface
-			, dstRect);
-	}
-	else
-	{
-		SDL_BlitScaled(image
-			, srcRect
-			, surface
-			, dstRect);
-	}	
-}
-
-SDL_Surface* Sprite::LoadImage(const std::string& path)
-{
-	SDL_Surface* temp = nullptr;
-	temp = IMG_Load(path.c_str());
-	if (temp == nullptr)
-	{
-		printf(" Unable to load image %s SDLError: %s\n", path , SDL_GetError());
-	}
-	return temp;
-}
-
 Uint32 Sprite::GetPixel(SDL_Surface *surface, int x, int y)
 {
 	int bpp = surface->format->BytesPerPixel;
@@ -205,58 +223,4 @@ void Sprite::DrawPixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 		break;
 	}
 }
-
-void Sprite::HorizontalMirror()
-{
-	SDL_Surface imageTemp = SDL_Surface((*image));
-	for (int x = 0; x < image->w; x++)
-	{
-		for (int y = 0; y < image->h; y++)
-		{
-			DrawPixel(image, image->w - x, y, GetPixel(&imageTemp, x, y));
-		}
-	}
-}
-
-void Sprite::VerticalMirror()
-{
-	SDL_Surface imageTemp = SDL_Surface((*image));
-	for (int x = 0; x < image->w; x++)
-	{
-		for (int y = 0; y < image->h; y++)
-		{
-			DrawPixel(image, x, image->h - y, GetPixel(&imageTemp, x, y));
-		}
-	}
-}
-
-void Sprite::HorizontalFlip()
-{
-	SDL_Surface* imageTemp = new SDL_Surface();
-	imageTemp = LoadImage(path);
-	for (int x = 0; x < image->w; x++)
-	{
-		for (int y = 0; y < image->h; y++)
-		{
-			DrawPixel(image, image->w-x, y, GetPixel(imageTemp, x, y));
-		}
-	}
-	imageTemp = NULL;
-}
-
-void Sprite::VerticalFlip()
-{
-	SDL_Surface* imageTemp = new SDL_Surface();
-	imageTemp = LoadImage(path);
-	int x;
-	int y;
-	for (x = 0; x < image->w; x++)
-	{
-		for (y = 0; y < image->h; y++)	
-		{
-			DrawPixel(image, x, image->h-y, GetPixel(imageTemp, x, y));
-		}
-	}
-	imageTemp = NULL;
-}
-*/
+**/

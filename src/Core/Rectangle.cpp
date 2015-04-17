@@ -2,8 +2,6 @@
 #include <math.h>
 #include <stdexcept>
 
-//While "using namespace TP" could have been used, I'm against the use of such thing, deal with it *put shades on*.
-//There's valid reasons for ze above mention.
 
 //Default Constructor, everything's a zero.
 Rectangle::Rectangle()

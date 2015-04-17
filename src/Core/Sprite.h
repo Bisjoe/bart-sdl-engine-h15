@@ -8,7 +8,7 @@ class Sprite :
 public:
 	Sprite();
 	Sprite(Texture::ID id);
-	Sprite(Texture::ID id, point<int> srcPos, point<int> srcSize);
+	Sprite(Texture::ID id, const point<int> srcPos, const point<int> srcSize);
 	~Sprite();
 
 	virtual void Start();
@@ -17,7 +17,6 @@ public:
 
 	void Draw();
 	/*
-	void ScaleSprite(int w, int h);
 	void HorizontalMirror();
 	void VerticalMirror();
 	void HorizontalFlip();
@@ -28,6 +27,12 @@ public:
 	void SetPosition(int x, int y)						{ dstRect->x = x; dstRect->y = y; }
 	void SetDstFrame(int x, int y, int w, int h)		{ dstRect->x = x, dstRect->y = y; dstRect->w = w; dstRect->h = h; }
 	void SetSrcFrame(int x, int y, int w, int h)		{ srcRect->x = x, srcRect->y = y; srcRect->w = w; srcRect->h = h; }
+	void ResizeTo(int w, int h);
+	void Flip(SDL_RendererFlip flip);
+
+	void SetRotation(float angle);
+	void RotateBy(float angle);
+	void Scale(float k);
 
 protected:
 	void ApplyTexture(SDL_Renderer* renderer);
@@ -36,9 +41,9 @@ private:
 	SDL_Texture* texture;
 	SDL_Rect* srcRect;
 	SDL_Rect* dstRect;
+	SDL_RendererFlip flipType;
 	float angle;
 	bool isVisible;
-	bool scaled;
 };
 
 

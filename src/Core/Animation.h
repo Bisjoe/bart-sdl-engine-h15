@@ -1,11 +1,5 @@
 #pragma once
 
-//Right now the current implentation:
-//[-] Does not support varying frameSizes animations. *Quite easy to implement
-//[-] Does not support offsets between frames. *You'd only need this if you had varying frameSizes... easy to implement.
-//[-] Sucks.
-//[+] Meh, it does the job.
-
 #define ANIM_SLOW_SPEED 6
 #define ANIM_DEFAULT_SPEED 12
 #define ANIM_FAST_SPEED 18
@@ -18,7 +12,7 @@ class Animation :
 {
 public:
 	Animation();
-	Animation(Texture::ID id, int nbFrame, int frameRate, const point<int>& frameSize, const point<int>& startSrcPos);
+	Animation(Texture::ID id, int nbFrame, int frameRate, const point<int>& srcPos, const point<int>& frameSize);
 	~Animation();
 
 	// Virtual from Sprite
@@ -36,13 +30,13 @@ private:
 	int frameRate; 
 	int currentFrame;
 	float currentTime;
-	point<int> startSrcPos;
+	point<int> srcPos;
 	point<int> frameSize;
 
 protected:
 	//Setters
 	void SetIsLooping(bool isLooping)		{ this->isLooping = isLooping;}
-	void SetStartSrcPos(point<int> point)	{ this->startSrcPos = point;  }
+	void SetSrcPos(point<int> point)		{ this->srcPos = point;  }
 	void SetNbFrame(int nbFrame)			{ this->nbFrame = nbFrame;	  }
 	void SetFrameRate(int frameRate)		{ this->frameRate = frameRate;}
 	void ResetCurrentFrame()				{ this->currentFrame = 0;	  }

@@ -14,7 +14,7 @@ struct Vector3D
 };
 
 //Pie goes without saying, this is the value of a cake.
-//That's if the cake happened to describe itself as the ratio of the circumference to the diameter of all circles...
+//That is, if the cake happened to describe itself as the ratio of the circumference to the diameter of all circles...
 //Yup, cake.
 const float PI = 3.1415926535897f;
 

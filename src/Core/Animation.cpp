@@ -1,5 +1,10 @@
 #include "Animation.h"
 
+/////////////////////////////////
+//Default Animation constructor//
+/////////////////////////////////
+//Shouldn't ever be used directly
+////////////////////////////////
 Animation::Animation()
 	: Sprite()
 	, isPlaying(false)
@@ -8,24 +13,39 @@ Animation::Animation()
 	, frameRate(DEFAULT_FRAMERATE)
 	, currentTime(0)
 	, currentFrame(0)
-	, startSrcPos()
+	, srcPos()
 	, frameSize()
 {
 }
 
-Animation::Animation(Texture::ID id, int nbFrame, int frameRate, const point<int>& frameSize, const point<int>& startSrcPos)
-	: Sprite(id, startSrcPos, frameSize)
+//Sprite::Sprite(Texture::ID id, point<int> srcPos, point<int> srcSize)
+
+/////////////////////////
+//Animation Constructor//
+/////////////////////////
+//All of animated sprite's states should be contained within the same sprite sheet.
+//You should line up horizontaly all of an animation's frames.
+//If you happen to have an offset between each frames on your sprite sheet, it should be consistent.
+//@id - This is your "Sprite sheet" ID
+//@nbFrame - Your animation's number of frames
+//@frameRate - Your animation's playback speed
+//@srcPos - The animation's starting (X,Y) position from the Sprite Sheet
+//@srcSize - The animation's frameSize in width/height
+//WARNING: Non-Consistent FrameSize are not supported as of now.
+////////////////////////////////////////////////////////////////
+Animation::Animation(Texture::ID id, int nbFrame, int frameRate, const point<int>& srcPos, const point<int>& frameSize)
+	: Sprite(id, srcPos, frameSize)
 	, isPlaying(false)
 	, isLooping(false)
 	, nbFrame(nbFrame)
 	, frameRate(frameRate)
 	, currentTime(0)
 	, currentFrame(0)
-	, startSrcPos(startSrcPos)
+	, srcPos(srcPos)
 	, frameSize(frameSize)
 {
 	SetSrcFrame(
-		startSrcPos.x, startSrcPos.y,
+		srcPos.x, srcPos.y,
 		frameSize.x, frameSize.y);
 }
 
@@ -41,12 +61,11 @@ void Animation::Update()
 	{
 		float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 		currentTime += dt;
-
 		if (currentTime >= 1.0f / frameRate)
 		{
 			SetSrcFrame(
-				startSrcPos.x + currentFrame * frameSize.x,
-				startSrcPos.y,
+				srcPos.x + currentFrame * frameSize.x,
+				srcPos.y,
 				frameSize.x, frameSize.y);
 			if (currentFrame < nbFrame-1)
 			{
@@ -78,8 +97,8 @@ void Animation::Stop()
 void Animation::Play()
 {
 	SetSrcFrame(
-		startSrcPos.x,
-		startSrcPos.y,
+		srcPos.x,
+		srcPos.y,
 		frameSize.x, frameSize.y);
 
 	isPlaying = true;

@@ -16,12 +16,6 @@ struct point
 };
 
 template <class T>
-void SaisirPoint(point<T> &p);
-
-template <class T>
-void AfficherPoint(const point<T> &p);
-
-template <class T>
 double Distance(const point<T> &a, const point<T> &b);
 
 template <class T>

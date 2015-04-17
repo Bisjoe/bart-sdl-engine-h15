@@ -208,7 +208,7 @@ void Text::UpdateFadeIn()
 	{
 		if (fadeInTxtsList[i].used)
 		{
-			fadeInTxtsList[i].currentTime += dt;
+			fadeInTxtsList[i].currentTime += (int)dt;
 			if (fadeInTxtsList[i].currentTime >= 1.0f / framerate)
 			{
 				fadeInTxtsList[i].currentTime = 0;

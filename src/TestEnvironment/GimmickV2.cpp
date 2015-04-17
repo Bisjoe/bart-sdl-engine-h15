@@ -2,7 +2,7 @@
 #include "Libraries.h"
 
 GimmickV2::GimmickV2()
-: Animation(Texture::ID::Gimmick, WALK_NB_FRAME(), ANIM_DEFAULT_SPEED, FRAME_SIZE(), WALK_START_SRC())
+: Animation(Texture::ID::Gimmick, WALK_NB_FRAME(), ANIM_DEFAULT_SPEED, WALK_START_SRC(), FRAME_SIZE())
 , currentState(IDLE)
 {
 	//Start the animation on creation
@@ -20,18 +20,18 @@ void GimmickV2::changeState(state newState)
 		switch (newState)
 		{
 		case IDLE:
-			this->SetStartSrcPos(IDLE_START_SRC());
+			this->SetSrcPos(IDLE_START_SRC());
 			this->SetNbFrame(IDLE_NB_FRAME());
 			this->SetFrameRate(3);
 			//Using varying frame rates cause issues since we won't instantly change to the other frame.
 			break;
 		case WALK:
-			this->SetStartSrcPos(WALK_START_SRC());
+			this->SetSrcPos(WALK_START_SRC());
 			this->SetNbFrame(WALK_NB_FRAME());
 			this->SetFrameRate(ANIM_DEFAULT_SPEED);
 			break;
 		case DIZZY:
-			this->SetStartSrcPos(DIZZY_START_SRC());
+			this->SetSrcPos(DIZZY_START_SRC());
 			this->SetNbFrame(DIZZY_NB_FRAME());
 			this->SetFrameRate(ANIM_DEFAULT_SPEED);
 			break;

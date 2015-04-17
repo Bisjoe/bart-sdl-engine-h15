@@ -38,10 +38,6 @@ void ResourceHolder<Resource, Identifier>::LoadMusic(Identifier id, const std::s
 {
 	Mix_Music* music;
 	music = Mix_LoadMUS(filename.c_str());
-	if (!music)
-	{
-		std::cout << "Music could not be load, ERROR: %s\n", Mix_GetError();
-	}
 	InsertResource(id, std::move(music));
 }
 
