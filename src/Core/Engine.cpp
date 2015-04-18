@@ -44,6 +44,7 @@ void Engine::Init()
 }
 
 void Engine::Init(int screenWidth, int screenHeight) {
+	AUDIO; // Initialize the Audio system
 	if (TTF_Init() == -1)
 	{
 		printf("SDL TTF could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
