@@ -14,10 +14,6 @@
 #define DEFAULT_WIN_H 600
 #endif
 
-#ifndef CHANNELS_COUNT
-#define CHANNELS_COUNT 16
-#endif
-
 #ifndef DEFAULT_FRAMERATE
 #define DEFAULT_FRAMERATE 30
 #endif
@@ -37,7 +33,7 @@
 // Engine
 #include "Input.h"
 #include "Timer.h"
-#include "ResourceHolder.h"
+#include "ResourceManager.h"
 
 // Custom lib
 #include "Point.h"

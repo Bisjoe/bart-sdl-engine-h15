@@ -104,7 +104,7 @@
     <ClInclude Include="TextAnim.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceHolder.h">
+    <ClInclude Include="ResourceManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

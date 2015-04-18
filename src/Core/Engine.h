@@ -40,14 +40,14 @@ public:
 	void Run();
 	void Stop();
 
-	SDL_Renderer*						GetRenderer(){ return renderer; }
-	ResourceHolder<SDL_Texture, int>*	GetTextures(){ return textures; }
-	ResourceHolder<TTF_Font, int>*		GetFonts()	 { return fonts; }
-	ResourceHolder<Mix_Music, int>*		GetMusics()	 { return musics; }
-	ResourceHolder<Mix_Chunk, int>*		GetSounds()	 { return sounds; }
-	Input*								GetInput()	 { return input; }
-	Timer*								GetTimer()	 { return timer; }
-	SDL_Window*							GetWindow()	 { return window; }
+	SDL_Renderer*						GetRenderer()	 { return renderer; }
+	ResourceManager<SDL_Texture, int>*	GetTextures()	 { return textures; }
+	ResourceManager<TTF_Font, int>*		GetFonts()		 { return fonts; }
+	ResourceManager<Mix_Music, int>*	GetMusics()		 { return musics; }
+	ResourceManager<Mix_Chunk, int>*	GetSounds()		 { return sounds; }
+	Input*								GetInput()		 { return input; }
+	Timer*								GetTimer()		 { return timer; }
+	SDL_Window*							GetWindow()		 { return window; }
 
 private:
 	void Start();
@@ -58,9 +58,9 @@ private:
 	SDL_Renderer* renderer;
 	Input* input;
 	Timer* timer;
-	ResourceHolder<SDL_Texture, int>*	textures;
-	ResourceHolder<TTF_Font, int>*		fonts;
-	ResourceHolder<Mix_Music, int>*		musics;
-	ResourceHolder<Mix_Chunk, int>*		sounds;
+	ResourceManager<SDL_Texture, int>*		textures;
+	ResourceManager<TTF_Font, int>*			fonts;
+	ResourceManager<Mix_Music, int>*		musics;
+	ResourceManager<Mix_Chunk, int>*		sounds;
 };
 

@@ -36,12 +36,12 @@ private:
 protected:
 	//Setters
 	void SetIsLooping(bool isLooping)		{ this->isLooping = isLooping;}
-	void SetSrcPos(point<int> point)		{ this->srcPos = point;  }
-	void SetNbFrame(int nbFrame)			{ this->nbFrame = nbFrame;	  }
+	void SetSrcPos(point<int> point)		{ this->srcPos = point;}
+	void SetNbFrame(int nbFrame)			{ this->nbFrame = nbFrame;}
 	void SetFrameRate(int frameRate)		{ this->frameRate = frameRate;}
-	void ResetCurrentFrame()				{ this->currentFrame = 0;	  }
+	void ResetCurrentFrame()				{ this->currentFrame = 0;}
 
 	//Getter
-	bool GetIsPlaying()						{ return this->isPlaying;	  }
+	bool GetIsPlaying()						{ return this->isPlaying;}
 };
 
