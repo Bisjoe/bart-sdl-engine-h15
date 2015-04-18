@@ -18,11 +18,10 @@ int main(int argc, char* args[])
 
 	Textures->LoadTexture(Texture::ID::Gimmick, "Gimmick2.png");
 	Textures->LoadTexture(Texture::ID::Ship, "Ship.jpg");
-	// Load now return a pointer to the ressources added, you can stock it or not if you want
-	Mix_Chunk* x = Sounds->LoadSound(Sound::ID::EnemyHit, "enemy_hit.wav");
-	Mix_Music* y = Musics->LoadMusic(Music::ID::TestMusic, "testmusic.mp3");
-	Fonts->LoadFont(Font::ID::Dialog, "dialog.tt");
-	AUDIO->PlaySound(x);
+	Sounds->LoadSound(Sound::ID::EnemyHit, "enemy_hit.wav");
+	Musics->LoadMusic(Music::ID::TestMusic, "testmusic.mp3");
+	Fonts->LoadFont(Font::ID::Dialog, "dialog.ttf");
+	AUDIO->PlaySound(Sounds->Get(Sound::ID::EnemyHit));
 	AUDIO->PlayMusic(Musics->Get(Music::ID::TestMusic));
 
 	Ship* ship = new Ship(25, 25);

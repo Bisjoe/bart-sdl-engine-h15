@@ -69,10 +69,10 @@ void Engine::Init(int screenWidth, int screenHeight) {
 			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 			input = new Input();
 			timer = new Timer();
-			textures = new ResourceManager<SDL_Texture, int>();
-			fonts = new ResourceManager<TTF_Font, int>();
-			musics = new ResourceManager<Mix_Music, int>();
-			sounds = new ResourceManager<Mix_Chunk, int>();
+			textures = new ResourceHolder<SDL_Texture, int>();
+			fonts = new ResourceHolder<TTF_Font, int>();
+			musics = new ResourceHolder<Mix_Music, int>();
+			sounds = new ResourceHolder<Mix_Chunk, int>();
 		}
 	}
 }

@@ -33,7 +33,7 @@
 // Engine
 #include "Input.h"
 #include "Timer.h"
-#include "ResourceManager.h"
+#include "ResourceHolder.h"
 
 // Custom lib
 #include "Point.h"

@@ -1,5 +1,5 @@
-#ifndef RESOURCE_MANAGER
-#define RESOURCE_MANAGER
+#ifndef RESOURCE_HOLDER
+#define RESOURCE_HOLDER
 
 #include "Common.h"
 #include <map>
@@ -20,20 +20,20 @@ namespace Music { enum ID; }
 namespace Sound { enum ID; }
 
 template <typename Resource, typename Identifier>
-class ResourceManager
+class ResourceHolder
 {
 public:
 	//Constructor
-	ResourceManager();
+	ResourceHolder();
 
 	//Deconstructor
-	~ResourceManager();
+	~ResourceHolder();
 
 	//Load resource
-	Resource*			LoadTexture(Identifier id, const std::string& filename);
-	Resource*			LoadSound(Identifier id, const std::string & filename);
-	Resource*			LoadMusic(Identifier id, const std::string & filename);
-	Resource*			LoadFont(Identifier id, const std::string & filename);
+	void				LoadTexture(Identifier id, const std::string& filename);
+	void				LoadSound(Identifier id, const std::string & filename);
+	void				LoadMusic(Identifier id, const std::string & filename);
+	void				LoadFont(Identifier id, const std::string & filename);
 
 	//Get resource from ID
 	Resource*			Get(Identifier id) const;
@@ -46,5 +46,5 @@ private:
 	std::map<Identifier, Resource*>	mResources;
 };
 
-#include "ResourceManager.inl"
+#include "ResourceHolder.inl"
 #endif

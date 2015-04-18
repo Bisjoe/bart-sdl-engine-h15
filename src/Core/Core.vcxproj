@@ -97,7 +97,7 @@
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Audio.h" />
-    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="TextAnim.h" />
