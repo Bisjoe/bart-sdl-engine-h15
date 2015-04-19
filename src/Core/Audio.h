@@ -1,6 +1,5 @@
 #pragma once
 #include "Common.h"
-#include "Engine.h"
 
 /**  =====================================================
 	 SDL_Mixer Documentation : http://jcatki.no-ip.org:8080/SDL_mixer/SDL_mixer.html
@@ -23,64 +22,36 @@
 
 #define CHANNEL_COUNT_MAX 50
 
-
-// Shortcut
-#define cAudio Audio::GetInstance()
-
 class Audio
 {
-public:
-#pragma region SINGLETON
-	static Audio* GetInstance()
-	{
-		if (!audioInst)
-		{
-			audioInst = new Audio();
-		}
-
-		return audioInst;
-	}
-
-	static void Kill()
-	{
-		if (audioInst)
-		{
-			delete audioInst;
-			audioInst = NULL;
-		}
-	}
+	friend class Engine;
 
 private:
 	Audio();
 	~Audio();
-	static Audio* audioInst;
-#pragma endregion
+
+	int CheckVolume(int volumeLevel);
+	void FreeAllAudio();
+	void FreeSfxList();
 
 public:
 	// Volumes
 	void SetMusicVolume(int volumeLevel);
+	void SetSfxVolume(int volumeLevel);
 	void SetSfxVolume(Mix_Chunk* chunk, int volumeLevel);
-	void SetSfxVolume(char* const filePath, int volumeLevel);
+	void SetSfxVolume(std::string filePath, int volumeLevel);
 	void SetAllSfxVolume(int volumeLevel);
 	void SetGlobalVolume(int volumeLevel);
 
 	// Music
-	void PlayMusic(char* const filePath);
-	void PlayMusic(char* const filePath, const int playCount);
+	void PlayMusic(std::string filePath);
+	void PlayMusic(std::string filePath, int playCount);
 	void PlayMusic(Mix_Music* music);
 
 	// Sound effects
-	void AddSoundToList(char* const filePath);
-	void OverrideSoundInList(char* const newFilePath, char* const oldFilePath);
-	void removeSound(char* const filePath);
-	void PlaySound(char* const filePath);
-	void PlaySound(char* const filePath, const int playCount);
+	void PlaySound(std::string filePath);
+	void PlaySound(std::string filePath, int playCount);
 	void PlaySound(Mix_Chunk* chunk);
 	void PlaySound(Mix_Chunk* chunk, int playCount);
 	
-
-private:
-	int CheckVolume(int volumeLevel);
-	void FreeAllAudio();
-	void FreeSfxList();
 };

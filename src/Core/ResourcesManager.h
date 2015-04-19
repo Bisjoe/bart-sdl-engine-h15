@@ -28,6 +28,7 @@ public:
 
 	//Get resource from ID
 	Resource* Get(Identifier filepath) const;
+	void Clear();
 
 private:
 	void InsertResource(Identifier filepath, Resource* resource);

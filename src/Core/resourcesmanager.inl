@@ -168,3 +168,10 @@ void ResourceManager<Resource, Identifier>::InsertResource(Identifier filePath, 
 	auto inserted = mResources.insert(std::make_pair(filePath , std::move(resource)));
 	assert(inserted.second);
 }
+
+template <typename Resource, typename Identifier>
+void ResourceManager<Resource, Identifier>::Clear()
+{
+	mResources.clear();
+	assert(mResources.empty());
+}

@@ -103,8 +103,8 @@ void Sprite::ApplyTexture(SDL_Renderer* renderer)
 **/
 void Sprite::Scale(float k)
 {
-	dstRect->w *= k;
-	dstRect->h *= k;
+	dstRect->w *= (int) k;
+	dstRect->h *= (int) k;
 }
 
 /**

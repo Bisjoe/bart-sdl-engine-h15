@@ -2,21 +2,10 @@
 #define COMMON_H
 
 // Global constants
-#ifndef DEFAULT_WIN_TITLE
 #define DEFAULT_WIN_TITLE "Engine - "
-#endif
-
-#ifndef DEFAULT_WIN_W
 #define DEFAULT_WIN_W 800
-#endif
-
-#ifndef DEFAULT_WIN_H
 #define DEFAULT_WIN_H 600
-#endif
-
-#ifndef DEFAULT_FRAMERATE
 #define DEFAULT_FRAMERATE 30
-#endif
 
 // STD Lib
 #include <iostream>
@@ -31,6 +20,7 @@
 #include "SDL_mixer.h"
 
 // Engine
+#include "Audio.h"
 #include "Input.h"
 #include "Timer.h"
 #include "ResourcesManager.h"
