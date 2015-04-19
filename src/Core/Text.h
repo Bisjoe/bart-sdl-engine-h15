@@ -12,24 +12,14 @@
 
 
 // Default parameters
-#ifndef DEFAULT_TEXT_FONT
 #define DEFAULT_TEXT_FONT "lhandw.ttf"
-#endif
-#ifndef DEFAULT_TEXT_COLOR
 #define DEFAULT_TEXT_COLOR { 255, 255, 255 }
-#endif
-#ifndef DEFAULT_TEXT_FONTSIZE
 #define DEFAULT_TEXT_FONTSIZE 12
-#endif
-#ifndef DEFAULT_TEXT_WRAPPER
 #define DEFAULT_TEXT_WRAPPER 750
-#endif
-#ifndef DEFAULT_FADEIN_MAX
 #define DEFAULT_FADEIN_MAX 16
-#endif
-#ifndef DEFAULT_FADEINTXT
 #define DEFAULT_FADEINTXT { false, 0, 0, NULL, NULL, "" }
-#endif
+
+
 typedef char const* Str;
 
 // Shortcut to quickly get a color without having to manually set an SDL_Color

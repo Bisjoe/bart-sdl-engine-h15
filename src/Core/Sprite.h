@@ -2,6 +2,11 @@
 #include "Common.h"
 #include "Engine.h"
 
+// Flip shortcuts
+#define flip_n SDL_FLIP_NONE
+#define flip_h SDL_FLIP_HORIZONTAL
+#define flip_v SDL_FLIP_VERTICAL
+
 class Sprite :
 	public Component
 {

@@ -26,13 +26,12 @@ Sprite::Sprite()
 	dstRect->w = 0;
 }
 
-////////////////////////////////
-//Sprite (Texture) constructor//
-////////////////////////////////
-//This'll create a sprite out of a texture.
-//This is suited for any non-animated images like a game's HUD, Map or "Title Screen".
-//@id - This is your "Sprite sheet" ID.
-////////////////////////////////
+/**
+	Sprite (Texture) constructor
+	-------------------
+	This'll create a sprite out of a texture.
+	@filepath : The path to your spritesheet or image
+**/
 Sprite::Sprite(std::string filepath)
 	: texture(Textures->LoadTexture(filepath))
 	, isVisible(true)
@@ -52,15 +51,15 @@ Sprite::Sprite(std::string filepath)
 	SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
 }
 
-/////////////////////////////////////////////////////
-//Sprite (Texture & Sprite Coordinates) constructor//
-/////////////////////////////////////////////////////
-//This'll create a sprite out of a texture's using specific coordinates.
-//This is suited for all actors (Tiles, Characters, Enemies...)
-//@id - This is your "Sprite sheet" ID.
-//@srcPos - The Sprite's starting (X,Y) position from the Sprite Sheet
-//@srcSize - The Sprite's width/height
-////////////////////////////////////////////////////////////////////
+/**
+	Sprite (Texture & Sprite Coordinates) constructor
+	-------------------
+	This'll create a sprite out of a texture's using specific coordinates.
+	This is suited for all actors (Tiles, Characters, Enemies...)
+	@id - This is your "Sprite sheet" ID.
+	@srcPos - The Sprite's starting (X,Y) position from the Sprite Sheet
+	@srcSize - The Sprite's width/height
+**/
 Sprite::Sprite(std::string filepath, const point<int> srcPos, const point<int> srcSize)
 	: texture(Textures->LoadTexture(filepath))
 	, isVisible(true)
@@ -97,51 +96,67 @@ void Sprite::ApplyTexture(SDL_Renderer* renderer)
 }
 
 
-//This'll scale a sprite by the desired K factor.
-//ScaleBy(1) will reset the texture back to its original file's size.
-//@k - Scaling factor
-////////////////////////////////////////////////////////////////////
+/**
+	Scales a sprite by the desired K factor.
+	-------------------
+	@k - the number to scale by (enter 1 to get back to default texture size)
+**/
 void Sprite::Scale(float k)
 {
-	SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
-	dstRect->w = (int)(dstRect->w*k);
-	dstRect->h = (int)(dstRect->w*k);
+	dstRect->w *= k;
+	dstRect->h *= k;
 }
 
-///////////////////
-//Sprite Resizing//
-///////////////////
-//This'll manually resize a sprite to your desired size.
-//This will not modify your sprite's sourcing.
-//@w - Desired sprite width
-//@h - Desired sprite height
-////////////////////////////////////////////////////////
+/**
+	Resizes the sprite to the desired size 
+	-------------------
+	@w - sprite new width
+	@h - sprite new height
+**/
 void Sprite::ResizeTo(int w, int h)
 {
 	dstRect->w = w;
 	dstRect->h = h;
 }
 
-///////////////////
-//Sprite Flipping//
-///////////////////
+/**
+	Flips the sprite
+	-------------------
+	@Flip is the fliptype to use
+	- flip_n = no flip (use to return to default after a flip)
+	- flip_h = horizontal flip
+	- flip_v = vertical flip
+	[!] It is impossible to flip vertically and horizontally at the same time, 
+	instead, do a 180 degree rotation
+**/
 void Sprite::Flip(SDL_RendererFlip flip)
 {
 	this->flipType = flip;
 }
 
-///////////////////
-//Sprite Rotation//
-///////////////////
+/**
+	Rotate the sprite to the given angle
+	-------------------
+	@angle angle desired
+**/
 void Sprite::SetRotation(float angle)
 {
 	this->angle = angle;
 }
 
-//////////////////////
-//Sprite Rotation By//
-//////////////////////
+/**
+	Rotate the sprite by the given angle
+	-------------------
+	@angle angle to add to the current angle rotation
+**/
 void Sprite::RotateBy(float angle)
 {
 	this->angle += angle;
+	// Fail safe, prevent the angle to break it's float max value 
+	// (unlikely but possible if something continuously rotate fast on the screen for a (very) long time)
+	// Better safe than sorry
+	if (this->angle >= 360)
+	{
+		this->angle -= 360;
+	}
 }
