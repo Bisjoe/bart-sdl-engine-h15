@@ -2,7 +2,7 @@
 #include "Libraries.h"
 
 GimmickV2::GimmickV2()
-: Animation(Texture::ID::Gimmick, WALK_NB_FRAME(), ANIM_DEFAULT_SPEED, WALK_START_SRC(), FRAME_SIZE())
+: Animation(t_gimmick, WALK_NB_FRAME(), ANIM_SPEED_DEFAULT, WALK_START_SRC(), FRAME_SIZE())
 , currentState(IDLE)
 {
 	//Start the animation on creation
@@ -23,22 +23,22 @@ void GimmickV2::changeState(state newState)
 			this->SetSrcPos(IDLE_START_SRC());
 			this->SetNbFrame(IDLE_NB_FRAME());
 			this->SetFrameRate(3);
-			//Using varying frame rates cause issues since we won't instantly change to the other frame.
+			// Using varying frame rates cause issues since we won't instantly change to the other frame.
 			break;
 		case WALK:
 			this->SetSrcPos(WALK_START_SRC());
 			this->SetNbFrame(WALK_NB_FRAME());
-			this->SetFrameRate(ANIM_DEFAULT_SPEED);
+			this->SetFrameRate(ANIM_SPEED_DEFAULT);
 			break;
 		case DIZZY:
 			this->SetSrcPos(DIZZY_START_SRC());
 			this->SetNbFrame(DIZZY_NB_FRAME());
-			this->SetFrameRate(ANIM_DEFAULT_SPEED);
+			this->SetFrameRate(ANIM_SPEED_DEFAULT);
 			break;
 		default:
 			break;
 		}
-		//It's important to reset back to the first frame on change
+		// It's important to reset back to the first frame on change
 		this->currentState = newState;
 		this->ResetCurrentFrame();
 	}
@@ -46,27 +46,30 @@ void GimmickV2::changeState(state newState)
 
 void GimmickV2::Update()
 {
-	//Very important, otherwise our animation won't update itself
+	// [!] Very important, otherwise the animation won't update itself
 	Animation::Update();
 
-	//Don't mind the brackets. Simply tried to save some screen space.
-	//Press Space to Pause & Resume
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_SPACE)){
+	// Press Space to Pause & Resume
+	if (ThisKeyPressed(SDL_SCANCODE_SPACE)) 
+	{
 		if (this->GetIsPlaying()){
 			this->Stop(); }
 		else {
 			this->Play();}
 	}
-	//Press 1 for Idle
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_1)){
+	// Press 1 for Idle
+	if (ThisKeyPressed(SDL_SCANCODE_1)) 
+	{
 		changeState(IDLE);
 	}
-	//Press 2 for Walk
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_2)){
+	// Press 2 for Walk
+	if (ThisKeyPressed(SDL_SCANCODE_2)) 
+	{
 		changeState(WALK);
 	}
-	//Press 3 for Dizzy
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_3)){
+	// Press 3 for Dizzy
+	if (ThisKeyPressed(SDL_SCANCODE_3)) 
+	{
 		changeState(DIZZY);
 	}
 

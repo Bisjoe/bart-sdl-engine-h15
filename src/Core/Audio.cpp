@@ -70,7 +70,14 @@ void Audio::SetAllSfxVolume(const int volumeLevel)
 		}
 	}
 }
+*/
+void Audio::SetSfxVolume(Mix_Chunk* chunk, int volumeLevel)
+{
+	Mix_VolumeChunk(chunk, CheckVolume(volumeLevel));
+}
 
+
+/*
 void Audio::PlayMusic(char* const filePath)
 {
 	PlayMusic(filePath, -1);

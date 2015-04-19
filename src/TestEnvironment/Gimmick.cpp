@@ -1,14 +1,14 @@
 #include "Gimmick.h"
 #include "Libraries.h"
 
-//First 'Clean & Simple' iteration
+// First 'Clean & Simple' iteration
 
 Gimmick::Gimmick()
-	: Animation(Texture::ID::Gimmick, 6, 18, point<int>(16, 19), point<int>(2, 24))
+	: Animation("gimmick.png", 6, 18, point<int>(2, 24), point<int>(16, 19))
 {
-	//Start the animation on creation
+	// Start the animation on creation
 	this->Play();
-	//Make it loop
+	// Make it loop
 	this->SetIsLooping(true);
 }
 
@@ -16,7 +16,7 @@ void Gimmick::Update()
 {
 	Animation::Update();
 
-	//Press Space to Pause & Resume
+	// Press Space to Pause & Resume
 	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_SPACE))
 	{
 		if (this->GetIsPlaying())

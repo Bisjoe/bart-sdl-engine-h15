@@ -1,8 +1,8 @@
 #pragma once
 
-#define ANIM_SLOW_SPEED 6
-#define ANIM_DEFAULT_SPEED 12
-#define ANIM_FAST_SPEED 18
+#define ANIM_SPEED_SLOW 6
+#define ANIM_SPEED_DEFAULT 12
+#define ANIM_SPEED_FAST 18
 
 #include "Common.h"
 #include "Sprite.h"
@@ -12,7 +12,7 @@ class Animation :
 {
 public:
 	Animation();
-	Animation(Texture::ID id, int nbFrame, int frameRate, const point<int>& srcPos, const point<int>& frameSize);
+	Animation(std::string filepath, int nbFrame, int frameRate, const point<int>& srcPos, const point<int>& frameSize);
 	~Animation();
 
 	// Virtual from Sprite

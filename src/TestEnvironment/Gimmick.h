@@ -17,4 +17,3 @@ public:
 	const point<int> START_SRC_POS;
 	const point<int> FRAME_SRC_SIZE;
 };
-

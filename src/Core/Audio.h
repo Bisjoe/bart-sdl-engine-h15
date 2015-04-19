@@ -21,18 +21,11 @@
 	- Simply call the function PlayMusic(), but keep in mind that only one music can be played at any given time, calling it again will replace the one existing.
 **/
 
-#ifndef CHANNEL_COUNT_MAX
 #define CHANNEL_COUNT_MAX 50
-#endif
+
 
 // Shortcut
-#ifndef AUDIO
-#define AUDIO Audio::GetInstance()
-#endif
-
-#ifndef DEFAULT_SFX
-#define DEFAULT_SFX { false, NULL, NULL }
-#endif
+#define cAudio Audio::GetInstance()
 
 class Audio
 {
@@ -66,6 +59,7 @@ private:
 public:
 	// Volumes
 	void SetMusicVolume(int volumeLevel);
+	void SetSfxVolume(Mix_Chunk* chunk, int volumeLevel);
 	void SetSfxVolume(char* const filePath, int volumeLevel);
 	void SetAllSfxVolume(int volumeLevel);
 	void SetGlobalVolume(int volumeLevel);

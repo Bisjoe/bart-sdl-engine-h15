@@ -1,10 +1,11 @@
 #include "Animation.h"
 
-/////////////////////////////////
-//Default Animation constructor//
-/////////////////////////////////
-//Shouldn't ever be used directly
-////////////////////////////////
+/**
+	==============================
+	Default Animation constructor
+	------------------------------
+	[!] Should never be used directly
+**/
 Animation::Animation()
 	: Sprite()
 	, isPlaying(false)
@@ -18,23 +19,24 @@ Animation::Animation()
 {
 }
 
-//Sprite::Sprite(Texture::ID id, point<int> srcPos, point<int> srcSize)
+/** 
+	==============================
+	All of animated sprite's states should be contained within the same sprite sheet.
+	You should line up horizontaly all of an animation's frames.
+	------------------------------
+	Properties:
+		@filepath - The path to your spritesheet, also serve as it's ID
+		@nbFrame - Your animation's number of frames
+		@frameRate - Your animation's playback speed
+		@srcPos - The animation's starting (x,y) position from the Sprite Sheet
+		@srcSize - The animation's frameSize in width/height
+	------------------------------
+	[!] WARNING: Non-Consistent FrameSizes are not supported as of now.
+		If you happen to have an offset between each frames on your sprite sheet, as of now it must be consistent.
 
-/////////////////////////
-//Animation Constructor//
-/////////////////////////
-//All of animated sprite's states should be contained within the same sprite sheet.
-//You should line up horizontaly all of an animation's frames.
-//If you happen to have an offset between each frames on your sprite sheet, it should be consistent.
-//@id - This is your "Sprite sheet" ID
-//@nbFrame - Your animation's number of frames
-//@frameRate - Your animation's playback speed
-//@srcPos - The animation's starting (X,Y) position from the Sprite Sheet
-//@srcSize - The animation's frameSize in width/height
-//WARNING: Non-Consistent FrameSize are not supported as of now.
-////////////////////////////////////////////////////////////////
-Animation::Animation(Texture::ID id, int nbFrame, int frameRate, const point<int>& srcPos, const point<int>& frameSize)
-	: Sprite(id, srcPos, frameSize)
+**/
+Animation::Animation(std::string filepath, int nbFrame, int frameRate, const point<int>& srcPos, const point<int>& frameSize)
+	: Sprite(filepath, srcPos, frameSize)
 	, isPlaying(false)
 	, isLooping(false)
 	, nbFrame(nbFrame)
@@ -59,7 +61,7 @@ void Animation::Update()
 {
 	if (isPlaying)
 	{
-		float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
+		float dt = DTime;
 		currentTime += dt;
 		if (currentTime >= 1.0f / frameRate)
 		{

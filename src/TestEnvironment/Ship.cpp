@@ -1,10 +1,10 @@
 #include "Ship.h"
 #include "Libraries.h"
-
+/*
 const float Ship::SPEED = 100.0f;
 
 Ship::Ship()
-	: Sprite(Texture::ID::Ship)
+	: Sprite("ship.jpg")
 	, currentX(0)
 	, currentY(0)
 	, currentTime(0)
@@ -12,7 +12,7 @@ Ship::Ship()
 }
 
 Ship::Ship(int x, int y)
-	: Sprite(Texture::ID::Ship)
+	: Sprite("ship.jpg")
 	, currentX(0)
 	, currentY(0)
 	, currentTime(0)
@@ -45,3 +45,4 @@ void Ship::Update()
 void Ship::Stop()
 {
 }
+*/

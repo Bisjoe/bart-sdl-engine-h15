@@ -4,7 +4,7 @@
 Engine* Engine::instance = 0;
 
 Engine::Engine()
-	:window(nullptr)
+	: window(nullptr)
 	, renderer(nullptr)
 	, input(nullptr)
 	, timer(nullptr)
@@ -30,11 +30,6 @@ Engine::~Engine()
 	delete timer;
 	timer = nullptr;
 
-	textures = nullptr;
-	musics = nullptr;
-	sounds = nullptr;
-	fonts = nullptr;
-
 	SDL_Quit();
 }
 
@@ -44,7 +39,7 @@ void Engine::Init()
 }
 
 void Engine::Init(int screenWidth, int screenHeight) {
-	AUDIO; // Initialize the Audio system
+	cAudio; // Initialize the Audio system
 	if (TTF_Init() == -1)
 	{
 		printf("SDL TTF could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
@@ -69,10 +64,10 @@ void Engine::Init(int screenWidth, int screenHeight) {
 			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 			input = new Input();
 			timer = new Timer();
-			textures = new ResourceManager<SDL_Texture, int>();
-			fonts = new ResourceManager<TTF_Font, int>();
-			musics = new ResourceManager<Mix_Music, int>();
-			sounds = new ResourceManager<Mix_Chunk, int>();
+			textures = new ResourceManager<SDL_Texture, std::string>();
+			fonts = new ResourceManager<TTF_Font, std::string>();
+			musics = new ResourceManager<Mix_Music, std::string>();
+			sounds = new ResourceManager<Mix_Chunk, std::string>();
 		}
 	}
 }

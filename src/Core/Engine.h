@@ -3,10 +3,23 @@
 #include "Common.h"
 #include "Component.h"
 
-#define Textures Engine::GetInstance()->GetTextures()
-#define Fonts Engine::GetInstance()->GetFonts()
-#define Sounds Engine::GetInstance()->GetSounds()
-#define Musics Engine::GetInstance()->GetMusics()
+// Shortcuts
+// Engine access
+#define cEngine Engine::GetInstance()
+
+// delta time
+#define DTime cEngine->GetTimer()->GetDeltaTime()
+
+// Resources
+#define Textures cEngine->GetTextures()
+#define Fonts cEngine->GetFonts()
+#define Sounds cEngine->GetSounds()
+#define Musics cEngine->GetMusics()
+
+// Inputs
+#define ThisKeyPressed cEngine->GetInput()->IsKeyPressed
+#define ThisKeyHold cEngine->GetInput()->IsKeyHold
+#define ThisKeyReleased cEngine->GetInput()->IsKeyReleased
 
 class Engine
 {
@@ -39,15 +52,15 @@ public:
 	void Init(int screenWidth, int screenHeight);
 	void Run();
 	void Stop();
-
-	SDL_Renderer*						GetRenderer()	 { return renderer; }
-	ResourceManager<SDL_Texture, int>*	GetTextures()	 { return textures; }
-	ResourceManager<TTF_Font, int>*		GetFonts()		 { return fonts; }
-	ResourceManager<Mix_Music, int>*	GetMusics()		 { return musics; }
-	ResourceManager<Mix_Chunk, int>*	GetSounds()		 { return sounds; }
-	Input*								GetInput()		 { return input; }
-	Timer*								GetTimer()		 { return timer; }
-	SDL_Window*							GetWindow()		 { return window; }
+		
+	SDL_Renderer*								GetRenderer()	{ return renderer; }
+	ResourceManager<SDL_Texture, std::string>*	GetTextures()	{ return textures; }
+	ResourceManager<TTF_Font, std::string>*		GetFonts()		{ return fonts; }
+	ResourceManager<Mix_Music, std::string>*	GetMusics()		{ return musics; }
+	ResourceManager<Mix_Chunk, std::string>*	GetSounds()		{ return sounds; }
+	Input*										GetInput()		{ return input; }
+	Timer*										GetTimer()		{ return timer; }
+	SDL_Window*									GetWindow()		{ return window; }
 
 private:
 	void Start();
@@ -58,9 +71,9 @@ private:
 	SDL_Renderer* renderer;
 	Input* input;
 	Timer* timer;
-	ResourceManager<SDL_Texture, int>*		textures;
-	ResourceManager<TTF_Font, int>*			fonts;
-	ResourceManager<Mix_Music, int>*		musics;
-	ResourceManager<Mix_Chunk, int>*		sounds;
+	ResourceManager<SDL_Texture, std::string>*		textures;
+	ResourceManager<TTF_Font, std::string>*			fonts;
+	ResourceManager<Mix_Music, std::string>*		musics;
+	ResourceManager<Mix_Chunk, std::string>*		sounds;
 };
 

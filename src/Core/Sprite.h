@@ -7,23 +7,11 @@ class Sprite :
 {
 public:
 	Sprite();
-	Sprite(Texture::ID id);
-	Sprite(Texture::ID id, const point<int> srcPos, const point<int> srcSize);
+	Sprite(std::string filepath);
+	Sprite(std::string filepath, const point<int> srcPos, const point<int> srcSize);
 	~Sprite();
 
-	virtual void Start();
-	virtual void Update();
-	virtual void Stop();
-
 	void Draw();
-	/*
-	void HorizontalMirror();
-	void VerticalMirror();
-	void HorizontalFlip();
-	void VerticalFlip();
-	Uint32 GetPixel(SDL_Surface *surface, int x, int y);
-	void DrawPixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
-	*/
 	void SetPosition(int x, int y)						{ dstRect->x = x; dstRect->y = y; }
 	void SetDstFrame(int x, int y, int w, int h)		{ dstRect->x = x, dstRect->y = y; dstRect->w = w; dstRect->h = h; }
 	void SetSrcFrame(int x, int y, int w, int h)		{ srcRect->x = x, srcRect->y = y; srcRect->w = w; srcRect->h = h; }

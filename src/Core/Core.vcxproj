@@ -80,6 +80,7 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TextAnim.cpp" />
@@ -97,7 +98,8 @@
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Audio.h" />
-    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="ResourcesManager.h" />
+    <ClInclude Include="Resources.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="TextAnim.h" />
