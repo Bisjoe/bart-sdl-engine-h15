@@ -82,6 +82,7 @@
     <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="GimmickV2.cpp" />
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="SoundTest.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +91,7 @@
     <ClInclude Include="GimmickV2.h" />
     <ClInclude Include="ResourceIDs.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="SoundTest.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.vcxproj">

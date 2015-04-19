@@ -17,11 +17,7 @@ public:
 
 	void Draw();
 	/*
-	void HorizontalMirror();
-	void VerticalMirror();
-	void HorizontalFlip();
-	void VerticalFlip();
-	Uint32 GetPixel(SDL_Surface *surface, int x, int y);
+	surface, int x, int y);
 	void DrawPixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 	*/
 	void SetPosition(int x, int y)						{ dstRect->x = x; dstRect->y = y; }

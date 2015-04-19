@@ -2,6 +2,7 @@
 #include "Ship.h"
 #include "Gimmick.h"
 #include "GimmickV2.h"
+#include "SoundTest.h"
 
 
 typedef int* pInt;
@@ -21,9 +22,10 @@ int main(int argc, char* args[])
 	Sounds->LoadSound(Sound::ID::EnemyHit, "enemy_hit.wav");
 	Musics->LoadMusic(Music::ID::TestMusic, "testmusic.mp3");
 	Fonts->LoadFont(Font::ID::Dialog, "dialog.ttf");
-	AUDIO->PlaySound(Sounds->Get(Sound::ID::EnemyHit));
-	AUDIO->PlayMusic(Musics->Get(Music::ID::TestMusic));
-
+	
+	//AudioSys->PlaySound(Sounds->Get(Sound::ID::EnemyHit));
+	//AudioSys->PlayMusic(Musics->Get(Music::ID::TestMusic));
+	SoundTest* soundtest = new SoundTest();
 	Ship* ship = new Ship(25, 25);
 	GimmickV2* gimmickv2 = new GimmickV2();
 

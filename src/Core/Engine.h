@@ -7,6 +7,7 @@
 #define Fonts Engine::GetInstance()->GetFonts()
 #define Sounds Engine::GetInstance()->GetSounds()
 #define Musics Engine::GetInstance()->GetMusics()
+#define AudioSys Engine::GetInstance()->GetAudio()
 
 class Engine
 {
@@ -40,26 +41,28 @@ public:
 	void Run();
 	void Stop();
 
-	SDL_Renderer*						GetRenderer()	 { return renderer; }
-	ResourceHolder<SDL_Texture, int>*	GetTextures()	 { return textures; }
-	ResourceHolder<TTF_Font, int>*		GetFonts()		 { return fonts; }
-	ResourceHolder<Mix_Music, int>*	GetMusics()		 { return musics; }
-	ResourceHolder<Mix_Chunk, int>*	GetSounds()		 { return sounds; }
+	Audio*								GetAudio()		 { return audio; }
 	Input*								GetInput()		 { return input; }
 	Timer*								GetTimer()		 { return timer; }
+	SDL_Renderer*						GetRenderer()	 { return renderer; }
 	SDL_Window*							GetWindow()		 { return window; }
+	ResourceHolder<SDL_Texture, int>*	GetTextures()	 { return textures; }
+	ResourceHolder<TTF_Font, int>*		GetFonts()		 { return fonts; }
+	ResourceHolder<Mix_Music, int>*		GetMusics()		 { return musics; }
+	ResourceHolder<Mix_Chunk, int>*		GetSounds()		 { return sounds; }
 
 private:
 	void Start();
 	void Update();
 	void Draw();
 
-	SDL_Window* window;
-	SDL_Renderer* renderer;
-	Input* input;
-	Timer* timer;
-	ResourceHolder<SDL_Texture, int>*		textures;
-	ResourceHolder<TTF_Font, int>*			fonts;
+	Audio*								audio;
+	Input*								input;
+	Timer*								timer;
+	SDL_Renderer*						renderer;
+	SDL_Window*							window;
+	ResourceHolder<SDL_Texture, int>*	textures;
+	ResourceHolder<TTF_Font, int>*		fonts;
 	ResourceHolder<Mix_Music, int>*		musics;
 	ResourceHolder<Mix_Chunk, int>*		sounds;
 };
