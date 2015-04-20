@@ -7,7 +7,7 @@ namespace Texture
 	enum ID
 	{
 		Gimmick,
-		Ship
+		PixelCat
 	};
 }
 
