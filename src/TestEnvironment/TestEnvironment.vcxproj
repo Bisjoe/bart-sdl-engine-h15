@@ -79,19 +79,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Gimmick.cpp" />
-    <ClCompile Include="GimmickV2.cpp" />
-    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="AnimationTest.cpp" />
+    <ClCompile Include="SpriteTest.cpp" />
     <ClCompile Include="SoundTest.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="TextTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libraries.h" />
-    <ClInclude Include="Gimmick.h" />
-    <ClInclude Include="GimmickV2.h" />
+    <ClInclude Include="AnimationTest.h" />
     <ClInclude Include="ResourceIDs.h" />
-    <ClInclude Include="Ship.h" />
+    <ClInclude Include="SpriteTest.h" />
     <ClInclude Include="SoundTest.h" />
+    <ClInclude Include="TextTest.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.vcxproj">

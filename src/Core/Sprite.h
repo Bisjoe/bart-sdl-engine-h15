@@ -16,30 +16,32 @@ public:
 	virtual void Stop();
 
 	void Draw();
-	/*
-	surface, int x, int y);
-	void DrawPixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
-	*/
+	void SetAlpha(int alpha)							{ this->alpha = alpha; }
 	void SetPosition(int x, int y)						{ dstRect->x = x; dstRect->y = y; }
 	void SetDstFrame(int x, int y, int w, int h)		{ dstRect->x = x, dstRect->y = y; dstRect->w = w; dstRect->h = h; }
 	void SetSrcFrame(int x, int y, int w, int h)		{ srcRect->x = x, srcRect->y = y; srcRect->w = w; srcRect->h = h; }
 	void ResizeTo(int w, int h);
-	void Flip(SDL_RendererFlip flip);
+	void Flip(unsigned int flip);
 
 	void SetRotation(float angle);
 	void RotateBy(float angle);
 	void Scale(float k);
 
+	point<int> GetPosition()	{ return {dstRect->x, dstRect->y}; }
+
 protected:
 	void ApplyTexture(SDL_Renderer* renderer);
+	void ApplyAlpha();
 
-private:
 	SDL_Texture* texture;
-	SDL_Rect* srcRect;
 	SDL_Rect* dstRect;
+	SDL_Rect* srcRect;
 	SDL_RendererFlip flipType;
+	int alpha;
 	float angle;
+	float scaling;
 	bool isVisible;
+
 };
 
 

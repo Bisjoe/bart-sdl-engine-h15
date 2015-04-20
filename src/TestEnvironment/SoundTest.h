@@ -1,7 +1,5 @@
 #pragma once
-
-#include "Common.h"
-#include "Component.h"
+#include "Libraries.h"
 
 //Sound refers to a single sound instance
 //SFX refers to all sounds

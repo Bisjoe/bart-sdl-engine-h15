@@ -69,10 +69,10 @@ void ResourceHolder<Resource, Identifier>::LoadMusic(Identifier id, const std::s
 
 
 template <typename Resource, typename Identifier>
-void ResourceHolder<Resource, Identifier>::LoadFont(Identifier id, const std::string& filename)
+void ResourceHolder<Resource, Identifier>::LoadFont(Identifier id, const std::string& filename, int fontSize)
 {
 	TTF_Font* font;
-	font = TTF_OpenFont(filename.c_str(), 10);
+	font = TTF_OpenFont(filename.c_str(), fontSize);
 	//If the font couldn't be loaded
 	if (!font)
 	{

@@ -8,6 +8,7 @@
 Sprite::Sprite()
 	: texture(nullptr)
 	, isVisible(true)
+	, alpha(255)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
@@ -35,8 +36,9 @@ Sprite::Sprite()
 //@id - This is your "Sprite sheet" ID.
 ////////////////////////////////
 Sprite::Sprite(Texture::ID id)
-	: texture(Engine::GetInstance()->GetTextures()->Get(id))
+	: texture(Textures->Get(id))
 	, isVisible(true)
+	, alpha(255)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
@@ -66,6 +68,7 @@ Sprite::Sprite(Texture::ID id)
 Sprite::Sprite(Texture::ID id, const point<int> srcPos, const point<int> srcSize)
 	: texture(Engine::GetInstance()->GetTextures()->Get(id))
 	, isVisible(true)
+	, alpha(255)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
@@ -91,7 +94,8 @@ void Sprite::Start()
 {}
 
 void Sprite::Update()
-{}
+{
+}
 
 void Sprite::Stop()
 {}
@@ -99,7 +103,15 @@ void Sprite::Stop()
 void Sprite::Draw()
 {
 	if (isVisible)
+	{
+		ApplyAlpha();
 		ApplyTexture(Engine::GetInstance()->GetRenderer());
+	}
+}
+
+void Sprite::ApplyAlpha()
+{
+	//SDL_SetTextureAlphaMod(texture, alpha);
 }
 
 void Sprite::ApplyTexture(SDL_Renderer* renderer)
@@ -118,8 +130,9 @@ void Sprite::ApplyTexture(SDL_Renderer* renderer)
 void Sprite::Scale(float k)
 {
 	SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
-	dstRect->w = (int)(dstRect->w*k);
-	dstRect->h = (int)(dstRect->w*k);
+	dstRect->w = (int)(srcRect->w*k);
+	dstRect->h = (int)(srcRect->h*k);
+	scaling = k;
 }
 
 ///////////////////
@@ -139,9 +152,9 @@ void Sprite::ResizeTo(int w, int h)
 ///////////////////
 //Sprite Flipping//
 ///////////////////
-void Sprite::Flip(SDL_RendererFlip flip)
+void Sprite::Flip(unsigned int flip)
 {
-	this->flipType = flip;
+	this->flipType = (SDL_RendererFlip)flip;
 }
 
 ///////////////////
@@ -159,68 +172,3 @@ void Sprite::RotateBy(float angle)
 {
 	this->angle += angle;
 }
-
-/*
-Uint32 Sprite::GetPixel(SDL_Surface *surface, int x, int y)
-{
-	int bpp = surface->format->BytesPerPixel;
-	//Here p is the address to the pixel we want to retrieve
-	Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
-
-
-	switch (bpp) {
-	case 1:
-		return *p;
-
-	case 2:
-		return *(Uint16 *)p;
-
-	case 3:
-		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
-			return p[0] << 16 | p[1] << 8 | p[2];
-		else
-			return p[0] | p[1] << 8 | p[2] << 16;
-
-	case 4:
-		return *(Uint32 *)p;
-
-	default:
-		return 0;       //shouldn't happen, but avoids warnings
-	}
-}
-
-void Sprite::DrawPixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
-{
-	int bpp = surface->format->BytesPerPixel;
-	//Here p is the address to the pixel we want to set
-	Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
-
-
-	switch (bpp) {
-	case 1:
-		*p = pixel;
-		break;
-
-	case 2:
-		*(Uint16 *)p = pixel;
-		break;
-
-	case 3:
-		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
-			p[0] = (pixel >> 16) & 0xff;
-			p[1] = (pixel >> 8) & 0xff;
-			p[2] = pixel & 0xff;
-		}
-		else {
-			p[0] = pixel & 0xff;
-			p[1] = (pixel >> 8) & 0xff;
-			p[2] = (pixel >> 16) & 0xff;
-		}
-		break;
-
-	case 4:
-		*(Uint32 *)p = pixel;
-		break;
-	}
-}
-**/
