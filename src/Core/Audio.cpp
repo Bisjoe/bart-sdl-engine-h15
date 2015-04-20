@@ -73,9 +73,33 @@ void Audio::SetSfxVolume(std::string filePath, int volumeLevel)
 	Mix_VolumeChunk(Sounds->Get(filePath), CheckVolume(volumeLevel));
 }
 
+void Audio::SetGlobalVolume(int volumeLevel)
+{
+	SetMusicVolume(volumeLevel);
+	SetSfxVolume(volumeLevel);
+}
+
+void Audio::PlayMusic(std::string filePath)
+{
+	PlayMusic(Musics->LoadMusic(filePath));
+}
+
+void Audio::PlayMusic(std::string filePath, int playCount)
+{
+	PlayMusic(Musics->LoadMusic(filePath), playCount);
+}
+
 void Audio::PlayMusic(Mix_Music* music) 
 {
 	if (Mix_PlayMusic(music, -1) == -1)
+	{
+		printf("Error while trying to play music, ERROR: %s\n", Mix_GetError());
+	}
+}
+
+void Audio::PlayMusic(Mix_Music* music, int playCount)
+{
+	if (Mix_PlayMusic(music, playCount) == -1)
 	{
 		printf("Error while trying to play music, ERROR: %s\n", Mix_GetError());
 	}

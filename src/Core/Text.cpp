@@ -26,7 +26,7 @@ Text::Text(std::string text)
 	: Sprite()
 	, text(text)
 	, typewriterText(text)
-	, font(Fonts->LoadFont(DEFAULT_TEXT_FONT))
+	, font(Fonts->LoadFont(DEFAULT_TEXT_FONT, DEFAULT_TEXT_FONTSIZE))
 	, color(Color::WHITE)
 	, surface(nullptr)
 	, options(0)
@@ -57,7 +57,7 @@ Text::Text(std::string text, SDL_Color color)
 	: Sprite()
 	, text(text)
 	, typewriterText(text)
-	, font(Fonts->LoadFont(DEFAULT_TEXT_FONT))
+	, font(Fonts->LoadFont(DEFAULT_TEXT_FONT, DEFAULT_TEXT_FONTSIZE))
 	, color(color)
 	, surface(nullptr)
 	, options(0)
@@ -85,12 +85,11 @@ Text::Text(std::string text, SDL_Color color)
 
 }
 
-
-Text::Text(std::string text, point<int> pos, std::string fontpath, int wrapping, SDL_Color color, unsigned char options)
+Text::Text(std::string text, std::string fontpath, point<int> pos, int wrapping, SDL_Color color, unsigned char options)
 	: Sprite()
 	, text(text)
 	, typewriterText(text)
-	, font(Fonts->LoadFont(fontpath))
+	, font(Fonts->LoadFont(fontpath, DEFAULT_TEXT_FONTSIZE))
 	, color(color)
 	, surface(nullptr)
 	, options(0)
@@ -107,17 +106,49 @@ Text::Text(std::string text, point<int> pos, std::string fontpath, int wrapping,
 {
 	scaling = 1;
 	srcRect = new SDL_Rect();
-	srcRect->x = 0;
-	srcRect->y = 0;
+	srcRect->x;
+	srcRect->y;
 
 	dstRect = new SDL_Rect();
-	dstRect->x = 0;
-	dstRect->y = 0;
+	dstRect->x = pos.x;
+	dstRect->y = pos.y;
 	SetOptions(options);
 	changed = true;
 }
 
-Text::Text(std::string text, point<int> pos, TTF_Font* font, int wrapping, SDL_Color color, unsigned char options)
+
+Text::Text(std::string text, std::string fontpath, int fontSize, point<int> pos, int wrapping, SDL_Color color, unsigned char options)
+	: Sprite()
+	, text(text)
+	, typewriterText(text)
+	, font(Fonts->LoadFont(fontpath, fontSize))
+	, color(color)
+	, surface(nullptr)
+	, options(0)
+	, fadeInTimer(0)
+	, fadeInSpeed(0.01f)
+	, fadeOutTimer(0)
+	, fadeOutSpeed(0.01f)
+	, fadeOutDelay(2.f)
+	, flashingTimer(0)
+	, flashingSpeed(25 / 255.f)
+	, typewriterTimer(0)
+	, typewriterSpeed(0.15f)
+	, wrapping(wrapping)
+{
+	scaling = 1;
+	srcRect = new SDL_Rect();
+	srcRect->x;
+	srcRect->y;
+
+	dstRect = new SDL_Rect();
+	dstRect->x = pos.x;
+	dstRect->y = pos.y;
+	SetOptions(options);
+	changed = true;
+}
+
+Text::Text(std::string text, TTF_Font* font, point<int> pos, int wrapping, SDL_Color color, unsigned char options)
 	: Sprite()
 	, text(text)
 	, typewriterText(text)
@@ -138,8 +169,8 @@ Text::Text(std::string text, point<int> pos, TTF_Font* font, int wrapping, SDL_C
 {
 	scaling = 1;
 	srcRect = new SDL_Rect();
-	srcRect->x = 0;
-	srcRect->y = 0;
+	srcRect->x = pos.x;
+	srcRect->y = pos.y;
 
 	dstRect = new SDL_Rect();
 	dstRect->x = 0;

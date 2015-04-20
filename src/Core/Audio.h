@@ -47,6 +47,7 @@ public:
 	void PlayMusic(std::string filePath);
 	void PlayMusic(std::string filePath, int playCount);
 	void PlayMusic(Mix_Music* music);
+	void PlayMusic(Mix_Music* filePath, int playCount);
 
 	// Sound effects
 	void PlaySound(std::string filePath);

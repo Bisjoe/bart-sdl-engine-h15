@@ -42,8 +42,9 @@ public:
 	Text(std::string text, SDL_Color color);
 	Text(std::string text, point<int> pos);
 	Text(std::string text, point<int> pos, SDL_Color color);
-	Text(std::string text, point<int> pos, std::string font, int wrapping = 0, SDL_Color color = Color::WHITE, unsigned char options = 0);
-	Text(std::string text, point<int> pos, TTF_Font* font, int wrapping = 0, SDL_Color color = Color::WHITE, unsigned char options = 0);
+	Text(std::string text, std::string font, point<int> pos, int wrapping = 0, SDL_Color color = Color::WHITE, unsigned char options = 0);
+	Text(std::string text, std::string font, int fontSize, point<int> pos, int wrapping = 0, SDL_Color color = Color::WHITE, unsigned char options = 0);
+	Text(std::string text, TTF_Font* font, point<int> pos, int wrapping = 0, SDL_Color color = Color::WHITE, unsigned char options = 0);
 	~Text();
 
 	virtual void Start();

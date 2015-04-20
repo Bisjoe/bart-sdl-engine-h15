@@ -97,7 +97,7 @@ void Sprite::ApplyTexture(SDL_Renderer* renderer)
 
 
 /**
-	Scales a sprite by the desired K factor.
+	Scales a sprite by the desired k factor.
 	-------------------
 	@k - the number to scale by (enter 1 to get back to default texture size)
 **/

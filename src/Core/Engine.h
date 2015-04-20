@@ -76,9 +76,9 @@ private:
 	Input* input;
 	Timer* timer;
 	Audio* audio;
-	ResourceManager<SDL_Texture, std::string>*		textures;
-	ResourceManager<TTF_Font, std::string>*			fonts;
-	ResourceManager<Mix_Music, std::string>*		musics;
-	ResourceManager<Mix_Chunk, std::string>*		sounds;
+	ResourceManager<SDL_Texture, std::string>*	textures;
+	ResourceManager<TTF_Font, std::string>*		fonts;
+	ResourceManager<Mix_Music, std::string>*	musics;
+	ResourceManager<Mix_Chunk, std::string>*	sounds;
 };
 
