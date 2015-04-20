@@ -56,8 +56,8 @@ Sprite::Sprite(std::string filepath)
 	-------------------
 	This'll create a sprite out of a texture's using specific coordinates.
 	This is suited for all actors (Tiles, Characters, Enemies...)
-	@id - This is your "Sprite sheet" ID.
-	@srcPos - The Sprite's starting (X,Y) position from the Sprite Sheet
+	@filepath : The path to your spritesheet or image (also correspond as ID)
+	@srcPos - The Sprite's starting (x,y) position from the Sprite Sheet (correspond to top-left corner)
 	@srcSize - The Sprite's width/height
 **/
 Sprite::Sprite(std::string filepath, const point<int> srcPos, const point<int> srcSize)

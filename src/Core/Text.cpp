@@ -3,298 +3,266 @@
 #pragma warning(disable: 4996)
 
 Text::Text()
-	: text("")
-	, fontSrc(DEFAULT_TEXT_FONT)
-	, fontSize(DEFAULT_TEXT_FONTSIZE)
-	, wrapper(DEFAULT_TEXT_WRAPPER)
-	, color(GetColor(BLACK))
+	: Sprite()
+	, text("")
+	, typewriterText("")
+	, color(Color::WHITE)
+	, surface(nullptr)
+	, options(0)
+	, fadeInTimer(0)
+	, fadeInSpeed(0)
+	, fadeOutTimer(0)
+	, fadeOutSpeed(0)
+	, fadeOutDelay(0)
+	, flashingTimer(0)
+	, flashingSpeed(0)
+	, typewriterTimer(0)
+	, typewriterSpeed(0)
+	, wrapping(0)
 {
-	Init(0, 0);
 }
 
-Text::Text(int x, int y)
-: text("")
-, fontSrc(DEFAULT_TEXT_FONT)
-, fontSize(DEFAULT_TEXT_FONTSIZE)
-, wrapper(DEFAULT_TEXT_WRAPPER)
-, color(DEFAULT_TEXT_COLOR)
+Text::Text(std::string text)
+	: Sprite()
+	, text(text)
+	, typewriterText(text)
+	, font(Fonts->LoadFont(DEFAULT_TEXT_FONT))
+	, color(Color::WHITE)
+	, surface(nullptr)
+	, options(0)
+	, fadeInTimer(0)
+	, fadeInSpeed(0.01f)
+	, fadeOutTimer(0)
+	, fadeOutSpeed(0.01f)
+	, fadeOutDelay(2.f)
+	, flashingTimer(0)
+	, flashingSpeed(25 / 255.f)
+	, typewriterTimer(0)
+	, typewriterSpeed(0.15f)
+	, wrapping(wrapping)
 {
-	Init(x, y);
-}
-
-Text::Text(Str text)
-	: text(text)
-	, fontSrc(DEFAULT_TEXT_FONT)
-	, fontSize(32)
-	, wrapper(DEFAULT_TEXT_WRAPPER)
-	, color(GetColor(BLACK))
-{
-	Init(0, 0);
-}
-
-/*
-Text::Text(Str text, Str fontSrc)
-	: text(text)
-	, fontSrc(fontSrc)
-	, fontSize(DEFAULT_TEXT_FONTSIZE)
-	, wrapper(DEFAULT_TEXT_WRAPPER)
-	, color(DEFAULT_TEXT_COLOR)
-{
-	Init(0, 0);
-}
-
-Text::Text(Str text, Str fontSrc, int fontSize)
-	: text(text)
-	, fontSrc(fontSrc)
-	, fontSize(fontSize)
-	, wrapper(DEFAULT_TEXT_WRAPPER)
-	, color(DEFAULT_TEXT_COLOR)
-{
-	Init(0, 0);
-}
-
-Text::Text(Str text, Str fontSrc, int fontSize, int wrapper)
-	: text(text)
-	, fontSrc(fontSrc)
-	, fontSize(fontSize)
-	, wrapper(wrapper)
-	, color(DEFAULT_TEXT_COLOR)
-{
-	Init(0, 0);
-}
-
-Text::Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, int y)
-	: text(text)
-	, fontSrc(fontSrc)
-	, fontSize(fontSize)
-	, wrapper(wrapper)
-	, color(DEFAULT_TEXT_COLOR)
-{
-	Init(x, y);
-}
-
-Text::Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, int y, SDL_Color color)
-	: text(text)
-	, fontSrc(fontSrc)
-	, fontSize(fontSize)
-	, wrapper(wrapper)
-	, color(color)
-{
-	Init(x, y);
-}
-
-Text::Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, const int y, DefaultColor color)
-	: text(text)
-	, fontSrc(fontSrc)
-	, fontSize(fontSize)
-	, wrapper(wrapper)
-	, color(GetColor(color))
-{
-	Init(x, y);
-}
-
-Text::~Text()
-{
-
-}
-*/
-void Text::AddToTxtsList(Str text, int x, int y)
-{
-	elemInList++;
-	for (int i = 0; i < DEFAULT_FADEIN_MAX; ++i)
-	{
-		if (!fadeInTxtsList[i].used)
-		{
-			fadeInTxtsList[i].used = true;
-			assert(strlen(text) < sizeof(fadeInTxtsList[i].text));
-			strcpy(fadeInTxtsList[i].text, text);
-			fadeInTxtsList[i].message = TTF_RenderText_Blended_Wrapped(this->font, text, this->color, wrapper);
-			SDL_Rect* tempDstRect = new SDL_Rect();
-			tempDstRect->x = x;
-			tempDstRect->y = y;
-			fadeInTxtsList[i].dstRect = tempDstRect;
-			break;
-		}
-	}
-}
-
-void Text::Init(int x, int y)
-{
-	elemInList = 0;
+	scaling = 1;
 	srcRect = new SDL_Rect();
 	srcRect->x = 0;
 	srcRect->y = 0;
-	srcRect->w = DEFAULT_WIN_W;
-	srcRect->h = DEFAULT_WIN_H;
 
 	dstRect = new SDL_Rect();
-	dstRect->x = x;
-	dstRect->y = y;
-
-	for (int i = 0; i < DEFAULT_FADEIN_MAX; ++i)
-	{
-		fadeInTxtsList[i] = DEFAULT_FADEINTXT;
-	}
-
-	memset(compText, 0, sizeof(compText));
-
-	UpdateMessage();
-}
-/*
-void Text::SetFont(Str font) {
-	this->fontSrc = font;
-	UpdateMessage();
+	dstRect->x = 0;
+	dstRect->y = 0;
+	SetOptions(options);
+	changed = true;
 }
 
-void Text::SetFontsize(int fontSize) {
-	this->fontSize = fontSize;
-	UpdateMessage();
-}
+Text::Text(std::string text, SDL_Color color)
+	: Sprite()
+	, text(text)
+	, typewriterText(text)
+	, font(Fonts->LoadFont(DEFAULT_TEXT_FONT))
+	, color(color)
+	, surface(nullptr)
+	, options(0)
+	, fadeInTimer(0)
+	, fadeInSpeed(0.01f)
+	, fadeOutTimer(0)
+	, fadeOutSpeed(0.01f)
+	, fadeOutDelay(2.f)
+	, flashingTimer(0)
+	, flashingSpeed(25 / 255.f)
+	, typewriterTimer(0)
+	, typewriterSpeed(0.15f)
+	, wrapping(wrapping)
+{
+	scaling = 1;
+	srcRect = new SDL_Rect();
+	srcRect->x = 0;
+	srcRect->y = 0;
 
-void Text::SetPosition(int x, int y) {
-	dstRect->x = x;
-	dstRect->y = y;
-}
+	dstRect = new SDL_Rect();
+	dstRect->x = 0;
+	dstRect->y = 0;
+	SetOptions(options);
+	changed = true;
 
-void Text::SetWrapper(int wrapper) {
-	this->wrapper = wrapper;
-
-}
-
-void Text::SetTextColor(const SDL_Color color) {
-	this->color = color;
-}
-
-void Text::SetTextColor(const DefaultColor color) {
-	this->color = GetColor(color);
-}
-*/
-// Use this to change the message midplay
-void Text::UpdateMessage() {
-	this->font = TTF_OpenFont(this->fontSrc, this->fontSize);
-	message = TTF_RenderText_Blended_Wrapped(this->font, this->text, this->color, this->wrapper);
-	texture = SDL_CreateTextureFromSurface(cEngine->GetRenderer(), message);
-	GetTextSize(); // Updates dstRect to the size of the text
 }
 
 
-// Efficiency may vary depending on the font used, the more equal they are between each letter, the better
-// (monstly because TTF_SizeText include spacing between letter, and this spacing change if the letter are together (ex. "Hello") or separated in multiple 
-// substrings (ex. "Hel" "lo");
-point<int> Text::GetTextSize() {
-	int w = 0, h = 0;
-	char tempString[250] = "";
-	if (text[0] != '\0') {
-		strcpy(tempString, text);
-		TTF_SizeText(font, tempString, &w, &h);
-		dstRect->w = w;
-		dstRect->h = h;
-	}
-	if (elemInList > 0) 
-	{
-		for (int i = 0; i < DEFAULT_FADEIN_MAX; ++i)
-		{
-			if (fadeInTxtsList[i].used != false)
-			{
-				strcat(tempString, fadeInTxtsList[i].text);
-			}
-		}
-		
-	}
-	TTF_SizeText(font, tempString, &w, &h);
-	return point<int> { w, h };
+Text::Text(std::string text, point<int> pos, std::string fontpath, int wrapping, SDL_Color color, unsigned char options)
+	: Sprite()
+	, text(text)
+	, typewriterText(text)
+	, font(Fonts->LoadFont(fontpath))
+	, color(color)
+	, surface(nullptr)
+	, options(0)
+	, fadeInTimer(0)
+	, fadeInSpeed(0.01f)
+	, fadeOutTimer(0)
+	, fadeOutSpeed(0.01f)
+	, fadeOutDelay(2.f)
+	, flashingTimer(0)
+	, flashingSpeed(25 / 255.f)
+	, typewriterTimer(0)
+	, typewriterSpeed(0.15f)
+	, wrapping(wrapping)
+{
+	scaling = 1;
+	srcRect = new SDL_Rect();
+	srcRect->x = 0;
+	srcRect->y = 0;
+
+	dstRect = new SDL_Rect();
+	dstRect->x = 0;
+	dstRect->y = 0;
+	SetOptions(options);
+	changed = true;
 }
+
+Text::Text(std::string text, point<int> pos, TTF_Font* font, int wrapping, SDL_Color color, unsigned char options)
+	: Sprite()
+	, text(text)
+	, typewriterText(text)
+	, font(font)
+	, color(color)
+	, surface(nullptr)
+	, options(0)
+	, fadeInTimer(0)
+	, fadeInSpeed(0.01f)
+	, fadeOutTimer(0)
+	, fadeOutSpeed(0.01f)
+	, fadeOutDelay(2.f)
+	, flashingTimer(0)
+	, flashingSpeed(25 / 255.f)
+	, typewriterTimer(0)
+	, typewriterSpeed(0.15f)
+	, wrapping(wrapping)
+{
+	scaling = 1;
+	srcRect = new SDL_Rect();
+	srcRect->x = 0;
+	srcRect->y = 0;
+
+	dstRect = new SDL_Rect();
+	dstRect->x = 0;
+	dstRect->y = 0;
+	SetOptions(options);
+	changed = true;
+}
+
+Text::~Text()
+{}
 
 void Text::Start()
-{
-	message = TTF_RenderText_Blended_Wrapped(this->font, this->text, this->color, this->wrapper);
-}
+{}
 
-void Text::UpdateFadeIn()
+void Text::Stop()
+{}
+
+void Text::Update()
 {
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
-	for (int i = 0; i < DEFAULT_FADEIN_MAX; ++i)
+	if (options & OpFadeIn)
 	{
-		if (fadeInTxtsList[i].used)
+		fadeInTimer += dt;
+		if (fadeInTimer >= fadeInSpeed)
 		{
-			fadeInTxtsList[i].currentTime += (int)dt;
-			if (fadeInTxtsList[i].currentTime >= 1.0f / framerate)
+			fadeInTimer -= fadeInSpeed;
+			if (this->alpha + 1 <= 255)
 			{
-				fadeInTxtsList[i].currentTime = 0;
-				if (fadeInTxtsList[i].alpha < 255)
+				this->alpha += 1;
+			}
+			else
+			{
+				options = options & ~Options::OpFadeIn;
+			}
+		}
+		changed = true;
+	}
+	if (options & OpFadeOut)
+	{
+		fadeOutTimer += dt;
+		if (fadeOutTimer >= fadeOutDelay)
+		{
+			if (fadeOutTimer >= fadeOutSpeed + fadeOutDelay)
+			{
+				fadeOutTimer -= fadeOutSpeed;
+				if (this->alpha - 1 >= 0)
 				{
-					fadeInTxtsList[i].alpha += 0.4f;
-					SDL_SetSurfaceAlphaMod(fadeInTxtsList[i].message, fadeInTxtsList[i].alpha);
-					//ShowFadeIn(Engine::GetInstance()->GetRenderer()->GetScreen());
+					this->alpha -= 1;
 				}
 				else
 				{
-					elemInList--;
-					strcat(compText, fadeInTxtsList[i].text);
-					text = compText;
-					fadeInTxtsList[i] = DEFAULT_FADEINTXT;
-					UpdateMessage();
+					options = options & ~Options::OpFadeOut;
 				}
 			}
 		}
+		changed = true;
 	}
-}
-
-void Text::Stop()
-{
-	
-}
-
-void Text::Draw()
-{
-	if (text[0] != '\0')
-		ShowMessage(cEngine->GetRenderer());
-	//if (elemInList > 0)
-		//ShowFadeIn(Engine::GetInstance()->GetRenderer()->GetScreen());
-}
-
-void Text::ShowMessage(SDL_Renderer* renderer)
-{
-	SDL_RenderCopyEx(renderer, texture, NULL, dstRect, 0, NULL, SDL_FLIP_NONE);
-}
-
-void Text::ShowFadeIn(SDL_Surface* surface)
-{
-	for (int i = 0; i < DEFAULT_FADEIN_MAX; ++i)
+	if (options & OpFlashing)
 	{
-		if (fadeInTxtsList[i].used != false)
+		flashingTimer += dt;
+		if (flashingTimer >= flashingSpeed)
 		{
-			SDL_BlitSurface(fadeInTxtsList[i].message
-				, srcRect
-				, surface
-				, fadeInTxtsList[i].dstRect);
+			flashingTimer -= flashingSpeed;
+			if (this->alpha != 0)
+			{
+				this->alpha = 0;
+			}
+			else
+			{
+				this->alpha = 255;
+			}
 		}
+		changed = true;
 	}
-	
+	if (options & OpTypewriter)
+	{
+		typewriterTimer += dt;
+		if (typewriterTimer >= typewriterSpeed)
+		{
+			typewriterTimer -= typewriterSpeed;
+			if (text.length() != typewriterText.length())
+			{
+				this->text += typewriterText[text.length()];
+			}
+			else
+			{
+				options = options & ~Options::OpTypewriter;
+			}
+		}
+		changed = true;
+	}
+	if (changed)
+	{
+		UpdateText();
+		changed = false;
+	}
 }
 
-SDL_Color Text::GetColor(DefaultColor color)
+void Text::UpdateText()
 {
-	switch (color) {
-		default : {
-			return { 0, 0, 0 };
-			break;
-		}
-		case(WHITE) : {
-			return { 255, 255, 255 };
-			break;
-		}
-		case(RED) : {
-			return { 255, 0, 0 };
-			break;
-		}
-		case(GREEN) : {
-			return { 0, 255, 0 };
-			break;
-		}
-		case(BLUE) : {
-			return { 0, 0, 255 };
-			break;
-		}
+	SDL_DestroyTexture(texture);
+	surface = TTF_RenderText_Blended_Wrapped(font, text.c_str(), color, wrapping);
+	SDL_SetSurfaceAlphaMod(surface, alpha);
+	texture = SDL_CreateTextureFromSurface(Engine::GetInstance()->GetRenderer(), surface);
+	SDL_FreeSurface(surface);
+	SDL_QueryTexture(texture, NULL, NULL, &srcRect->w, &srcRect->h);
+	SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
+	Scale(scaling);
+}
+
+void Text::SetOptions(unsigned char options)
+{
+	text = typewriterText;
+	this->alpha = 255;
+	if (options & OpFadeIn)
+	{
+		this->alpha = 0;
 	}
+	if (options & OpTypewriter)
+	{
+		typewriterText = text;
+		text = "";
+	}
+	this->options = options;
+	changed = true;
 }

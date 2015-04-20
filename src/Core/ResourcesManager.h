@@ -14,20 +14,23 @@ template <typename Resource, typename Identifier>
 class ResourceManager
 {
 public:
-	//Constructor
+	// Constructor
 	ResourceManager();
 
-	//Deconstructor
+	// Deconstructor
 	~ResourceManager();
 
-	//Load resource
+	// Load resource
 	Resource* LoadTexture(const std::string &filepath);
 	Resource* LoadSound(const std::string &filepath);
 	Resource* LoadMusic(const std::string &filepath);
 	Resource* LoadFont(const std::string &filepath);
+	Resource* LoadFont(const std::string &filepath, int fontSize);
 
-	//Get resource from ID
+	// Get resource from ID
 	Resource* Get(Identifier filepath) const;
+
+	// Delete the list
 	void Clear();
 
 private:

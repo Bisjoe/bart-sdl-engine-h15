@@ -19,7 +19,8 @@ int main(int argc, char* args[])
 	Mix_Chunk* x = Sounds->LoadSound("enemy_hit.wav");
 	// Example of errors management
 	// Mix_Music* y = Musics->LoadMusic("dialog.ttf"); // <- Take out the first commentary to try it
-	Text* testText = new Text("Hello world!");
+	Text* testText = new Text("Hello world!", Color::BLACK);
+	//testText->Scale(3);
 	Fonts->LoadFont("dialog.ttf");
 	//cAudio->PlaySound(x);
 	//cAudio->PlaySound(Sounds->LoadSound("about_time.wav"), -1);
@@ -28,11 +29,11 @@ int main(int argc, char* args[])
 	// Other example where the load music is use as soon as it is created, without needing to stock it elsewhere or having to get it 
 	// (use is safe as the resource system will never load twice the same file. If already loaded, it will return that one)
 	// (That is, of course, unless said two files are identical but have different names)
-	// cAudio->PlayMusic(Musics->LoadMusic(m_testmusic));
+	cAudio->PlayMusic(Musics->LoadMusic(m_testmusic));
 
 	// L'engin vire
 	Engine::GetInstance()->Run();
 	delete gimmick2;
-	//delete testS;
+	delete testS;
 	return 0;
 }

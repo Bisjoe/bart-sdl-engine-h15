@@ -20,6 +20,7 @@ public:
 	~Sprite();
 
 	void Draw();
+	void SetAlpha(int alpha)							{ this->alpha = alpha; }
 	void SetPosition(int x, int y)						{ dstRect->x = x; dstRect->y = y; }
 	void SetDstFrame(int x, int y, int w, int h)		{ dstRect->x = x, dstRect->y = y; dstRect->w = w; dstRect->h = h; }
 	void SetSrcFrame(int x, int y, int w, int h)		{ srcRect->x = x, srcRect->y = y; srcRect->w = w; srcRect->h = h; }
@@ -32,14 +33,16 @@ public:
 
 protected:
 	void ApplyTexture(SDL_Renderer* renderer);
+	void ApplyAlpha();
 
-private:
 	SDL_Texture* texture;
 	SDL_Rect* srcRect;
 	SDL_Rect* dstRect;
 	SDL_RendererFlip flipType;
 	float angle;
+	float scaling;
 	bool isVisible;
+	int alpha;
 };
 
 

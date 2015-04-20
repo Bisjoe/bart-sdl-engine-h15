@@ -1,5 +1,6 @@
 #pragma once
 #include "Common.h"
+#include "Sprite.h"
 #include "Engine.h"
 
 /**  =====================================================
@@ -10,102 +11,67 @@
 	 that you place them in your project folder.
 **/
 
-
 // Default parameters
-#define DEFAULT_TEXT_FONT "lhandw.ttf"
-#define DEFAULT_TEXT_COLOR { 255, 255, 255 }
-#define DEFAULT_TEXT_FONTSIZE 12
+#define DEFAULT_TEXT_FONT "retro_computer.ttf"
+#define DEFAULT_TEXT_FONTSIZE 14
 #define DEFAULT_TEXT_WRAPPER 750
-#define DEFAULT_FADEIN_MAX 16
-#define DEFAULT_FADEINTXT { false, 0, 0, NULL, NULL, "" }
 
+namespace Color
+{
+	static SDL_Color BLACK	= { 0, 0, 0 };
+	static SDL_Color WHITE	= { 255, 255, 255 };
+	static SDL_Color RED	= { 255, 0, 0 };
+	static SDL_Color GREEN	= { 0, 255, 0 };
+	static SDL_Color BLUE	= { 0, 0, 255 };
+	static SDL_Color YELLOW = { 255, 255, 0 };
+}
 
-// Flip shortcuts
-#ifndef FLIPPERS
-#define FLIPPERS
-#define flip_n SDL_FLIP_NONE
-#define flip_h SDL_FLIP_HORIZONTAL
-#define flip_v SDL_FLIP_VERTICAL
-#endif
-
-typedef char const* Str;
-
-// Shortcut to quickly get a color without having to manually set an SDL_Color
-enum DefaultColor {
-	BLACK,
-	WHITE, 
-	RED,
-	BLUE,
-	GREEN
-};
-
-struct FadeInText {
-	bool used;
-	float alpha;
-	int currentTime;
-	SDL_Surface* message;
-	SDL_Rect* dstRect;
-	char text[128];
+enum Options {
+	OpTypewriter = 0x01,
+	OpFadeIn = 0x02,
+	OpFadeOut = 0x04,
+	OpFlashing = 0x08,
 };
 
 class Text :
-	public Component
+	public Sprite
 {
-private:
-	Str fontSrc;
-	Str text;
-	int currentTime;
-	int changeAtTime;
-	int framerate;
-	
-	TTF_Font* font;
-	SDL_Surface* message;
-	SDL_Texture* texture;
-	int fontSize;
-	int wrapper;
-	SDL_Color color;
-	SDL_Rect* dstRect; 
-	SDL_Rect* srcRect;
-
 public:
 	Text();
-	Text(Str text);
-	Text(int x, int y);
-	Text(Str text, Str fontSrc);
-	Text(Str text, Str fontSrc, int fontSize);
-	Text(Str text, Str fontSrc, int fontSize, int wrapper);
-	Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, int y);
-	Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, int y, SDL_Color color);
-	Text(Str text, Str fontSrc, int fontSize, int wrapper, int x, int y, DefaultColor color);
+	Text(std::string text);
+	Text(std::string text, SDL_Color color);
+	Text(std::string text, point<int> pos);
+	Text(std::string text, point<int> pos, SDL_Color color);
+	Text(std::string text, point<int> pos, std::string font, int wrapping = 0, SDL_Color color = Color::WHITE, unsigned char options = 0);
+	Text(std::string text, point<int> pos, TTF_Font* font, int wrapping = 0, SDL_Color color = Color::WHITE, unsigned char options = 0);
 	~Text();
 
-	// Setters
-	void SetFont(Str font);
-	void SetText(Str text);
-	void SetFontsize(int fontSize);
-	void SetPosition(int x, int y);
-	void SetWrapper(int wrapper);
-	void SetTextColor(const SDL_Color color);
-	void SetTextColor(const DefaultColor color);
-
-	// Getter
-	point<int> GetTextSize();
-
-	void UpdateMessage();
 	virtual void Start();
+	virtual void Update();
 	virtual void Stop();
-	virtual void Draw();
+	void UpdateText();
 
-protected:
-	FadeInText fadeInTxtsList[DEFAULT_FADEIN_MAX];
-	int elemInList;
-	char compText[1024];
-	void AddToTxtsList(Str text, int x, int y);
-	void UpdateFadeIn();
-	void Init(int x, int y);
-	void ShowMessage(SDL_Renderer* renderer);
-	void Text::ShowFadeIn(SDL_Surface* surface);
-	SDL_Color GetColor(DefaultColor color);
-	
+
+	void SetText(std::string && text)				{ this->text = text, typewriterText = text, changed = true; }
+	void SetColor(const SDL_Color color)			{ this->color = color, changed = true; }
+	void SetOptions(unsigned char options);
+
+private:
+	SDL_Color color;
+	TTF_Font* font;
+	SDL_Surface* surface;
+	std::string text;
+	std::string typewriterText;
+	unsigned char options;
+	int wrapping;
+	bool changed;
+	float fadeInTimer;
+	float fadeInSpeed;
+	float fadeOutTimer;
+	float fadeOutSpeed;
+	float fadeOutDelay;
+	float flashingTimer;
+	float flashingSpeed;
+	float typewriterTimer;
+	float typewriterSpeed;
 };
-
