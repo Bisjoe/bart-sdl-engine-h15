@@ -7,7 +7,7 @@ Text::Text()
 	, fontSrc(DEFAULT_TEXT_FONT)
 	, fontSize(DEFAULT_TEXT_FONTSIZE)
 	, wrapper(DEFAULT_TEXT_WRAPPER)
-	, color(DEFAULT_TEXT_COLOR)
+	, color(GetColor(BLACK))
 {
 	Init(0, 0);
 }
@@ -25,13 +25,14 @@ Text::Text(int x, int y)
 Text::Text(Str text)
 	: text(text)
 	, fontSrc(DEFAULT_TEXT_FONT)
-	, fontSize(DEFAULT_TEXT_FONTSIZE)
+	, fontSize(32)
 	, wrapper(DEFAULT_TEXT_WRAPPER)
-	, color(DEFAULT_TEXT_COLOR)
+	, color(GetColor(BLACK))
 {
 	Init(0, 0);
 }
 
+/*
 Text::Text(Str text, Str fontSrc)
 	: text(text)
 	, fontSrc(fontSrc)
@@ -96,7 +97,7 @@ Text::~Text()
 {
 
 }
-
+*/
 void Text::AddToTxtsList(Str text, int x, int y)
 {
 	elemInList++;
@@ -129,15 +130,17 @@ void Text::Init(int x, int y)
 	dstRect = new SDL_Rect();
 	dstRect->x = x;
 	dstRect->y = y;
+
 	for (int i = 0; i < DEFAULT_FADEIN_MAX; ++i)
 	{
 		fadeInTxtsList[i] = DEFAULT_FADEINTXT;
 	}
-	this->font = TTF_OpenFont(this->fontSrc, this->fontSize);
 
 	memset(compText, 0, sizeof(compText));
-}
 
+	UpdateMessage();
+}
+/*
 void Text::SetFont(Str font) {
 	this->fontSrc = font;
 	UpdateMessage();
@@ -165,11 +168,13 @@ void Text::SetTextColor(const SDL_Color color) {
 void Text::SetTextColor(const DefaultColor color) {
 	this->color = GetColor(color);
 }
-
+*/
 // Use this to change the message midplay
 void Text::UpdateMessage() {
 	this->font = TTF_OpenFont(this->fontSrc, this->fontSize);
 	message = TTF_RenderText_Blended_Wrapped(this->font, this->text, this->color, this->wrapper);
+	texture = SDL_CreateTextureFromSurface(cEngine->GetRenderer(), message);
+	GetTextSize(); // Updates dstRect to the size of the text
 }
 
 
@@ -179,8 +184,12 @@ void Text::UpdateMessage() {
 point<int> Text::GetTextSize() {
 	int w = 0, h = 0;
 	char tempString[250] = "";
-	if (text[0] != '\0')
+	if (text[0] != '\0') {
 		strcpy(tempString, text);
+		TTF_SizeText(font, tempString, &w, &h);
+		dstRect->w = w;
+		dstRect->h = h;
+	}
 	if (elemInList > 0) 
 	{
 		for (int i = 0; i < DEFAULT_FADEIN_MAX; ++i)
@@ -238,18 +247,15 @@ void Text::Stop()
 
 void Text::Draw()
 {
-	//if (text[0] != '\0')
-		//ShowMessage(Engine::GetInstance()->GetRenderer()->GetScreen());
+	if (text[0] != '\0')
+		ShowMessage(cEngine->GetRenderer());
 	//if (elemInList > 0)
 		//ShowFadeIn(Engine::GetInstance()->GetRenderer()->GetScreen());
 }
 
-void Text::ShowMessage(SDL_Surface* surface)
+void Text::ShowMessage(SDL_Renderer* renderer)
 {
-	SDL_BlitSurface(this->message
-		, srcRect
-		, surface
-		, dstRect);
+	SDL_RenderCopyEx(renderer, texture, NULL, dstRect, 0, NULL, SDL_FLIP_NONE);
 }
 
 void Text::ShowFadeIn(SDL_Surface* surface)

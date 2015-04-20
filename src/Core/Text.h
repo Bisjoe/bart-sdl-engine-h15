@@ -20,6 +20,14 @@
 #define DEFAULT_FADEINTXT { false, 0, 0, NULL, NULL, "" }
 
 
+// Flip shortcuts
+#ifndef FLIPPERS
+#define FLIPPERS
+#define flip_n SDL_FLIP_NONE
+#define flip_h SDL_FLIP_HORIZONTAL
+#define flip_v SDL_FLIP_VERTICAL
+#endif
+
 typedef char const* Str;
 
 // Shortcut to quickly get a color without having to manually set an SDL_Color
@@ -52,6 +60,7 @@ private:
 	
 	TTF_Font* font;
 	SDL_Surface* message;
+	SDL_Texture* texture;
 	int fontSize;
 	int wrapper;
 	SDL_Color color;
@@ -94,7 +103,7 @@ protected:
 	void AddToTxtsList(Str text, int x, int y);
 	void UpdateFadeIn();
 	void Init(int x, int y);
-	void ShowMessage(SDL_Surface* surface);
+	void ShowMessage(SDL_Renderer* renderer);
 	void Text::ShowFadeIn(SDL_Surface* surface);
 	SDL_Color GetColor(DefaultColor color);
 	

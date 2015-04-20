@@ -3,9 +3,12 @@
 #include "Engine.h"
 
 // Flip shortcuts
+#ifndef FLIPPERS
+#define FLIPPERS
 #define flip_n SDL_FLIP_NONE
 #define flip_h SDL_FLIP_HORIZONTAL
 #define flip_v SDL_FLIP_VERTICAL
+#endif
 
 class Sprite :
 	public Component

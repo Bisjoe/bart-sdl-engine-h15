@@ -13,17 +13,18 @@ int main(int argc, char* args[])
 	Sprite* testS = new Sprite(t_ship); // Check ResourceIDs for explanations on "t_ship"
 	GimmickV2* gimmick2 = new GimmickV2();
 	gimmick2->Scale(2);
-	gimmick2->Flip(flip_h); // Check sprite.h for the full list of flipping shortcuts
-	testS->SetRotation(180);
+	//gimmick2->Flip(flip_h); // Check sprite.h for the full list of flipping shortcuts
+	//testS->SetRotation(180);
 	// Load now return a pointer to the ressources added, you can stock it or not if you want (useful for quick use after creation)
 	Mix_Chunk* x = Sounds->LoadSound("enemy_hit.wav");
 	// Example of errors management
 	// Mix_Music* y = Musics->LoadMusic("dialog.ttf"); // <- Take out the first commentary to try it
+	Text* testText = new Text("Hello world!");
 	Fonts->LoadFont("dialog.ttf");
-	cAudio->PlaySound(x, -1);
+	//cAudio->PlaySound(x);
 	//cAudio->PlaySound(Sounds->LoadSound("about_time.wav"), -1);
-	cAudio->PlaySound("about_time.wav");
-	cAudio->SetSfxVolume(42);
+	//cAudio->PlaySound("about_time.wav");
+	//cAudio->SetSfxVolume(42);
 	// Other example where the load music is use as soon as it is created, without needing to stock it elsewhere or having to get it 
 	// (use is safe as the resource system will never load twice the same file. If already loaded, it will return that one)
 	// (That is, of course, unless said two files are identical but have different names)
@@ -32,6 +33,6 @@ int main(int argc, char* args[])
 	// L'engin vire
 	Engine::GetInstance()->Run();
 	delete gimmick2;
-	delete testS;
+	//delete testS;
 	return 0;
 }
