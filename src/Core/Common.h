@@ -39,5 +39,5 @@
 
 // Custom lib
 #include "Point.h"
-
+#include "Vector.h"
 #endif
