@@ -20,6 +20,7 @@ public:
 	void SetPosition(int x, int y)						{ dstRect->x = x; dstRect->y = y; }
 	void SetDstFrame(int x, int y, int w, int h)		{ dstRect->x = x, dstRect->y = y; dstRect->w = w; dstRect->h = h; }
 	void SetSrcFrame(int x, int y, int w, int h)		{ srcRect->x = x, srcRect->y = y; srcRect->w = w; srcRect->h = h; }
+	void SetTexture(Texture::ID id)						{ texture = Engine::GetInstance()->GetTextures()->Get(id); }
 	void ResizeTo(int w, int h);
 	void Flip(unsigned int flip);
 
