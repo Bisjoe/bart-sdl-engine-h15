@@ -9,7 +9,7 @@ struct point
 	point()
 		: x(0), y(0) { }
 
-	point(int x, int y)
+	point(T x, T y)
 	: x(x), y(y) { }
 
 	T x, y;

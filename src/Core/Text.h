@@ -36,8 +36,8 @@ public:
 	void UpdateText();
 
 
-	void SetText(std::string text)				{ this->text = text, typewriterText = text , UpdateText(); }
-	void SetColor(const SDL_Color color)		{ this->color = color, UpdateText(); }
+	void SetText(std::string && text)				{ this->text = text, typewriterText = text , isDirty = true; }
+	void SetColor(const SDL_Color color)			{ this->color = color, isDirty = true; }
 	void SetOptions(unsigned char options);
 
 private:
@@ -48,6 +48,7 @@ private:
 	std::string typewriterText;
 	unsigned char options;
 	int wrapping;
+	bool isDirty;
 	float fadeInTimer;
 	float fadeInSpeed;
 	float fadeOutTimer;

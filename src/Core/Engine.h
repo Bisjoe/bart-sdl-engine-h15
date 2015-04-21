@@ -9,6 +9,7 @@
 #define Musics Engine::GetInstance()->GetMusics()
 #define AudioSys Engine::GetInstance()->GetAudio()
 
+
 class Engine
 {
 #pragma region SINGLETON
@@ -37,7 +38,7 @@ private:
 
 public:
 	void Init();
-	void Init(int screenWidth, int screenHeight);
+	void Init(int screenWidth, int screenHeight, point<float> NativeResolution = { 0, 0 });
 	void Run();
 	void Stop();
 
@@ -65,5 +66,6 @@ private:
 	ResourceHolder<TTF_Font, int>*		fonts;
 	ResourceHolder<Mix_Music, int>*		musics;
 	ResourceHolder<Mix_Chunk, int>*		sounds;
+	point<float>						scaling;
 };
 

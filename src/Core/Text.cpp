@@ -50,7 +50,7 @@ Text::Text(std::string text, Font::ID font, int wrapping, SDL_Color color, unsig
 	dstRect->x = 0;
 	dstRect->y = 0;
 	SetOptions(options);
-	UpdateText();
+	isDirty = true;
 }
 
 Text::~Text()
@@ -80,6 +80,7 @@ void Text::Update()
 				options = options & ~Options::OpFadeIn;
 			}
 		}
+		isDirty = true;
 	}
 	if (options & OpFadeOut)
 	{
@@ -99,6 +100,7 @@ void Text::Update()
 				}
 			}
 		}
+		isDirty = true;
 	}
 	if (options & OpFlashing)
 	{
@@ -115,6 +117,7 @@ void Text::Update()
 				this->alpha = 255;
 			}
 		}
+		isDirty = true;
 	}
 	if (options & OpTypewriter)
 	{
@@ -131,12 +134,18 @@ void Text::Update()
 				options = options & ~Options::OpTypewriter;
 			}
 		}
+		isDirty = true;
 	}
-	UpdateText();
+	if (isDirty)
+	{
+		UpdateText();
+		isDirty = false;
+	}
 }
 
 void Text::UpdateText()
 {
+	SDL_DestroyTexture(texture);
 	surface = TTF_RenderText_Blended_Wrapped(font, text.c_str(), color, wrapping);
 	SDL_SetSurfaceAlphaMod(surface, alpha);
 	texture = SDL_CreateTextureFromSurface(Engine::GetInstance()->GetRenderer(), surface);
@@ -160,5 +169,5 @@ void Text::SetOptions(unsigned char options)
 		text = "";
 	}
 	this->options = options;
-	UpdateText();
+	isDirty = true;
 }

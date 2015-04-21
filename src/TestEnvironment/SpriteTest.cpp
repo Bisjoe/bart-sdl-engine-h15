@@ -4,7 +4,7 @@
 const float SpriteTest::SPEED = 100;
 
 SpriteTest::SpriteTest()
-	: Sprite(Texture::ID::Ship)
+	: Sprite(Texture::ID::PixelCat)
 	, currentX(0)
 	, currentY(0)
 	, currentTime(0)
@@ -12,7 +12,7 @@ SpriteTest::SpriteTest()
 }
 
 SpriteTest::SpriteTest(int x, int y)
-	: Sprite(Texture::ID::Ship)
+	: Sprite(Texture::ID::PixelCat)
 	, currentX(x)
 	, currentY(y)
 	, currentTime(0)
