@@ -24,6 +24,7 @@ public:
 	void Play();
 
 private:
+	void NextFrame();
 	bool isPlaying;
 	bool isLooping;
 	int nbFrame;
@@ -39,7 +40,7 @@ protected:
 	void SetSrcPos(point<int> point)		{ this->srcPos = point;}
 	void SetNbFrame(int nbFrame)			{ this->nbFrame = nbFrame;}
 	void SetFrameRate(int frameRate)		{ this->frameRate = frameRate;}
-	void ResetCurrentFrame()				{ this->currentFrame = 0;}
+	void ResetCurrentFrame()				{ this->currentFrame = 0, NextFrame(); }
 
 	//Getter
 	bool GetIsPlaying()						{ return this->isPlaying;}
