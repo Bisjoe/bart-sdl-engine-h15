@@ -57,7 +57,7 @@ Sprite::Sprite(Texture::ID id)
 }
 
 /////////////////////////////////////////////////////
-//Sprite (Texture & Sprite Coordinates) constructor//
+//Sprite (Texture & Sprite Coordinates) constructor//meow
 /////////////////////////////////////////////////////
 //This'll create a sprite out of a texture's using specific coordinates.
 //This is suited for all actors (Tiles, Characters, Enemies...)

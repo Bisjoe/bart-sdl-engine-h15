@@ -69,6 +69,12 @@ void AnimationTest::Update()
 	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_C)){
 		changeState(DIZZY);
 	}
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_D)){
+		this->Flip(SDL_FLIP_HORIZONTAL);
+	}
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_E)){
+		this->Flip(SDL_FLIP_NONE);
+	}
 
 }
 

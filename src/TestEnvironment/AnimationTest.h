@@ -9,6 +9,8 @@
 //Press A for Idle
 //Press B for Walk
 //Press C for Dizzy
+//Press D for Not-Flipped
+//Press E for Flipped
 //Press Space to Pause/Resume
 
 class AnimationTest :
