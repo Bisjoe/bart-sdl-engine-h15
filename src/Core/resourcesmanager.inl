@@ -118,37 +118,36 @@ Resource* ResourceManager<Resource, Identifier>::LoadMusic(const std::string& fi
 template <typename Resource, typename Identifier>
 Resource* ResourceManager<Resource, Identifier>::LoadFont(const std::string& filepath)
 {
-	// First check if the resource already exist
-	Resource* res = Get(filepath);
-	// If not, add and return it
-	if (!res)
-	{
-		return LoadFont(filepath, 10);
-	}
-	// Otherwise, simply return the pointer of the resource
-	else
-	{
-		return res;
-	}
+	return LoadFont(filepath, 10);
 }
 
 template <typename Resource, typename Identifier>
 Resource* ResourceManager<Resource, Identifier>::LoadFont(const std::string& filepath, int fontSize)
 {
-	TTF_Font* font;
-	font = TTF_OpenFont(filepath.c_str(), fontSize);
-	// Check if the font was loaded
-	if (!font)
+	// First check if the resource already exist
+	Resource* res = Get(filepath);
+	// If not, add and return it
+	if (!res)
 	{
-		// Print error
-		printf("Font could not be load, ERROR: %s\n", TTF_GetError());
-		return NULL;
+		TTF_Font* font;
+		font = TTF_OpenFont(filepath.c_str(), fontSize);
+		// Check if the font was loaded
+		if (!font)
+		{
+			// Print error
+			printf("Font could not be load, ERROR: %s\n", TTF_GetError());
+			return NULL;
+		}
+		else
+		{
+			// Add the resource in the manager and return a pointer
+			InsertResource(filepath, std::move(font));
+			return font;
+		}
 	}
 	else
 	{
-		// Add the resource in the manager and return a pointer
-		InsertResource(filepath, std::move(font));
-		return font;
+		return res;
 	}
 }
 

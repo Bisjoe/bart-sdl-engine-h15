@@ -27,6 +27,7 @@ namespace Color
 }
 
 enum Options {
+	OpNone = 0,
 	OpTypewriter = 0x01,
 	OpFadeIn = 0x02,
 	OpFadeOut = 0x04,
@@ -56,7 +57,9 @@ public:
 	void SetText(std::string && text)				{ this->text = text, typewriterText = text, changed = true; }
 	void SetColor(const SDL_Color color)			{ this->color = color, changed = true; }
 	void SetOptions(unsigned char options);
-
+	 
+	bool TextNotSet()                               { return text.empty(); }
+	 
 private:
 	SDL_Color color;
 	TTF_Font* font;

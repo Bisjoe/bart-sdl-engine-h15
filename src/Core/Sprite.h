@@ -22,14 +22,24 @@ public:
 	void Draw();
 	void SetAlpha(int alpha)							{ this->alpha = alpha; }
 	void SetPosition(int x, int y)						{ dstRect->x = x; dstRect->y = y; }
+	void MoveBy(int x, int y)                           { dstRect->x += x, dstRect->y += y; }
 	void SetDstFrame(int x, int y, int w, int h)		{ dstRect->x = x, dstRect->y = y; dstRect->w = w; dstRect->h = h; }
 	void SetSrcFrame(int x, int y, int w, int h)		{ srcRect->x = x, srcRect->y = y; srcRect->w = w; srcRect->h = h; }
 	void ResizeTo(int w, int h);
 	void Flip(SDL_RendererFlip flip);
 
+	void ToggleVisibility()								{ isVisible = !isVisible; }
+
 	void SetRotation(float angle);
 	void RotateBy(float angle);
 	void Scale(float k);
+
+	// Getters
+	bool IsVisible()									{ return isVisible; }
+	point<int> GetPosition()                            { int x = dstRect->x;
+														  int y = dstRect->y;
+														  return point<int>(x, y); }
+
 
 protected:
 	void ApplyTexture(SDL_Renderer* renderer);

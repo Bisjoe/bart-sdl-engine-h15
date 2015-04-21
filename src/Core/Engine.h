@@ -21,7 +21,7 @@
 
 // Inputs
 #define ThisKeyPressed cEngine->GetInput()->IsKeyPressed
-#define ThisKeyHold cEngine->GetInput()->IsKeyHold
+#define ThisKeyHeld cEngine->GetInput()->IsKeyHeld
 #define ThisKeyReleased cEngine->GetInput()->IsKeyReleased
 
 class Engine
