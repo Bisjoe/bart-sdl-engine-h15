@@ -18,6 +18,14 @@
 #define DEFAULT_FRAMERATE 30
 #endif
 
+#ifndef RESOLUTION_NTSC
+#define RESOLUTION_NTSC {256, 240}
+#endif
+
+#ifndef RESOLUTION_PAL
+#define RESOLUTION_PAL {256, 224}
+#endif
+
 
 // STD Lib
 #include <iostream>
