@@ -14,13 +14,13 @@ public:
 	float GetGameTime()const;
 	float GetDeltaTime()const;
 
-	//Call before message loop.
+	// Call before message loop.
 	void Reset();
-	//Call when unpaused.
+	// Call when unpaused.
 	void Start();
-	//Call when paused.
+	// Call when paused.
 	void Stop();
-	//Call every frame.
+	// Call every frame.
 	void Tick();
 
 private:

@@ -20,6 +20,7 @@ public:
 	~Sprite();
 
 	void Draw();
+
 	void SetAlpha(int alpha)							{ this->alpha = alpha; }
 	void SetPosition(int x, int y)						{ dstRect->x = x; dstRect->y = y; }
 	void MoveBy(int x, int y)                           { dstRect->x += x, dstRect->y += y; }
@@ -29,6 +30,7 @@ public:
 	void Flip(SDL_RendererFlip flip);
 
 	void ToggleVisibility()								{ isVisible = !isVisible; }
+	void SetVisibility(bool isVisible)					{ this->isVisible = isVisible; }
 
 	void SetRotation(float angle);
 	void RotateBy(float angle);

@@ -6,6 +6,8 @@
 #define DEFAULT_WIN_W 800
 #define DEFAULT_WIN_H 600
 #define DEFAULT_FRAMERATE 30
+#define RESOLUTION_NTSC { 256, 240 }
+#define RESOLUTION_PAL { 256, 224 }
 
 // STD Lib
 #include <iostream>

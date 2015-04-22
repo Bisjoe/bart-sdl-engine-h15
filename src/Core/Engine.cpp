@@ -45,8 +45,8 @@ void Engine::Init()
 	Init(DEFAULT_WIN_W, DEFAULT_WIN_H);
 }
 
-void Engine::Init(int screenWidth, int screenHeight) {
-	
+void Engine::Init(int screenWidth, int screenHeight, point<float> NativeResolution)
+{
 	if (TTF_Init() == -1)
 	{
 		printf("SDL TTF could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
@@ -76,6 +76,11 @@ void Engine::Init(int screenWidth, int screenHeight) {
 			fonts = new ResourceManager<TTF_Font, std::string>();
 			musics = new ResourceManager<Mix_Music, std::string>();
 			sounds = new ResourceManager<Mix_Chunk, std::string>();
+			if (NativeResolution.x != 0 && NativeResolution.y != 0)
+			{
+				this->scaling.x = (screenWidth / NativeResolution.x);
+				this->scaling.y = (screenHeight / NativeResolution.y);
+			}
 		}
 	}
 }
@@ -110,7 +115,7 @@ void Engine::Draw()
 	{
 		(*iter)->Draw();
 	}
-	
+	SDL_RenderSetScale(renderer, scaling.x, scaling.y);
 	SDL_RenderPresent(renderer);
 	SDL_RenderClear(renderer);
 }

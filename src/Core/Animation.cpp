@@ -32,7 +32,7 @@ Animation::Animation()
 		@srcSize - The animation's frameSize in width/height
 	------------------------------
 	[!] WARNING: Non-Consistent FrameSizes are not supported as of now.
-		If you happen to have an offset between each frames on your sprite sheet, as of now it must be consistent.
+		If you happen to have an offset between each frames on your sprite sheet, it must be consistent.
 
 **/
 Animation::Animation(std::string filepath, int nbFrame, int frameRate, const point<int>& srcPos, const point<int>& frameSize)
@@ -65,25 +65,30 @@ void Animation::Update()
 		currentTime += dt;
 		if (currentTime >= 1.0f / frameRate)
 		{
-			SetSrcFrame(
-				srcPos.x + currentFrame * frameSize.x,
-				srcPos.y,
-				frameSize.x, frameSize.y);
-			if (currentFrame < nbFrame-1)
-			{
-				currentFrame++;
-			}
-			else
-			{
-				currentFrame = 0;
-				if (!isLooping)
-				{
-					Stop();
-				}
-			}
-			currentTime = 0;
+			NextFrame();
 		}
 	}
+}
+
+void Animation::NextFrame() 
+{
+	SetSrcFrame(
+		srcPos.x + currentFrame * frameSize.x,
+		srcPos.y,
+		frameSize.x, frameSize.y);
+	if (currentFrame < nbFrame - 1)
+	{
+		currentFrame++;
+	}
+	else
+	{
+		currentFrame = 0;
+		if (!isLooping)
+		{
+			Stop();
+		}
+	}
+	currentTime = 0;
 }
 
 void Animation::Start()

@@ -24,8 +24,7 @@ public:
 	Resource* LoadTexture(const std::string &filepath);
 	Resource* LoadSound(const std::string &filepath);
 	Resource* LoadMusic(const std::string &filepath);
-	Resource* LoadFont(const std::string &filepath);
-	Resource* LoadFont(const std::string &filepath, int fontSize);
+	Resource* LoadFont(const std::string &filepath, int fontSize = 11);
 
 	// Get resource from ID
 	Resource* Get(Identifier filepath) const;

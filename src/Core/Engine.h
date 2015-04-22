@@ -52,7 +52,7 @@ private:
 
 public:
 	void Init();
-	void Init(int screenWidth, int screenHeight);
+	void Init(int screenWidth, int screenHeight, point<float> NativeResolution = { 0, 0 });
 	void Run();
 	void Stop();
 		
@@ -76,6 +76,7 @@ private:
 	Input* input;
 	Timer* timer;
 	Audio* audio;
+	point<float> scaling = { 1, 1 };
 	ResourceManager<SDL_Texture, std::string>*	textures;
 	ResourceManager<TTF_Font, std::string>*		fonts;
 	ResourceManager<Mix_Music, std::string>*	musics;

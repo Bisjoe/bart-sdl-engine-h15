@@ -116,12 +116,6 @@ Resource* ResourceManager<Resource, Identifier>::LoadMusic(const std::string& fi
 }
 
 template <typename Resource, typename Identifier>
-Resource* ResourceManager<Resource, Identifier>::LoadFont(const std::string& filepath)
-{
-	return LoadFont(filepath, 10);
-}
-
-template <typename Resource, typename Identifier>
 Resource* ResourceManager<Resource, Identifier>::LoadFont(const std::string& filepath, int fontSize)
 {
 	// First check if the resource already exist

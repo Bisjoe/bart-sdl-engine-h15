@@ -127,7 +127,7 @@ void Sprite::ResizeTo(int w, int h)
 	- flip_h = horizontal flip
 	- flip_v = vertical flip
 	[!] It is impossible to flip vertically and horizontally at the same time, 
-	instead, do a 180 degree rotation
+		instead, do a 180 degree rotation
 **/
 void Sprite::Flip(SDL_RendererFlip flip)
 {

@@ -54,5 +54,4 @@ public:
 	void PlaySound(std::string filePath, int playCount);
 	void PlaySound(Mix_Chunk* chunk);
 	void PlaySound(Mix_Chunk* chunk, int playCount);
-	
 };
