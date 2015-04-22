@@ -55,6 +55,9 @@ public:
 	void Init(int screenWidth, int screenHeight, point<float> NativeResolution = { 0, 0 });
 	void Run();
 	void Stop();
+
+	void AddNewComponent(Component* comp);
+	void DeleteComponent(Component* comp);
 		
 	SDL_Renderer* GetRenderer()									{ return renderer; }
 	ResourceManager<SDL_Texture, std::string>* GetTextures()	{ return textures; }
@@ -71,12 +74,22 @@ private:
 	void Update();
 	void Draw();
 
+	void CheckNew();
+	void CheckDeleted();
+	
+
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	Input* input;
 	Timer* timer;
 	Audio* audio;
-	point<float> scaling = { 1, 1 };
+	point<float> scaling;
+
+	std::vector<Component*> toDelete;
+	std::vector<Component*> toAdd;
+	bool addNeeded;
+	bool delNeeded;
+
 	ResourceManager<SDL_Texture, std::string>*	textures;
 	ResourceManager<TTF_Font, std::string>*		fonts;
 	ResourceManager<Mix_Music, std::string>*	musics;

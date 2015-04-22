@@ -12,6 +12,9 @@ Engine::Engine()
 	, fonts(nullptr)
 	, musics(nullptr)
 	, sounds(nullptr)
+	, addNeeded(false)
+	, delNeeded(false)
+	, scaling(1, 1)
 {
 
 }
@@ -99,12 +102,15 @@ void Engine::Start()
 
 void Engine::Update()
 {
+	if (addNeeded)
+		CheckNew();
+	if (delNeeded)
+		CheckDeleted();
 	auto iter = Component::components.begin();
 	for (; iter != Component::components.end(); iter++)
 	{
 		(*iter)->Update();
 	}
-
 	timer->Tick();
 }
 
@@ -153,11 +159,9 @@ void Engine::Run()
 				break;
 			}
 		}
-
 		Update();
 		Draw();
 	}
-
 	Stop();
 }
 
@@ -171,3 +175,46 @@ void Engine::Stop()
 	}
 	timer->Stop();
 }
+
+void Engine::AddNewComponent(Component* comp)
+{
+	toAdd.push_back(comp);
+	addNeeded = true;
+}
+
+void Engine::DeleteComponent(Component* comp)
+{
+	toDelete.push_back(comp);
+	delNeeded = true;
+}
+
+void Engine::CheckNew()
+{
+	auto iter = toAdd.begin();
+	for (; iter != toAdd.end(); iter++)
+	{
+		Component::components.push_back((*iter));
+	}
+	toAdd.clear();
+	addNeeded = false;
+}
+
+void Engine::CheckDeleted()
+{
+	auto iter = toDelete.begin();
+	for (; iter != toDelete.end(); iter++)
+	{
+		auto cIter = Component::components.begin();
+		for (; cIter != Component::components.end(); cIter++)
+		{
+			if (*cIter == *iter)
+			{
+				Component::components.erase(cIter);
+				break;
+			}
+		}
+	}
+	toDelete.clear();
+	delNeeded = false;
+}
+	
