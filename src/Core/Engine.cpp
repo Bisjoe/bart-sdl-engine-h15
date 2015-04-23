@@ -187,15 +187,31 @@ void Engine::AddNewComponent(Component* comp)
 }
 
 /**
-	Add the component to delete in a array checked at the beginning of an update, safely removing it runtime
-	Also call the destructor of the component using the function "Kill"
-
-	@comp Component to delete (pointer to Sprite, Text, etc)
+	Remove a component from the update list
+	Can also destroy it
+	-------------------------
+	@comp Component to delete
+	@kill Enter "true" to destroy the component and "false" to only remove it from the update list, default is true
+	[!] WARNING: Only use false if you have kept another pointer to the element, or you will have memory leak
 **/
-void Engine::DeleteComponent(Component* comp)
+void Engine::DeleteComponent(Component* comp, bool kill)
 {
-	toDelete.push_back(comp);
+	Component::DeletionComp compStruct;
+	compStruct.comp = comp;
+	compStruct.kill = kill;
+	toDelete.push_back(compStruct);
 	delNeeded = true;
+}
+
+/**
+	Move a component to the end of the update list
+	-------------------------
+	@comp Component to move
+**/
+void Engine::MoveBack(Component* comp)
+{
+	DeleteComponent(comp, false);
+	AddNewComponent(comp);
 }
 
 void Engine::CheckNew()
@@ -217,9 +233,10 @@ void Engine::CheckDeleted()
 		auto cIter = Component::components.begin();
 		for (; cIter != Component::components.end(); cIter++)	
 		{														
-			if (*cIter == *iter)								
+			if (*cIter == iter->comp)								
 			{		
-				(*iter)->Kill();
+				if (iter->kill)
+					(*cIter)->Kill();
 				Component::components.erase(cIter);
 				break;											
 			}													

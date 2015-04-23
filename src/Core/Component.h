@@ -2,10 +2,14 @@
 #include <iostream>
 #include <vector>
 
-
 class Component
 {
 friend class Engine;
+
+struct DeletionComp {
+	Component* comp;
+	bool kill;
+};
 
 public:
 	Component();

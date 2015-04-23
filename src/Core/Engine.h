@@ -56,8 +56,26 @@ public:
 	void Run();
 	void Stop();
 
+	/**
+		This function is called whenever a new component is created
+		[!] WARNING: Never use it directly, you only need to create the new component
+	**/
 	void AddNewComponent(Component* comp);
-	void DeleteComponent(Component* comp);
+	/**
+		Remove a component from the update list
+		Can also destroy it
+		-------------------------
+		@comp Component to delete
+		@kill Enter "true" to destroy the component and "false" to only remove it from the component list, default is true
+		[!] WARNING: Only use false if you have kept another pointer to the element, or you will have memory leak
+	**/
+	void DeleteComponent(Component* comp, bool kill = true);
+	/**
+		Move a component to the end of the update list
+		-------------------------
+		@comp Component to move
+	**/
+	void MoveBack(Component* comp);
 		
 	SDL_Renderer* GetRenderer()									{ return renderer; }
 	ResourceManager<SDL_Texture, std::string>* GetTextures()	{ return textures; }
@@ -76,7 +94,6 @@ private:
 
 	void CheckNew();
 	void CheckDeleted();
-	
 
 	SDL_Window* window;
 	SDL_Renderer* renderer;
@@ -85,7 +102,7 @@ private:
 	Audio* audio;
 	point<float> scaling;
 
-	std::vector<Component*> toDelete;
+	std::vector<Component::DeletionComp> toDelete;
 	std::vector<Component*> toAdd;
 	bool addNeeded;
 	bool delNeeded;
