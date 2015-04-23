@@ -160,3 +160,8 @@ void Sprite::RotateBy(float angle)
 		this->angle -= 360;
 	}
 }
+
+void Sprite::Kill()
+{
+	delete this;
+}

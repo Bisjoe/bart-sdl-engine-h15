@@ -1,10 +1,11 @@
 #include "Component.h"
+#include "Engine.h"
 
 std::vector<Component*> Component::components;
 
 Component::Component()
 {
-	components.push_back(this);
+	cEngine->AddNewComponent(this);
 }
 
 Component::~Component()
@@ -24,6 +25,11 @@ void Component::Draw()
 }
 
 void Component::Stop()
+{
+
+}
+
+void Component::Kill()
 {
 
 }

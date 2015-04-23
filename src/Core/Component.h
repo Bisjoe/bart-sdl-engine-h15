@@ -1,7 +1,7 @@
 #pragma once
-
 #include <iostream>
 #include <vector>
+
 
 class Component
 {
@@ -15,6 +15,7 @@ public:
 	virtual void Update();
 	virtual void Draw();
 	virtual void Stop();
+	virtual void Kill();
 
 private:
 	static std::vector<Component*> components;

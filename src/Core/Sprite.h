@@ -20,6 +20,7 @@ public:
 	~Sprite();
 
 	void Draw();
+	void Kill();
 
 	void SetAlpha(int alpha)							{ this->alpha = alpha; }
 	void SetPosition(int x, int y)						{ dstRect->x = x; dstRect->y = y; }

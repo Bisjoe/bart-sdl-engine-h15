@@ -176,12 +176,22 @@ void Engine::Stop()
 	timer->Stop();
 }
 
+/**
+	This function is called whenever a new component is created
+	[!] WARNING: Never use it directly, only create the new component
+**/
 void Engine::AddNewComponent(Component* comp)
 {
 	toAdd.push_back(comp);
 	addNeeded = true;
 }
 
+/**
+	Add the component to delete in a array checked at the beginning of an update, safely removing it runtime
+	Also call the destructor of the component using the function "Kill"
+
+	@comp Component to delete (pointer to Sprite, Text, etc)
+**/
 void Engine::DeleteComponent(Component* comp)
 {
 	toDelete.push_back(comp);
@@ -205,15 +215,16 @@ void Engine::CheckDeleted()
 	for (; iter != toDelete.end(); iter++)
 	{
 		auto cIter = Component::components.begin();
-		for (; cIter != Component::components.end(); cIter++)
-		{
-			if (*cIter == *iter)
-			{
+		for (; cIter != Component::components.end(); cIter++)	
+		{														
+			if (*cIter == *iter)								
+			{		
+				(*iter)->Kill();
 				Component::components.erase(cIter);
-				break;
-			}
-		}
-	}
+				break;											
+			}													
+		}														
+	}															
 	toDelete.clear();
 	delNeeded = false;
 }

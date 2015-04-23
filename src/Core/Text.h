@@ -51,6 +51,7 @@ public:
 	virtual void Start();
 	virtual void Update();
 	virtual void Stop();
+	virtual void Kill();
 	void UpdateText();
 
 

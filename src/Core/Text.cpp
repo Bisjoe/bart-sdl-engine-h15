@@ -297,3 +297,8 @@ void Text::SetOptions(unsigned char options)
 	this->options = options;
 	changed = true;
 }
+
+void Text::Kill()
+{
+	delete this;
+}
