@@ -94,6 +94,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="LineSegment.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Pool.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="ResourceHolder.h" />
