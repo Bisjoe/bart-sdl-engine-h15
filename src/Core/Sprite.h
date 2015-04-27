@@ -1,6 +1,7 @@
 #pragma once
 #include "Common.h"
 #include "Engine.h"
+#include "Rectangle.h"
 
 class Sprite :
 	public Component
@@ -23,6 +24,7 @@ public:
 	void SetTexture(Texture::ID id)						{ texture = Engine::GetInstance()->GetTextures()->Get(id); }
 	void ResizeTo(int w, int h);
 	void Flip(unsigned int flip);
+	Rectangle GetRect()									{ return Rectangle(dstRect->x, dstRect->y, dstRect->w, dstRect->h); }
 
 	void SetRotation(float angle);
 	void RotateBy(float angle);
@@ -38,6 +40,7 @@ protected:
 	SDL_Rect* dstRect;
 	SDL_Rect* srcRect;
 	SDL_RendererFlip flipType;
+
 	int alpha;
 	float angle;
 	float scaling;
