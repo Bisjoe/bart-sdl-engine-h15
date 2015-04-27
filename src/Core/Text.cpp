@@ -53,6 +53,37 @@ Text::Text(std::string text)
 	changed = true;
 }
 
+Text::Text(std::string text, std::string font)
+	: Sprite()
+	, text(text)
+	, typewriterText(text)
+	, font(Fonts->LoadFont(font))
+	, color(Color::WHITE)
+	, surface(nullptr)
+	, options(0)
+	, fadeInTimer(0)
+	, fadeInSpeed(0.01f)
+	, fadeOutTimer(0)
+	, fadeOutSpeed(0.01f)
+	, fadeOutDelay(2.f)
+	, flashingTimer(0)
+	, flashingSpeed(25 / 255.f)
+	, typewriterTimer(0)
+	, typewriterSpeed(0.15f)
+	, wrapping(wrapping)
+{
+	scaling = 1;
+	srcRect = new SDL_Rect();
+	srcRect->x = 0;
+	srcRect->y = 0;
+
+	dstRect = new SDL_Rect();
+	dstRect->x = 0;
+	dstRect->y = 0;
+	SetOptions(options);
+	changed = true;
+}
+
 Text::Text(std::string text, SDL_Color color)
 	: Sprite()
 	, text(text)

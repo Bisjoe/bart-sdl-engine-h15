@@ -17,6 +17,7 @@ Animation::Animation()
 	, srcPos()
 	, frameSize()
 {
+
 }
 
 /** 

@@ -23,6 +23,14 @@ public:
 	// Custom
 	void Play();
 
+	//Getter
+	bool GetIsPlaying()						{ return this->isPlaying; }
+	void SetIsLooping(bool isLooping)		{ this->isLooping = isLooping; }
+	void SetSrcPos(point<int> point)		{ this->srcPos = point; }
+	void SetNbFrame(int nbFrame)			{ this->nbFrame = nbFrame; }
+	void SetFrameRate(int frameRate)		{ this->frameRate = frameRate; }
+	void ResetCurrentFrame()				{ this->currentFrame = 0; NextFrame(); }
+
 private:
 	bool isPlaying;
 	bool isLooping;
@@ -34,16 +42,5 @@ private:
 	point<int> frameSize;
 
 	void NextFrame();
-
-protected:
-	//Setters
-	void SetIsLooping(bool isLooping)		{ this->isLooping = isLooping;}
-	void SetSrcPos(point<int> point)		{ this->srcPos = point;}
-	void SetNbFrame(int nbFrame)			{ this->nbFrame = nbFrame;}
-	void SetFrameRate(int frameRate)		{ this->frameRate = frameRate;}
-	void ResetCurrentFrame()				{ this->currentFrame = 0; NextFrame(); }
-
-	//Getter
-	bool GetIsPlaying()						{ return this->isPlaying;}
 };
 

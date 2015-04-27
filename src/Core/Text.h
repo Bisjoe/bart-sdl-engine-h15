@@ -40,6 +40,7 @@ class Text :
 public:
 	Text();
 	Text(std::string text);
+	Text(std::string text, std::string font);
 	Text(std::string text, SDL_Color color);
 	Text(std::string text, point<int> pos);
 	Text(std::string text, point<int> pos, SDL_Color color);
@@ -59,6 +60,7 @@ public:
 	void SetColor(const SDL_Color color)			{ this->color = color, changed = true; }
 	void SetOptions(unsigned char options);
 	 
+	std::string GetText()							{ return text; }
 	bool TextNotSet()                               { return text.empty(); }
 	 
 private:
