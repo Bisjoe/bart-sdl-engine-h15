@@ -68,6 +68,18 @@ void Animation::Update()
 	}
 }
 
+void Animation::ForceNextFrame()
+{
+	if (currentFrame < nbFrame - 1)
+	{
+		currentFrame++;
+	}
+	SetSrcFrame(
+		srcPos.x + currentFrame * frameSize.x,
+		srcPos.y,
+		frameSize.x, frameSize.y);
+}
+
 void Animation::NextFrame()
 {
 	SetSrcFrame(

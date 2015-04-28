@@ -100,6 +100,20 @@ void Rectangle::SetPosition(float x, float y)
 	return;
 }
 
+void Rectangle::SetSize(const Vector2D* const vect)
+{
+	SetSize(vect->x, vect->y);
+	return;
+}
+
+//Modify the rectangle's width and height
+void Rectangle::SetSize(float w, float h)
+{
+	this->width = w;
+	this->height = h;
+	return;
+}
+
 //Using MoveBy(Points), reusing functions is fun!
 void Rectangle::MoveBy(const Vector2D*  const vect)
 {
