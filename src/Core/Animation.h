@@ -32,7 +32,6 @@ public:
 
 	void ForceNextFrame();
 	void ForceReset()						{ this->currentFrame = 0; }
-	void SetIsLooping(bool isLooping)		{ this->isLooping = isLooping; }
 
 	bool GetIsPlaying()						{ return this->isPlaying; }
 	const bool GetIsFinished()				{ return currentFrame == nbFrame - 1; }

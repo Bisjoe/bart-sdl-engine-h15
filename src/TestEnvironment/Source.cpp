@@ -15,7 +15,7 @@ int main(int argc, char* args[])
 	GimmickV2* gimmick2 = new GimmickV2();
 	gimmick2->Scale(2);
 
-	//gimmick2->Flip(flip_h); // Check sprite.h for the full list of flipping shortcuts
+	gimmick2->Flip(flip_h);
 	//testS->SetRotation(180);
 
 	// Load now return a pointer to the ressources added, you can stock it or not if you want (useful for quick use after creation)
@@ -28,15 +28,15 @@ int main(int argc, char* args[])
 
 	//testText->Scale(3);
 
-	Fonts->LoadFont("dialog.ttf");
+	//Fonts->LoadFont("dialog.ttf");
 
-	cAudio->PlaySound("about_time.wav");
-	cAudio->SetGlobalVolume(34);
+	//cAudio->PlaySound("about_time.wav");
+	//cAudio->SetGlobalVolume(34);
 
 	// Other example where the load music is use as soon as it is created, without needing to stock it elsewhere or having to get it 
 	// (use is safe as the resource system will never load twice the same file. If already loaded, it will return that one)
 	// (That is, of course, unless said two files are identical but have different names)
-	cAudio->PlayMusic(Musics->LoadMusic(m_testmusic)); // <- Take out the first commentary to try it
+	// cAudio->PlayMusic(Musics->LoadMusic(m_testmusic)); // <- Take out the first commentary to try it
 
 	// L'engin vire
 	Engine::GetInstance()->Run();
