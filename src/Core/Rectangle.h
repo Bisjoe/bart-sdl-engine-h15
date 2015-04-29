@@ -36,6 +36,8 @@ public:
 	//Setters
 	void SetPosition(const Vector2D* const vect);
 	void SetPosition(const float x, const float y);
+	void SetSize(const Vector2D* const vect);
+	void SetSize(const float w, const float h);
 
 	//Move the rectangle's coordinates by specified x/y.
 	void MoveBy(const Vector2D*  const vect);

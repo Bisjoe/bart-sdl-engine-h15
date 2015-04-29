@@ -92,6 +92,18 @@ void Animation::NextFrame()
 	currentTime = 0;
 }
 
+void Animation::ForceNextFrame()
+{
+	if (currentFrame < nbFrame - 1)
+	{
+		currentFrame++;
+	}
+	SetSrcFrame(
+		srcPos.x + currentFrame * frameSize.x,
+		srcPos.y,
+		frameSize.x, frameSize.y);
+}
+
 void Animation::Start()
 {
 	

@@ -1,6 +1,7 @@
 #pragma once
 #include "Common.h"
 #include "Engine.h"
+#include "Rectangle.h"
 
 // Flip shortcuts
 #ifndef FLIPPERS
@@ -31,6 +32,7 @@ public:
 	void SetSrcFrame(SDL_Rect* rect)					{ srcRect = rect; }
 	void SetSrcFrame(int x, int y, int w, int h)		{ srcRect->x = x, srcRect->y = y; srcRect->w = w; srcRect->h = h; }
 	void ResizeTo(int w, int h);
+	Rectangle GetRect()									{ return Rectangle(dstRect->x, dstRect->y, dstRect->w, dstRect->h); }
 
 	/**
 		Flips the sprite
