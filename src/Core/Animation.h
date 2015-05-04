@@ -19,6 +19,11 @@ public:
 	void Start(); 
 	void Update();
 	void Stop();
+	void ForceNextFrame();
+	void ForceReset()						{ this->currentFrame = 0; }
+	void SetIsLooping(bool isLooping)		{ this->isLooping = isLooping; }
+
+	const bool GetIsFinished()				{ return currentFrame == nbFrame - 1; }
 
 	// Custom
 	void Play();
@@ -36,7 +41,6 @@ private:
 
 protected:
 	//Setters
-	void SetIsLooping(bool isLooping)		{ this->isLooping = isLooping;}
 	void SetSrcPos(point<int> point)		{ this->srcPos = point;}
 	void SetNbFrame(int nbFrame)			{ this->nbFrame = nbFrame;}
 	void SetFrameRate(int frameRate)		{ this->frameRate = frameRate;}
