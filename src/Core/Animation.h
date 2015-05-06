@@ -21,12 +21,20 @@ public:
 	void Stop();
 	void ForceNextFrame();
 	void ForceReset()						{ this->currentFrame = 0; }
-	void SetIsLooping(bool isLooping)		{ this->isLooping = isLooping; }
-
-	const bool GetIsFinished()				{ return currentFrame == nbFrame - 1; }
 
 	// Custom
 	void Play();
+
+	// Setters
+	void SetIsLooping(bool isLooping)		{ this->isLooping = isLooping; }
+	void SetSrcPos(point<int> point)		{ this->srcPos = point; }
+	void SetNbFrame(int nbFrame)			{ this->nbFrame = nbFrame; }
+	void SetFrameRate(int frameRate)		{ this->frameRate = frameRate; }
+	void ResetCurrentFrame()				{ this->currentFrame = 0; NextFrame(); }
+
+	// Getter
+	bool GetIsPlaying()						{ return this->isPlaying; }
+	const bool GetIsFinished()				{ return currentFrame == nbFrame - 1; }
 
 private:
 	void NextFrame();
@@ -38,15 +46,5 @@ private:
 	float currentTime;
 	point<int> srcPos;
 	point<int> frameSize;
-
-protected:
-	//Setters
-	void SetSrcPos(point<int> point)		{ this->srcPos = point;}
-	void SetNbFrame(int nbFrame)			{ this->nbFrame = nbFrame;}
-	void SetFrameRate(int frameRate)		{ this->frameRate = frameRate;}
-	void ResetCurrentFrame()				{ this->currentFrame = 0, NextFrame(); }
-
-	//Getter
-	bool GetIsPlaying()						{ return this->isPlaying;}
 };
 

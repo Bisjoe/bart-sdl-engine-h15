@@ -88,17 +88,29 @@ Sprite::Sprite(Texture::ID id, const point<int> srcPos, const point<int> srcSize
 }
 
 Sprite::~Sprite()
-{}
+{
+
+}
 
 void Sprite::Start()
-{}
+{
+
+}
 
 void Sprite::Update()
 {
+
 }
 
 void Sprite::Stop()
-{}
+{
+
+}
+
+void Sprite::Kill()
+{
+	delete this;
+}
 
 void Sprite::Draw()
 {
@@ -172,3 +184,4 @@ void Sprite::RotateBy(float angle)
 {
 	this->angle += angle;
 }
+

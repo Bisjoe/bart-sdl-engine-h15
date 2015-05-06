@@ -101,6 +101,10 @@ void Engine::Start()
 
 void Engine::Update()
 {
+	if (!Component::toAdd.empty())
+		CheckNew();
+	if (!Component::toDelete.empty())
+		CheckDeleted();
 	auto iter = Component::components.begin();
 	for (; iter != Component::components.end(); iter++)
 	{
@@ -173,4 +177,57 @@ void Engine::Stop()
 		(*iter)->Stop();
 	}
 	timer->Stop();
+}
+
+/**
+	Remove a component from the update list
+	Can also destroy it
+	-------------------------
+	@comp Component to delete
+	@kill Enter "true" to destroy the component and "false" to only remove it from the update list, default is true
+	[!] WARNING: Only use false if you have kept another pointer to the element, or you will have memory leak
+**/
+void Engine::DeleteComponent(Component* comp)
+{
+	Component::toDelete.push_back(comp);
+}
+
+// /**
+//		Move a component to the end of the update list
+//		-------------------------
+//		@comp Component to move
+// **/
+// void Engine::MoveBack(Component* comp)
+// {
+// 	Component::toAdd.push_back(comp);
+// 	DeleteComponent(comp);
+// } 
+
+void Engine::CheckNew()
+{
+	auto iter = Component::toAdd.begin();
+	for (; iter != Component::toAdd.end(); iter++)
+	{
+		Component::components.push_back((*iter));
+	}
+	Component::toAdd.clear();
+}
+
+void Engine::CheckDeleted()
+{
+	auto iter = Component::toDelete.begin();
+	for (; iter != Component::toDelete.end(); iter++)
+	{
+		auto cIter = Component::components.begin();
+		for (; cIter != Component::components.end(); cIter++)
+		{
+			if (*cIter == *iter)
+			{
+				(*cIter)->Kill();
+				Component::components.erase(cIter);
+				break;
+			}
+		}
+	}
+	Component::toDelete.clear();
 }

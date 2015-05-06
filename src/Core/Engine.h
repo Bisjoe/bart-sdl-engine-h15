@@ -3,12 +3,26 @@
 #include "Common.h"
 #include "Component.h"
 
-#define Textures Engine::GetInstance()->GetTextures()
-#define Fonts Engine::GetInstance()->GetFonts()
-#define Sounds Engine::GetInstance()->GetSounds()
-#define Musics Engine::GetInstance()->GetMusics()
-#define AudioSys Engine::GetInstance()->GetAudio()
+// Shortcuts
+// Engine access
+#define cEngine Engine::GetInstance()
 
+// delta time
+#define DTime cEngine->GetTimer()->GetDeltaTime()
+
+// Resources
+#define Textures cEngine->GetTextures()
+#define Fonts cEngine->GetFonts()
+#define Sounds cEngine->GetSounds()
+#define Musics cEngine->GetMusics()
+
+// Audio
+#define AudioSys cEngine->GetAudio()
+
+// Inputs
+#define ThisKeyPressed cEngine->GetInput()->IsKeyPressed
+#define ThisKeyHeld cEngine->GetInput()->IsKeyHeld
+#define ThisKeyReleased cEngine->GetInput()->IsKeyReleased
 
 class Engine
 {
@@ -42,6 +56,46 @@ public:
 	void Run();
 	void Stop();
 
+	/**
+		Remove a component from the update list
+		Can also destroy it
+		-------------------------
+		@comp Component to delete
+		[!] WARNING: Also destroy the component, use only if you won't be needing it again
+	**/
+	void DeleteComponent(Component* comp);
+
+//	 WORK IN PROGRESS, problem of memory leak until a safe method of access for the component removed is implemented, do not use as of now
+//
+//	/**
+//		Move a component to the end of the update list
+//		-------------------------
+//		@comp Component to move
+//	**/
+//	void MoveBack(Component* comp);
+//
+//
+//	/**
+//		Remove a component from the update list
+//		Add it in the "removed" list for later use (Does not destroy it)
+//		-------------------------
+//		@comp Component to delete
+//		[!] WARNING: The component will be removed from the update list and no longer updated, but will still exist.
+//	**/
+//	void RemoveComponent(Component* comp);
+//
+//
+//	/**
+//		Remove a component from the update list
+//		Add it in the "removed" list for later use (Does not destroy it)
+//		-------------------------
+//		@comp 
+//		[!] WARNING: The component will be removed from the update list and no longer updated, but will still exist
+//	**/
+//	void AddNewComponent(Component* comp);
+
+	
+
 	Audio*								GetAudio()		 { return audio; }
 	Input*								GetInput()		 { return input; }
 	Timer*								GetTimer()		 { return timer; }
@@ -56,6 +110,9 @@ private:
 	void Start();
 	void Update();
 	void Draw();
+
+	void CheckNew();
+	void CheckDeleted();
 
 	Audio*								audio;
 	Input*								input;

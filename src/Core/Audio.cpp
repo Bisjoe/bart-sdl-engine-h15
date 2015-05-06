@@ -20,13 +20,10 @@ Audio::~Audio()
 }
 
 
-/////////////////////
-//Volume validation//
-/////////////////////
-//All functions that alter volume level use this function's return value.
-//Channel volumes range from 0 (0% volume) to the default value of 128 (100% volume).
-//It is much easier to handle volume in percentages than in arbitrary values.
-//We clamp the value between 0-128 based upon the passed volumeLevel percentage.
+/**
+	Validate and convert a volume given, assume in percent,
+	to the default values used by SDL_Mixer (0 (0%) to 128 (100%))
+**/
 int Audio::Volume(int volumeLevel)
 {
 	volumeLevel = (volumeLevel / 100.f) * 128;
@@ -35,10 +32,28 @@ int Audio::Volume(int volumeLevel)
 			: volumeLevel;
 }
 
+
+/**
+	Change the volume of all channels
+	------------------------
+	@volumeLevel the volume level to give, in percents
+**/
 void Audio::SetSfxVolume(int volumeLevel)
 {
 	Mix_Volume(-1, Volume(volumeLevel));
 }
+
+/**
+	Change the volume of a specific SFX
+	(useful to make quick correction if one sound is louder than the others (due to the file itself))
+	------------------------
+	@volumeLevel the volume level to give, in percents
+**/
+void Audio::SetSfxVolume(Mix_Chunk* chunk, int volumeLevel)
+{
+	Mix_VolumeChunk(chunk, Volume(volumeLevel));
+}
+
 
 void Audio::SetMusicVolume(int volumeLevel)
 {

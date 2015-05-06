@@ -33,6 +33,7 @@ private:
 public:
 	// Volumes
 	void SetSfxVolume(int volumeLevel);
+	void SetSfxVolume(Mix_Chunk* chunk, int volumeLevel);
 	void SetMusicVolume(int volumeLevel);
 	void SetGlobalVolume(int volumeLevel)	{ SetMusicVolume(volumeLevel), SetSfxVolume(volumeLevel); }
 

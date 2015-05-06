@@ -68,6 +68,10 @@ void SpriteTest::Update()
 	{
 		Flip(SDL_FLIP_HORIZONTAL);
 	}
+
+	if (ThisKeyPressed(SDL_SCANCODE_H)) {
+		cEngine->DeleteComponent(this);
+	}
 }
 
 void SpriteTest::Stop()
