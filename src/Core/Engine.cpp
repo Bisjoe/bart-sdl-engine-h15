@@ -197,7 +197,7 @@ void Engine::ClearComponents()
 	auto iter = Component::components.begin();
 	for (; iter != Component::components.end(); iter++)
 	{
-		Component::toDelete.push_back((*iter));
+		(*iter)->Kill();
 	}
 }
 

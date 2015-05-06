@@ -88,25 +88,21 @@ public:
 //
 //
 //	/**
-//		Remove a component from the update list
-//		Add it in the "removed" list for later use (Does not destroy it)
-//		-------------------------
-//		@comp 
-//		[!] WARNING: The component will be removed from the update list and no longer updated, but will still exist
+//		
 //	**/
-//	void AddNewComponent(Component* comp);
+//	void AddComponent(Component* comp);
 
 	
 
-	Audio*								GetAudio()		 { return audio; }
-	Input*								GetInput()		 { return input; }
-	Timer*								GetTimer()		 { return timer; }
+	Audio*								GetAudio()		 { return audio;	}
+	Input*								GetInput()		 { return input;	}
+	Timer*								GetTimer()		 { return timer;	}
 	SDL_Renderer*						GetRenderer()	 { return renderer; }
-	SDL_Window*							GetWindow()		 { return window; }
+	SDL_Window*							GetWindow()		 { return window;	}
 	ResourceHolder<SDL_Texture, int>*	GetTextures()	 { return textures; }
-	ResourceHolder<TTF_Font, int>*		GetFonts()		 { return fonts; }
-	ResourceHolder<Mix_Music, int>*		GetMusics()		 { return musics; }
-	ResourceHolder<Mix_Chunk, int>*		GetSounds()		 { return sounds; }
+	ResourceHolder<TTF_Font, int>*		GetFonts()		 { return fonts;	}
+	ResourceHolder<Mix_Music, int>*		GetMusics()		 { return musics;	}
+	ResourceHolder<Mix_Chunk, int>*		GetSounds()		 { return sounds;	}
 
 private:
 	void Start();
