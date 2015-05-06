@@ -65,6 +65,8 @@ public:
 	**/
 	void DeleteComponent(Component* comp);
 
+	void ClearComponents();
+
 //	 WORK IN PROGRESS, problem of memory leak until a safe method of access for the component removed is implemented, do not use as of now
 //
 //	/**

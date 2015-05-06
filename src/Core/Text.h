@@ -14,6 +14,7 @@ namespace Color
 }
 
 enum Options {
+	OpNone = 0,
 	OpTypewriter = 0x01,
 	OpFadeIn = 0x02,
 	OpFadeOut = 0x04,
