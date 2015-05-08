@@ -7,21 +7,19 @@ class Component
 friend class Engine;
 
 public:
-	Component();
-	~Component();
+	Component() { toAdd.push_back(this); }
+	~Component() {};
 
-	virtual void Start();
-	virtual void Update();
-	virtual void Draw();
-	virtual void Stop();
-	virtual void Kill();
+	virtual void Start()  = 0;
+	virtual void Update() = 0;
+	virtual void Draw()	  = 0;
+	virtual void Stop()   = 0;
+	virtual void Kill()   = 0;
 
 private:
 	static std::vector<Component*> components;
 	static std::vector<Component*> toAdd;
 	static std::vector<Component*> toDelete;
 	static std::vector<Component*> removed;
-
-	int depth;
 };
 

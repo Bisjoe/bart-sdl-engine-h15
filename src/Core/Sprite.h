@@ -23,7 +23,7 @@ public:
 	virtual void Update();
 	virtual void Stop();
 	void Draw();
-	void Kill();
+	void Kill() { delete this; }
 
 	void SetAlpha(int alpha)							{ this->alpha = alpha; }
 	void SetPosition(int x, int y)						{ dstRect->x = x; dstRect->y = y; }

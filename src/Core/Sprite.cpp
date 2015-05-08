@@ -107,11 +107,6 @@ void Sprite::Stop()
 
 }
 
-void Sprite::Kill()
-{
-	delete this;
-}
-
 void Sprite::Draw()
 {
 	if (isVisible)
