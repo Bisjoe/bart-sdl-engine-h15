@@ -64,7 +64,7 @@ void Text::Stop()
 
 void Text::Update()
 {
-	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
+	float dt = DTime;
 	if (options & OpFadeIn)
 	{
 		fadeInTimer += dt;

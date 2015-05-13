@@ -30,14 +30,13 @@ public:
 	Text();
 	Text(std::string text, Font::ID font, int wrapping = 0, SDL_Color color = Color::WHITE, unsigned char options = 0);
 	~Text();
-	// Virtuals used
-	virtual void Start();
-	virtual void Update();
-	virtual void Stop();
-	virtual void Kill() { delete this; }
+	
 
-	// Virtual unused
-	void Draw() {};
+	void Start();
+	void Update();
+	void Stop();
+	void Kill() { delete this; }
+	void Draw() { __super::Draw(); }
 
 	void UpdateText();
 
