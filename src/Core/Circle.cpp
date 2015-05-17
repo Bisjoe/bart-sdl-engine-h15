@@ -96,7 +96,7 @@ bool Circle::CollidesWith(const Rectangle* const rect)
 	//Alternatively you might consider it the super vector of HalfRectangleWidth and HalfRectangleHeight... weee!!!
 	Vector2D rectCenter;
 	rectCenter.x = rect->GetWidth() / 2;
-	rectCenter.y = rect->GetWidth() / 2;
+	rectCenter.y = rect->GetHeight() / 2;
 
 	//Self-Explaining boolean
 	bool areColliding;

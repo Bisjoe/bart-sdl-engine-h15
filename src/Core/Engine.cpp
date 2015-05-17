@@ -108,7 +108,10 @@ void Engine::Update()
 	auto iter = Component::components.begin();
 	for (; iter != Component::components.end(); iter++)
 	{
-		(*iter)->Update();
+		if ((*iter)->isActive)
+		{
+			(*iter)->Update();
+		}
 	}
 
 	timer->Tick();
@@ -119,7 +122,10 @@ void Engine::Draw()
 	auto iter = Component::components.begin();
 	for (; iter != Component::components.end(); iter++)
 	{
-		(*iter)->Draw();
+		if ((*iter)->isActive)
+		{
+			(*iter)->Draw();
+		}
 	}
 
 	SDL_RenderSetScale(renderer, scaling.x, scaling.y);

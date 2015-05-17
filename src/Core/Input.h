@@ -15,7 +15,7 @@ public:
 	bool IsMouseButtonHeld(int button);
 	bool IsMouseButtonPressed(int button);
 	bool IsMouseButtonReleased(int button);
-	void GetMousePosition(int& x, int& y);
+	void GetMousePosition(int x, int y);
 
 private:
 	static const int KEY_COUNT = 256;

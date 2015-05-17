@@ -3,12 +3,12 @@
 #include "Engine.h"
 #include "Rectangle.h"
 
-// Flip shortcuts
+// Flip shortcuts, lolwut
 #ifndef FLIPPERS
 #define FLIPPERS
-#define flip_n SDL_FLIP_NONE
-#define flip_h SDL_FLIP_HORIZONTAL
-#define flip_v SDL_FLIP_VERTICAL
+#define FLIP_N SDL_FLIP_NONE
+#define FLIP_H SDL_FLIP_HORIZONTAL
+#define FLIP_V SDL_FLIP_VERTICAL
 #endif
 
 class Sprite :
@@ -33,7 +33,7 @@ public:
 	void SetVisible(bool visible)						{ isVisible = visible; }
 	void ResizeTo(int w, int h);
 	void Flip(unsigned int flip);
-	Rectangle GetRect()									{ return Rectangle(dstRect->x, dstRect->y, dstRect->w, dstRect->h); }
+	Rectangle GetRect()									{ return Rectangle((float)dstRect->x, (float)dstRect->y, (float)dstRect->w, (float)dstRect->h); }
 
 	void SetRotation(float angle);
 	void RotateBy(float angle);

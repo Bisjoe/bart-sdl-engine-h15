@@ -83,7 +83,7 @@ bool Input::IsMouseButtonReleased(int button)
 	return false;
 }
 
-void Input::GetMousePosition(int& x, int& y)
+void Input::GetMousePosition(int x, int y)
 {
 	return;
 }
